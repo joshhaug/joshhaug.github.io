@@ -6,4 +6,4 @@ tags:
 - interesting
 tumblr_url: http://joshuahaug.com/post/143306733324/fluid-dynamics-and-traffic
 ---
-Fluid Dynamics and TrafficTraffic can be analyzed as an emergent phenomenon in nonlinear dynamics.
+Traffic can be analyzed as an emergent phenomenon in nonlinear dynamics.

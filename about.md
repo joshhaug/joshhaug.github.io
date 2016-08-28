@@ -3,8 +3,13 @@ layout: page
 title: About
 ---
 
-My name is Josh and this is my personal website. 
+## Let Me Introduce Myself ##
+My name is Josh and this is my personal website.  Some facts about me:
+* Attended [Pepperdine University](http://www.pepperdine.edu/) in Malibu, CA
+  * Majored in Mathematics & Computer Science
 
+
+## Contact Me ##
 If you'd like to contact me, there are a few ways of doing it:
 
 * Connect on [LinkedIn](https://www.linkedin.com/in/joshua-haug-64a04897)
