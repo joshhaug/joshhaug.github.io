@@ -4,7 +4,7 @@
  <title>Joshua Haug</title>
  <link href="http://jhaug.com/atom.xml" rel="self"/>
  <link href="http://jhaug.com/"/>
- <updated>2016-09-04T02:55:43-07:00</updated>
+ <updated>2016-09-04T03:48:56-07:00</updated>
  <id>http://jhaug.com</id>
  <author>
    <name>Mark Otto</name>
@@ -274,17 +274,27 @@
  </entry>
  
  <entry>
-   <title>What's Jekyll?</title>
-   <link href="http://jhaug.com/2016/01/01/whats-jekyll/"/>
+   <title>You Know MBTI is Bogus, Right?</title>
+   <link href="http://jhaug.com/2016/01/01/mbti-is-bogus/"/>
    <updated>2016-01-01T00:00:00-08:00</updated>
-   <id>http://jhaug.com/2016/01/01/whats-jekyll</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From &lt;a href=&quot;https://github.com/jekyll/jekyll/blob/master/README.markdown&quot;&gt;the project’s readme&lt;/a&gt;:&lt;/p&gt;
+   <id>http://jhaug.com/2016/01/01/mbti-is-bogus</id>
+   <content type="html">&lt;p&gt;I’ve heard that too.  Here’s my take…&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Jekyll is a simple, blog aware, static site generator. It takes a template directory […] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;h2 id=&quot;yes-sort-of&quot;&gt;Yes, Sort Of&lt;/h2&gt;
 
-&lt;p&gt;It’s an immensely useful tool. Find out more by &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;visiting the project on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Classifying people’s personalities is inherently ambiguous&lt;/li&gt;
+  &lt;li&gt;So it cannot be a (capital-t) Truth of Psychology&lt;/li&gt;
+  &lt;li&gt;I &lt;strong&gt;despise&lt;/strong&gt; MBTI Trust® for trademarking Myers-Briggs Type Indicator®, Myers Briggs®, and MBTI®.  &lt;a href=&quot;http://www.myersbriggs.org/myers-and-briggs-foundation/ethical-use-of-the-mbti-instrument/trademark-guidelines.htm&quot;&gt;Yikes.&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;If you want more info &lt;a href=&quot;https://www.quora.com/To-what-extent-is-the-Myer-Briggs-Type-Indicator-bullshit&quot;&gt;this quora answer does a pretty good job of summing it up&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;but-not-entirely&quot;&gt;But Not Entirely&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It’s an interesting system of classification&lt;/li&gt;
+  &lt;li&gt;Most importantly, MBTI roughly describes human behavior in a way that makes sense to awkward people, particularly computer scientists&lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  
@@ -295,14 +305,13 @@
    <id>http://jhaug.com/2015/04/07/myers-briggs-quality-resources</id>
    <content type="html">&lt;p&gt;This is the first in (what I hope will be) a series of Quality Resource compilations.&lt;/p&gt;
 
-&lt;p&gt;Many people find it difficult to learn concepts on their own, which I take as a sign that many self-teaching materials are complete crap.  This is especially true of online materials. In my experience, most online resources written by beginners &amp;amp; for beginners are terrible; the one-eyed often prefer leading the blind to following the two-eyed.&lt;/p&gt;
+&lt;p&gt;Many people find it difficult to learn concepts on their own.  Here’s something to think about: straightforward &amp;amp; factual resources should be shared whenever possible.  It’s the only way we’ll separate the wheat from the chaff.&lt;/p&gt;
 
-&lt;p&gt;Here’s my point: straightforward &amp;amp; factual resources should be shared whenever possible; that’s the only way we’ll be able to separate the wheat from the chaff.&lt;/p&gt;
-
-&lt;p&gt;Unusually accurate MBTI test 
-Interesting text on the applications of Myers-Briggs (and personality theory in general) to human-computer interaction
-For visual learners: Michael Pierce: Sixteen Types
-Keirsey’s first and second definitive works on Jungian typology.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Applications of Myers-Briggs (and personality theory in general) to human-computer interaction&lt;/li&gt;
+  &lt;li&gt;Audiovisual folks might appreciate Michael Pierce’s Sixteen Types&lt;/li&gt;
+  &lt;li&gt;Keirsey’s first and second works on the subject&lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  
