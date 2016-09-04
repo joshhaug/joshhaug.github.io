@@ -4,7 +4,7 @@
  <title>Joshua Haug</title>
  <link href="http://jhaug.com/atom.xml" rel="self"/>
  <link href="http://jhaug.com/"/>
- <updated>2016-08-25T02:26:26-07:00</updated>
+ <updated>2016-09-04T02:55:43-07:00</updated>
  <id>http://jhaug.com</id>
  <author>
    <name>Mark Otto</name>
@@ -13,11 +13,20 @@
 
  
  <entry>
+   <title>The Fascinating Subtleties that Separate Aerosols, Vapors, Colloids, and Gases</title>
+   <link href="http://jhaug.com/2016/08/26/clarifications-states-of-matter/"/>
+   <updated>2016-08-26T00:00:00-07:00</updated>
+   <id>http://jhaug.com/2016/08/26/clarifications-states-of-matter</id>
+   <content type="html">
+</content>
+ </entry>
+ 
+ <entry>
    <title>Fluid Dynamics and Traffic</title>
    <link href="http://jhaug.com/2016/04/24/fluid-dynamics-and-traffic/"/>
    <updated>2016-04-24T01:55:21-07:00</updated>
    <id>http://jhaug.com/2016/04/24/fluid-dynamics-and-traffic</id>
-   <content type="html">&lt;p&gt;Fluid Dynamics and TrafficTraffic can be analyzed as an emergent phenomenon in nonlinear dynamics.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Traffic can be analyzed as an emergent phenomenon in nonlinear dynamics.&lt;/p&gt;
 </content>
  </entry>
  
