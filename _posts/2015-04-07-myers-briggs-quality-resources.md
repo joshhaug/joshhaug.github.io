@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Myers-Briggs: Quality Resources'
+title: 'Myers-Briggs -- Quality Resources'
 date: '2015-04-07T01:02:23-07:00'
 tags:
 - mbti

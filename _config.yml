@@ -4,9 +4,9 @@ permalink:           pretty
 # Setup
 title:               Joshua Haug
 tagline:             The personal website of Joshua Haug.
-url:                 http://jhaug.com
+#url:                 http://jhaug.com
 paginate:            1
-baseurl:             ""
+#baseurl:             ""
 analytics_id:        UA-83227079-1
 
 pages_list:       
@@ -23,9 +23,9 @@ sass:
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  name:              Joshua Haug 
+  url:               http://www.jhaug.com
+  email:             josh.haug55@gmail.com
 
 # Custom vars
 version:             2.0.0

@@ -4,7 +4,7 @@ title: About
 ---
 
 ## Let Me Introduce Myself ##
-This is my personal website.  Some facts about me...
+My name is **Joshua Haug**.  If you are reading this it means you've navigated your browser to my personal website.  Some facts about me...
 
 * Attended [Pepperdine University](http://www.pepperdine.edu/) in Malibu, California
 * Majored in Mathematics / Computer Science
@@ -19,5 +19,16 @@ If you'd like to contact me, there are a few ways of doing it:
 * Connect on [LinkedIn](https://www.linkedin.com/in/joshua-haug-64a04897)
 * Be my friend in real life
 
+## What I Look Like ##
+
+This is me on a hike in Malibu:
+![me]({{ site.url }}/assets/Me-hiking.jpg)
+I've been told I look like [Bo Burnham](https://en.wikipedia.org/wiki/Bo_Burnham) and [Ellen DeGeneres](https://en.wikipedia.org/wiki/Ellen_DeGeneres).
+
+
+
+
 ## Thanks for reading! ##
+
+
 

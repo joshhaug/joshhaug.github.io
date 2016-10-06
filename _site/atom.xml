@@ -2,39 +2,39 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Joshua Haug</title>
- <link href="http://jhaug.com/atom.xml" rel="self"/>
- <link href="http://jhaug.com/"/>
- <updated>2016-09-04T03:48:56-07:00</updated>
- <id>http://jhaug.com</id>
+ <link href="/atom.xml" rel="self"/>
+ <link href="/"/>
+ <updated>2016-10-05T22:36:16-07:00</updated>
+ <id></id>
  <author>
-   <name>Mark Otto</name>
-   <email>markdotto@gmail.com</email>
+   <name>Joshua Haug</name>
+   <email>josh.haug55@gmail.com</email>
  </author>
 
  
  <entry>
-   <title>The Fascinating Subtleties that Separate Aerosols, Vapors, Colloids, and Gases</title>
-   <link href="http://jhaug.com/2016/08/26/clarifications-states-of-matter/"/>
+   <title>Aerosols, Vapors, and Gases -- The Differences</title>
+   <link href="/2016/08/26/clarifications-states-of-matter/"/>
    <updated>2016-08-26T00:00:00-07:00</updated>
-   <id>http://jhaug.com/2016/08/26/clarifications-states-of-matter</id>
+   <id>/2016/08/26/clarifications-states-of-matter</id>
    <content type="html">
 </content>
  </entry>
  
  <entry>
    <title>Fluid Dynamics and Traffic</title>
-   <link href="http://jhaug.com/2016/04/24/fluid-dynamics-and-traffic/"/>
+   <link href="/2016/04/24/fluid-dynamics-and-traffic/"/>
    <updated>2016-04-24T01:55:21-07:00</updated>
-   <id>http://jhaug.com/2016/04/24/fluid-dynamics-and-traffic</id>
-   <content type="html">&lt;p&gt;Traffic can be analyzed as an emergent phenomenon in nonlinear dynamics.&lt;/p&gt;
+   <id>/2016/04/24/fluid-dynamics-and-traffic</id>
+   <content type="html">&lt;p&gt;I bet you didn’t know that &lt;a href=&quot;http://www.trafficwaves.org&quot;&gt;traffic can be mathematically represented as an emergent phenomenon in fluid dynamics.&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>Introduction</title>
-   <link href="http://jhaug.com/2016/01/03/introduction/"/>
+   <link href="/2016/01/03/introduction/"/>
    <updated>2016-01-03T00:00:00-08:00</updated>
-   <id>http://jhaug.com/2016/01/03/introduction</id>
+   <id>/2016/01/03/introduction</id>
    <content type="html">&lt;p&gt;&lt;em&gt;The Strange Case of Dr. Jekyll and Mr. Hyde&lt;/em&gt; tells the story of a lawyer investigating the connection of two persons, Dr. Henry Jekyll and Mr. Edward Hyde. Chief among the novel’s supporting cast is a man by the name of Mr. Poole, Dr. Jekyll’s loyal butler.&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -80,9 +80,9 @@
  
  <entry>
    <title>Example content</title>
-   <link href="http://jhaug.com/2016/01/02/example-content/"/>
+   <link href="/2016/01/02/example-content/"/>
    <updated>2016-01-02T00:00:00-08:00</updated>
-   <id>http://jhaug.com/2016/01/02/example-content</id>
+   <id>/2016/01/02/example-content</id>
    <content type="html">&lt;div class=&quot;message&quot;&gt;
   Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
 &lt;/div&gt;
@@ -274,35 +274,121 @@
  </entry>
  
  <entry>
-   <title>You Know MBTI is Bogus, Right?</title>
-   <link href="http://jhaug.com/2016/01/01/mbti-is-bogus/"/>
+   <title>MBTI© is Junk Science</title>
+   <link href="/2016/01/01/mbti-is-bullshit/"/>
    <updated>2016-01-01T00:00:00-08:00</updated>
-   <id>http://jhaug.com/2016/01/01/mbti-is-bogus</id>
-   <content type="html">&lt;p&gt;I’ve heard that too.  Here’s my take…&lt;/p&gt;
+   <id>/2016/01/01/mbti-is-bullshit</id>
+   <content type="html">&lt;p&gt;Here’s a question I get asked from time to time:&lt;/p&gt;
 
-&lt;h2 id=&quot;yes-sort-of&quot;&gt;Yes, Sort Of&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Why does it matter what my Myers-Briggs type is?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It’s often followed by this, usually in a hushed voice:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You know it’s bullshit, right?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/MBTI.gif&quot; alt=&quot;a common search&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Go ahead and perform a web search with &lt;code class=&quot;highlighter-rouge&quot;&gt;MBTI bullshit&lt;/code&gt; as the query.  You’ll find &lt;em&gt;plenty&lt;/em&gt; of people fuming over the MBTI© for a myriad of reasons.  The most common of these are…&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Weak factual basis&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Neither Isabel Briggs Myers nor Katherine Briggs had a formal background in psychology&lt;/li&gt;
+      &lt;li&gt;Based on binary characteristics, which is too restrictive for personality&lt;/li&gt;
+      &lt;li&gt;Jung’s &lt;a href=&quot;https://en.wikipedia.org/wiki/Analytical_psychology&quot;&gt;analytic psychology&lt;/a&gt; is based on anecdotal rather than empirical evidence, and is therefore unscientific&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;The tests don’t work&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Most people get a different result upon re-taking the test &lt;sup id=&quot;fnref:fn-half-diff&quot;&gt;&lt;a href=&quot;#fn:fn-half-diff&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+      &lt;li&gt;Forces people into one of 16 boxes (which seems arbitrary)&lt;/li&gt;
+      &lt;li&gt;Doesn’t effectively predict job performance &lt;sup id=&quot;fnref:fn-job-perf&quot;&gt;&lt;a href=&quot;#fn:fn-job-perf&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;hr /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Reinforces stereotypes of personality&lt;/li&gt;
+      &lt;li&gt;Seems like a scam&lt;/li&gt;
+      &lt;li&gt;MBTI Trust® has trademarked Myers-Briggs Type Indicator®, Myers Briggs®, and MBTI®.  &lt;a href=&quot;http://www.myersbriggs.org/myers-and-briggs-foundation/ethical-use-of-the-mbti-instrument/trademark-guidelines.htm&quot;&gt;Here are their guidelines for usage.&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Moreover, the bulk of scientific literature pertaining to MBTI is published for conferences of the &lt;em&gt;Center for the Application of Psychological Type&lt;/em&gt; or as papers in the &lt;em&gt;Journal of Psychological Type&lt;/em&gt;, both of which are funded by sales of MBTI-related tests and services.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;When stacked up, these arguments are pretty convincing.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;the-importance-of-helpful-bullshit&quot;&gt;The Importance of Helpful Bullshit&lt;/h2&gt;
+
+&lt;p&gt;While I totally agree that MBTI is &lt;em&gt;not&lt;/em&gt; legitimate science, I disagree with&lt;/p&gt;
+
+&lt;p&gt;And that is precisely what should happen to MBTI – it should be demoted.  The scientific community and Fortune 500 companies alike should respect the evidence.&lt;/p&gt;
+
+&lt;p&gt;In fact, the majority of the population has little need for personality categorization.&lt;/p&gt;
+
+&lt;p&gt;There is a small minority for whom MBTI serves a valuable purpose.  In the Big 5, these are called BLANK and BLANK.  MBTI classifies them as INTPs and INTJs.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Classifying people’s personalities is inherently ambiguous&lt;/li&gt;
-  &lt;li&gt;So it cannot be a (capital-t) Truth of Psychology&lt;/li&gt;
-  &lt;li&gt;I &lt;strong&gt;despise&lt;/strong&gt; MBTI Trust® for trademarking Myers-Briggs Type Indicator®, Myers Briggs®, and MBTI®.  &lt;a href=&quot;http://www.myersbriggs.org/myers-and-briggs-foundation/ethical-use-of-the-mbti-instrument/trademark-guidelines.htm&quot;&gt;Yikes.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;If you want more info &lt;a href=&quot;https://www.quora.com/To-what-extent-is-the-Myer-Briggs-Type-Indicator-bullshit&quot;&gt;this quora answer does a pretty good job of summing it up&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fuels navel-gazing-and-elitism&lt;sup id=&quot;fnref:fn-then-again&quot;&gt;&lt;a href=&quot;#fn:fn-then-again&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;It’s an interesting system of classification&lt;/li&gt;
+  &lt;li&gt;Most importantly, MBTI crudely describes human behavior in a way that makes sense to awkward people (INTP and INTJ then INFs, ENT, ENF, everyone else) (Dylan 2016)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;but-not-entirely&quot;&gt;But Not Entirely&lt;/h2&gt;
+&lt;p&gt;I am an INTP. &lt;strong&gt;INTP&lt;/strong&gt;s constitute 3-5% of the U.S. population.&lt;sup id=&quot;fnref:fn-type-freq&quot;&gt;&lt;a href=&quot;#fn:fn-type-freq&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;  INTPs share some bizarre quirks like a fondness for discordant music and a strong suspicion towards their own emotions.  For more information, see &lt;a href=&quot;http://www.intp.org/intprofile.html&quot;&gt;An INTP Profile&lt;/a&gt; by Paul James.&lt;/p&gt;
+
+&lt;p&gt;Here are some INTP sites I’m familiar with:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;It’s an interesting system of classification&lt;/li&gt;
-  &lt;li&gt;Most importantly, MBTI roughly describes human behavior in a way that makes sense to awkward people, particularly computer scientists&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/intp&quot;&gt;INTP subreddit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.intp.org&quot;&gt;intp.org&lt;/a&gt; has a few cool resources&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.intpexperience.com&quot;&gt;intpexperience.com&lt;/a&gt; goes into depth about the INTP’s relationship with emotion&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;Most online personality forums seem to share the masturbatory “nobody understands us” mentality.  These are no exception – you’ve been warned.  Unlike other forums, however, many commenters express sincere gratitude for the typology.  INTPs often have a hell of a time finding others that they can relate to.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/INTP-gratitude.png&quot; alt=&quot;a common post on INTP forums&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;bibliography&quot;&gt;Bibliography&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://thoughtcatalog.com/lorenzo-jensen-iii/2015/05/13-reasons-why-the-myers-briggs-test-is-absolute-nonsense/&quot;&gt;13 Reasons Why The Myers-Briggs Test Is Absolute Nonsense&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://skepdic.com/myersb.html&quot;&gt;The Skeptic’s Dictionary&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.psychologytoday.com/blog/give-and-take/201309/goodbye-mbti-the-fad-won-t-die&quot;&gt;Adam Grant’s critique of MBTI&lt;/a&gt; as well as &lt;a href=&quot;http://www.cppblogcentral.com/cpp-connect/the-myers-briggs-assessment-is-no-fad-its-a-research-based-instrument-that-delivers-results/&quot;&gt;CPP’s response&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:fn-half-diff&quot;&gt;
+      &lt;p&gt;See &lt;a href=&quot;http://www.indiana.edu/~jobtalk/HRMWebsite/hrm/articles/develop/mbti.pdf&quot;&gt;this paper&lt;/a&gt; for more information &lt;a href=&quot;#fnref:fn-half-diff&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-job-perf&quot;&gt;
+      &lt;p&gt;Job performance is addressed in &lt;a href=&quot;http://www.opd.net/abstracts5.html&quot;&gt;this review from K. Nowack&lt;/a&gt; &lt;a href=&quot;#fnref:fn-job-perf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-then-again&quot;&gt;
+      &lt;p&gt;Then again, those sorts of people will use any means they can to assert superiority – be it IQ scores, taste in music, what have you. &lt;a href=&quot;#fnref:fn-then-again&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-type-freq&quot;&gt;
+      &lt;p&gt;This figure comes from &lt;a href=&quot;http://www.myersbriggs.org/my-mbti-personality-type/my-mbti-results/how-frequent-is-my-type.htm&quot;&gt;the official Myers-Briggs page&lt;/a&gt; &lt;a href=&quot;#fnref:fn-type-freq&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
 </content>
  </entry>
  
  <entry>
-   <title>Myers-Briggs: Quality Resources</title>
-   <link href="http://jhaug.com/2015/04/07/myers-briggs-quality-resources/"/>
+   <title>Myers-Briggs -- Quality Resources</title>
+   <link href="/2015/04/07/myers-briggs-quality-resources/"/>
    <updated>2015-04-07T01:02:23-07:00</updated>
-   <id>http://jhaug.com/2015/04/07/myers-briggs-quality-resources</id>
+   <id>/2015/04/07/myers-briggs-quality-resources</id>
    <content type="html">&lt;p&gt;This is the first in (what I hope will be) a series of Quality Resource compilations.&lt;/p&gt;
 
 &lt;p&gt;Many people find it difficult to learn concepts on their own.  Here’s something to think about: straightforward &amp;amp; factual resources should be shared whenever possible.  It’s the only way we’ll separate the wheat from the chaff.&lt;/p&gt;
