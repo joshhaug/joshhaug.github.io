@@ -1,6 +1,8 @@
 ---
 layout: post
 title: MBTI© is Junk Science
+date: '2016-01-01T01:02:23-07:00'
+
 ---
 
 Here's a question I get asked from time to time: 
@@ -73,6 +75,9 @@ Most online personality forums seem to share the masturbatory "nobody understand
 - [13 Reasons Why The Myers-Briggs Test Is Absolute Nonsense](http://thoughtcatalog.com/lorenzo-jensen-iii/2015/05/13-reasons-why-the-myers-briggs-test-is-absolute-nonsense/)
 - [The Skeptic's Dictionary](http://skepdic.com/myersb.html)
 - [Adam Grant's critique of MBTI](https://www.psychologytoday.com/blog/give-and-take/201309/goodbye-mbti-the-fad-won-t-die) as well as [CPP's response](http://www.cppblogcentral.com/cpp-connect/the-myers-briggs-assessment-is-no-fad-its-a-research-based-instrument-that-delivers-results/)
+
+
+-----
 
 [^fn-then-again]: Then again, those sorts of people will use any means they can to assert superiority -- be it IQ scores, taste in music, what have you.
 

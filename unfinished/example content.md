@@ -1,12 +1,3 @@
----
-layout: post
-title: Example content
----
-
-
-<div class="message">
-  Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
-</div>
 
 Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. *Aenean eu leo quam.* Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
 
@@ -113,6 +104,18 @@ Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at
   <dt>JavaScript (JS)</dt>
   <dd>The programming language used to build advanced Web sites and applications</dd>
 </dl>
+
+
+
+$$d_{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$
+
+
+$$d^{a}$$
+
+
+
+\\[ \mathbf{X} = \mathbf{Z} \mathbf{P^\mathsf{T}} \\]
+
 
 Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.
 

@@ -11,7 +11,7 @@ analytics_id:        UA-83227079-1
 
 pages_list:       
   About: '/about'
-  Archive: '/archive'
+  All Posts: '/archive'
   Feed: '/atom.xml'
 
 # Assets
