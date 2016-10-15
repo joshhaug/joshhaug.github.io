@@ -2,6 +2,13 @@
 <html lang="en">
 
   <head>
+    
+  <script type="text/javascript">
+      var host = "yoursite.com";
+      if ((host == window.location.host) && (window.location.protocol != "https:"))
+          window.location.protocol = "https";
+  </script>
+      
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +17,7 @@
       Joshua Haug &middot; The personal website of Joshua Haug.
     
   </title>
-
+  <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
@@ -50,9 +57,7 @@
 
     <time datetime="2015-04-07T01:02:23-07:00" class="post-date">07 Apr 2015</time>
 
-    <p>This is the first in (what I hope will be) a series of Quality Resource compilations.</p>
-
-<p>Many people find it difficult to learn concepts on their own.  Here’s something to think about: straightforward &amp; factual resources should be shared whenever possible.  It’s the only way we’ll separate the wheat from the chaff.</p>
+    <p>Many people find it difficult to learn concepts on their own.  Here’s something to think about: does one have a moral obligation to share straightforward &amp; factual resources?</p>
 
 <ul>
   <li>Applications of Myers-Briggs (and personality theory in general) to human-computer interaction</li>
@@ -77,7 +82,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2016-10-06T22:48:45-07:00">2016</time>. All rights reserved.
+          &copy; <time datetime="2016-10-15T14:19:34-07:00">2016</time>. All rights reserved.
         </small>
       </footer>
     </div>

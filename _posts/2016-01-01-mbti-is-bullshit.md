@@ -23,9 +23,7 @@ Go ahead and perform a web search with `MBTI bullshit` as the query.  You'll fin
   * Jung's [analytic psychology](https://en.wikipedia.org/wiki/Analytical_psychology) is based on anecdotal rather than empirical evidence, and is therefore unscientific
 
 2. **The tests don't work**
-  * Most people get a different result upon re-taking the test [^fn-half-diff]
-  * Forces people into one of 16 boxes (which seems arbitrary)
-  * Doesn't effectively predict job performance [^fn-job-perf]
+  * Most people get a different result upon re-taking the test [^fn-half-diff] 
 
 3. ****
   * Reinforces stereotypes of personality

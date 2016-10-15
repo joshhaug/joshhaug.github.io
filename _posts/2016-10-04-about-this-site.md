@@ -35,7 +35,7 @@ This post addresses some frequently asked questions about this site.
 
 **How did you get math to render on your site?**
 
-> Great question.  The math here is rendered using [MathJax](https://www.mathjax.org/).  All I did was navigate to Jekyll's `_layouts/post.html` and included this snippet:
+> Great question.  The math on this site is rendered using [MathJax](https://www.mathjax.org/).  To get this working, I navigated to Jekyll's `_layouts/default.html` and included this snippet:
 
 {% highlight html %}
 <script type="text/javascript"
@@ -50,12 +50,11 @@ $${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$
 
 **Why do your code blocks look so nice?**
 
-> The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to `_sass/_code.scss`, found the block that started with `pre {` and added in `white-space: pre-wrap;`, which did the trick.  
-> 
+> The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to `_sass/_code.scss`, found the block that started with `pre {` and added in `white-space: pre-wrap;`, which did the trick.  If you're on mobile, however, the code blocks are gonna look ugly.  
 
 
 -----
-[^fn-aerodyn]: In case you're interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density of 1000 kg/m^3.  
+[^fn-aerodyn]: In case you're interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor.  
 
 
 

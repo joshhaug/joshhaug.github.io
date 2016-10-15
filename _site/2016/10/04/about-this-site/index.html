@@ -2,6 +2,13 @@
 <html lang="en">
 
   <head>
+    
+  <script type="text/javascript">
+      var host = "yoursite.com";
+      if ((host == window.location.host) && (window.location.protocol != "https:"))
+          window.location.protocol = "https";
+  </script>
+      
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +17,7 @@
       About This Website &middot; Joshua Haug
     
   </title>
-
+  <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
@@ -74,7 +81,7 @@ This post addresses some frequently asked questions about this site.
 <p><strong>How did you get math to render on your site?</strong></p>
 
 <blockquote>
-  <p>Great question.  The math here is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  All I did was navigate to Jekyll’s <code class="highlighter-rouge">_layouts/post.html</code> and included this snippet:</p>
+  <p>Great question.  The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
 </blockquote>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
@@ -90,8 +97,7 @@ This post addresses some frequently asked questions about this site.
 <p><strong>Why do your code blocks look so nice?</strong></p>
 
 <blockquote>
-  <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.</p>
-
+  <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
 </blockquote>
 
 <hr />
@@ -99,7 +105,7 @@ This post addresses some frequently asked questions about this site.
 <div class="footnotes">
   <ol>
     <li id="fn:fn-aerodyn">
-      <p>In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density of 1000 kg/m^3. <a href="#fnref:fn-aerodyn" class="reversefootnote">&#8617;</a></p>
+      <p>In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor. <a href="#fnref:fn-aerodyn" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -113,7 +119,7 @@ This post addresses some frequently asked questions about this site.
     
       <li>
         <a href="/2016/08/26/clarifications-states-of-matter/">
-          Aerosols, Vapors, and Gases -- The Differences
+          Aerosols vs. Vapors vs. Gases
           <small><time datetime="2016-08-26T00:00:00-07:00">26 Aug 2016</time></small>
         </a>
       </li>
@@ -140,7 +146,7 @@ This post addresses some frequently asked questions about this site.
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2016-10-06T22:48:45-07:00">2016</time>. All rights reserved.
+          &copy; <time datetime="2016-10-15T14:19:34-07:00">2016</time>. All rights reserved.
         </small>
       </footer>
     </div>

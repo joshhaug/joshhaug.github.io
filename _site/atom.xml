@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Joshua Haug</title>
- <link href="/atom.xml" rel="self"/>
- <link href="/"/>
- <updated>2016-10-06T22:48:45-07:00</updated>
- <id></id>
+ <link href="https://jhaug.com/atom.xml" rel="self"/>
+ <link href="https://jhaug.com/"/>
+ <updated>2016-10-15T14:19:34-07:00</updated>
+ <id>https://jhaug.com</id>
  <author>
    <name>Joshua Haug</name>
    <email>josh.haug55@gmail.com</email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>About This Website</title>
-   <link href="/2016/10/04/about-this-site/"/>
+   <link href="https://jhaug.com/2016/10/04/about-this-site/"/>
    <updated>2016-10-04T01:02:23-07:00</updated>
-   <id>/2016/10/04/about-this-site</id>
+   <id>https://jhaug.com/2016/10/04/about-this-site</id>
    <content type="html">&lt;div class=&quot;message&quot;&gt;
 This post addresses some frequently asked questions about this site.
 &lt;/div&gt;
@@ -49,7 +49,7 @@ This post addresses some frequently asked questions about this site.
 &lt;p&gt;&lt;strong&gt;How did you get math to render on your site?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Great question.  The math here is rendered using &lt;a href=&quot;https://www.mathjax.org/&quot;&gt;MathJax&lt;/a&gt;.  All I did was navigate to Jekyll’s &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts/post.html&lt;/code&gt; and included this snippet:&lt;/p&gt;
+  &lt;p&gt;Great question.  The math on this site is rendered using &lt;a href=&quot;https://www.mathjax.org/&quot;&gt;MathJax&lt;/a&gt;.  To get this working, I navigated to Jekyll’s &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt; and included this snippet:&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;
@@ -65,8 +65,7 @@ This post addresses some frequently asked questions about this site.
 &lt;p&gt;&lt;strong&gt;Why do your code blocks look so nice?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to &lt;code class=&quot;highlighter-rouge&quot;&gt;_sass/_code.scss&lt;/code&gt;, found the block that started with &lt;code class=&quot;highlighter-rouge&quot;&gt;pre {&lt;/code&gt; and added in &lt;code class=&quot;highlighter-rouge&quot;&gt;white-space: pre-wrap;&lt;/code&gt;, which did the trick.&lt;/p&gt;
-
+  &lt;p&gt;The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to &lt;code class=&quot;highlighter-rouge&quot;&gt;_sass/_code.scss&lt;/code&gt;, found the block that started with &lt;code class=&quot;highlighter-rouge&quot;&gt;pre {&lt;/code&gt; and added in &lt;code class=&quot;highlighter-rouge&quot;&gt;white-space: pre-wrap;&lt;/code&gt;, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
@@ -74,7 +73,7 @@ This post addresses some frequently asked questions about this site.
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:fn-aerodyn&quot;&gt;
-      &lt;p&gt;In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density of 1000 kg/m^3. &lt;a href=&quot;#fnref:fn-aerodyn&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor. &lt;a href=&quot;#fnref:fn-aerodyn&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -82,28 +81,139 @@ This post addresses some frequently asked questions about this site.
  </entry>
  
  <entry>
-   <title>Aerosols, Vapors, and Gases -- The Differences</title>
-   <link href="/2016/08/26/clarifications-states-of-matter/"/>
+   <title>Aerosols vs. Vapors vs. Gases</title>
+   <link href="https://jhaug.com/2016/08/26/clarifications-states-of-matter/"/>
    <updated>2016-08-26T00:00:00-07:00</updated>
-   <id>/2016/08/26/clarifications-states-of-matter</id>
-   <content type="html">
+   <id>https://jhaug.com/2016/08/26/clarifications-states-of-matter</id>
+   <content type="html">&lt;div class=&quot;message&quot;&gt;
+At first glance, aerosols, vapors, and gases appear to be the same thing -- but there are subtle differences which cannot be observed with the human eye.  Here I'd like to clarify those differences and answer the most common questions about this topic.  
+&lt;/div&gt;
+
+&lt;h3 id=&quot;why-its-important&quot;&gt;Why It’s Important&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Different processes of generation, different behaviors, different effects on our lungs, etc.&lt;/li&gt;
+  &lt;li&gt;Clarifies the differences between e-cigarettes, herbal vaporizers, and combustion&lt;/li&gt;
+  &lt;li&gt;The confusion is amplified by the e-cigarette industry’s use of terms for marketing that are not congruent with the science.&lt;/li&gt;
+  &lt;li&gt;Gives scientists a clue on how to allow scientific jargon to evolve
+    &lt;ul&gt;
+      &lt;li&gt;Vapor redefinition to the gaseous phase or suspension of a liquid&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;definitions&quot;&gt;Definitions&lt;/h3&gt;
+&lt;dl&gt;
+    &lt;dt&gt;Suspension&lt;/dt&gt;
+    &lt;dd&gt;A heterogeneous mixture containing solid particles that are sufficiently large for sedimentation. Diameter ≥ 1.0 µm.  The particles can be either solid or liquid. In theory, all suspensions settle.&lt;/dd&gt;
+      
+    &lt;dt&gt;Aerosol&lt;/dt&gt;
+    &lt;dd&gt;A suspension of liquid droplets or fine solid particles in a gas. Particles can range from 1 to 10 µm in diameter.&lt;/dd&gt;
+        
+    &lt;dt&gt;Colloid&lt;/dt&gt; 
+    &lt;dd&gt;Unlike suspensions, colloids do not settle.  Diameter &amp;lt; 1.0 µm.  Kind of the gas version of a solution.&lt;/dd&gt;    
+
+    &lt;dt&gt;Vapor&lt;/dt&gt;
+    &lt;dd&gt;The gas phase of something that was once a liquid.  Colloquially refers to the aerosol produced by e-cigarettes and herbal vaporizers.&lt;/dd&gt;
+    
+    &lt;dt&gt;Sublimation&lt;/dt&gt;
+    &lt;dd&gt;A phase change: solid → gas.&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;What e-cigarettes produce: aerosol (suspension of small droplets of propylene glycol + nicotine solution + flavoring solution)&lt;/p&gt;
+
+&lt;p&gt;What herbal vaporization produces: aerosol (small droplets of trichomes)&lt;/p&gt;
+
+&lt;p&gt;What combustion produces: 
+Solid Aerosol&lt;/p&gt;
+
+&lt;p&gt;How are droplets suspended in the air? 
+* Aerator Nozzle
+*&lt;/p&gt;
+
+&lt;h3 id=&quot;aerosol-categorization&quot;&gt;Aerosol Categorization&lt;/h3&gt;
+
+&lt;p&gt;Aerosols can be categorized by the measure of particle heterogeneity.  For instance, an aerosol can be &lt;strong&gt;monodisperse&lt;/strong&gt; (all particles the same size – this one is very rare in nature) or &lt;strong&gt;polydisperse&lt;/strong&gt; (many different sizes).  It’s useful to describe polydisperse aerosols with a distribution of particle sizes — simply divide the total size range into intervals and find the percent of particles that fall within each interval.  The two most common size intervals you’ll find in literature are PM-10 and PM-2.5.  These categories are convenient as they roughly describe where the particles would deposit, if inhaled by an adult human.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;PM-10&lt;/strong&gt; is an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 10.0 µm.”  These particles deposit in the mouth, throat, and upper parts of the lungs.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;PM-2.5&lt;/strong&gt; is therefore an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 2.5 µm.”  These particles are in the danger zone, so to speak – they are small enough to reach the alveolar region of the lungs, where they can be effortlessly absorbed into the bloodstream.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;deposition&quot;&gt;Deposition&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Deposition is the process by which aerosol particles deposit themselves on solid surfaces.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It is caused by one or more of the following…&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Impaction — some particles are unable to follow the curvature of the airflow due to their inertia, so they are flung out of the airstream and hit something&lt;/li&gt;
+  &lt;li&gt;Settling (aka gravitational sedimentation) — particles fall and settle due to gravity&lt;/li&gt;
+  &lt;li&gt;Interception — when following the streamline, some of the outermost particles will run into obstacles (note the difference between this and impaction, which is the result of a curvature in the air path)&lt;/li&gt;
+  &lt;li&gt;Turbulence —&lt;/li&gt;
+  &lt;li&gt;Thermophoresis&lt;/li&gt;
+  &lt;li&gt;Turbophoresis — tendency for particles to collect in the area of least turbulence&lt;/li&gt;
+  &lt;li&gt;Diffusiophoresis — spontaneous movement of particles caused by a concentration gradient&lt;/li&gt;
+  &lt;li&gt;Electrophoresis&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;respiratory-deposition&quot;&gt;Respiratory Deposition&lt;/h3&gt;
+
+&lt;p&gt;The diameter of the particle dₚ determines the region in which it will deposit.  Size-selective sampling is generally split into the following categories:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Inhalable fraction: enters the nose, mouth, pharynx, larynx (dₚ &amp;gt; 10.0 µm)&lt;/li&gt;
+  &lt;li&gt;Thoracic fraction: reaches the thorax/chest region, trachea to terminal bronchioles, corresponding to PM-10  (dₚ ≤ 10.0 µm)&lt;/li&gt;
+  &lt;li&gt;Respirable fraction: reaches the alveolar/pulmonary region, corresponding to PM-2.5  (dₚ ≤ 2.5 µm)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The most important mechanisms of deposition in the respiratory system are impaction, settling, and diffusion.  Impaction is of primary concern in the large airways.  Settling is most important in the smaller airways and alveolar region.&lt;/p&gt;
+
+&lt;p&gt;￼&lt;/p&gt;
+
+&lt;p&gt;Breathing Statistics
+Volume: At rest, about 0.5 L of tidal air is inhaled and exhaled with each breath. During heavy work, the tidal volume may exceed three times this amount. 
+Rate: A resting adult breathes about 12 times a minute, a rate that triples (36 breaths/min) during heavy work.&lt;/p&gt;
+
+&lt;h3 id=&quot;aerosol-behavior&quot;&gt;Aerosol Behavior&lt;/h3&gt;
+
+&lt;p&gt;The aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density of 1000 kg/m^3.  It is defined as…&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;d_{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}&lt;/script&gt;
+
+&lt;h3 id=&quot;measurement-techniques&quot;&gt;Measurement Techniques&lt;/h3&gt;
+
+&lt;p&gt;Aerosol Mass Spectrometry — AMS
+- Specifically the off-line variant, as the aerosol is collected before measurement&lt;/p&gt;
+
+&lt;p&gt;Particulate Matter Samplers
+https://en.wikipedia.org/wiki/Particulate_matter_sampler 
+- Inertial Separators
+    - Purpose: eliminate particles outside of a desired size range
+    - A gas stream is forced to turn a sharp corner, and the inertia of the large particles causes them to separate from the gas stream and attach to the walls of the vessel
+    - Use a volumetric flow control system to pull air at the required velocity to achieve the desired cutpoint
+    - Cyclonic Inertial Separators spin the gas stream
+    - Impactor Inertial Separators involve a greased metal plate which the heavier particles collide with&lt;/p&gt;
+
 </content>
  </entry>
  
  <entry>
    <title>Fluid Dynamics and Traffic</title>
-   <link href="/2016/04/24/fluid-dynamics-and-traffic/"/>
+   <link href="https://jhaug.com/2016/04/24/fluid-dynamics-and-traffic/"/>
    <updated>2016-04-24T01:55:21-07:00</updated>
-   <id>/2016/04/24/fluid-dynamics-and-traffic</id>
+   <id>https://jhaug.com/2016/04/24/fluid-dynamics-and-traffic</id>
    <content type="html">&lt;p&gt;I bet you didn’t know that &lt;a href=&quot;http://www.trafficwaves.org&quot;&gt;traffic can be mathematically represented as an emergent phenomenon in fluid dynamics.&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>MBTI© is Junk Science</title>
-   <link href="/2016/01/01/mbti-is-bullshit/"/>
+   <link href="https://jhaug.com/2016/01/01/mbti-is-bullshit/"/>
    <updated>2016-01-01T00:02:23-08:00</updated>
-   <id>/2016/01/01/mbti-is-bullshit</id>
+   <id>https://jhaug.com/2016/01/01/mbti-is-bullshit</id>
    <content type="html">&lt;p&gt;Here’s a question I get asked from time to time:&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -116,7 +226,7 @@ This post addresses some frequently asked questions about this site.
   &lt;p&gt;You know it’s bullshit, right?&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/MBTI.gif&quot; alt=&quot;a common search&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jhaug.com/assets/MBTI.gif&quot; alt=&quot;a common search&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Go ahead and perform a web search with &lt;code class=&quot;highlighter-rouge&quot;&gt;MBTI bullshit&lt;/code&gt; as the query.  You’ll find &lt;em&gt;plenty&lt;/em&gt; of people fuming over the MBTI© for a myriad of reasons.  The most common of these are…&lt;/p&gt;
 
@@ -131,8 +241,6 @@ This post addresses some frequently asked questions about this site.
   &lt;li&gt;&lt;strong&gt;The tests don’t work&lt;/strong&gt;
     &lt;ul&gt;
       &lt;li&gt;Most people get a different result upon re-taking the test &lt;sup id=&quot;fnref:fn-half-diff&quot;&gt;&lt;a href=&quot;#fn:fn-half-diff&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
-      &lt;li&gt;Forces people into one of 16 boxes (which seems arbitrary)&lt;/li&gt;
-      &lt;li&gt;Doesn’t effectively predict job performance &lt;sup id=&quot;fnref:fn-job-perf&quot;&gt;&lt;a href=&quot;#fn:fn-job-perf&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -163,13 +271,13 @@ This post addresses some frequently asked questions about this site.
 &lt;ul&gt;
   &lt;li&gt;Classifying people’s personalities is inherently ambiguous&lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Fuels navel-gazing-and-elitism&lt;sup id=&quot;fnref:fn-then-again&quot;&gt;&lt;a href=&quot;#fn:fn-then-again&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+    &lt;p&gt;Fuels navel-gazing-and-elitism&lt;sup id=&quot;fnref:fn-then-again&quot;&gt;&lt;a href=&quot;#fn:fn-then-again&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;It’s an interesting system of classification&lt;/li&gt;
   &lt;li&gt;Most importantly, MBTI crudely describes human behavior in a way that makes sense to awkward people (INTP and INTJ then INFs, ENT, ENF, everyone else) (Dylan 2016)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;I am an INTP. &lt;strong&gt;INTP&lt;/strong&gt;s constitute 3-5% of the U.S. population.&lt;sup id=&quot;fnref:fn-type-freq&quot;&gt;&lt;a href=&quot;#fn:fn-type-freq&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;  INTPs share some bizarre quirks like a fondness for discordant music and a strong suspicion towards their own emotions.  For more information, see &lt;a href=&quot;http://www.intp.org/intprofile.html&quot;&gt;An INTP Profile&lt;/a&gt; by Paul James.&lt;/p&gt;
+&lt;p&gt;I am an INTP. &lt;strong&gt;INTP&lt;/strong&gt;s constitute 3-5% of the U.S. population.&lt;sup id=&quot;fnref:fn-type-freq&quot;&gt;&lt;a href=&quot;#fn:fn-type-freq&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;  INTPs share some bizarre quirks like a fondness for discordant music and a strong suspicion towards their own emotions.  For more information, see &lt;a href=&quot;http://www.intp.org/intprofile.html&quot;&gt;An INTP Profile&lt;/a&gt; by Paul James.&lt;/p&gt;
 
 &lt;p&gt;Here are some INTP sites I’m familiar with:&lt;/p&gt;
 
@@ -181,7 +289,7 @@ This post addresses some frequently asked questions about this site.
 
 &lt;p&gt;Most online personality forums seem to share the masturbatory “nobody understands us” mentality.  These are no exception – you’ve been warned.  Unlike other forums, however, many commenters express sincere gratitude for the typology.  INTPs often have a hell of a time finding others that they can relate to.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/INTP-gratitude.png&quot; alt=&quot;a common post on INTP forums&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://jhaug.com/assets/INTP-gratitude.png&quot; alt=&quot;a common post on INTP forums&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;bibliography&quot;&gt;Bibliography&lt;/h2&gt;
 
@@ -198,9 +306,6 @@ This post addresses some frequently asked questions about this site.
     &lt;li id=&quot;fn:fn-half-diff&quot;&gt;
       &lt;p&gt;See &lt;a href=&quot;http://www.indiana.edu/~jobtalk/HRMWebsite/hrm/articles/develop/mbti.pdf&quot;&gt;this paper&lt;/a&gt; for more information &lt;a href=&quot;#fnref:fn-half-diff&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
-    &lt;li id=&quot;fn:fn-job-perf&quot;&gt;
-      &lt;p&gt;Job performance is addressed in &lt;a href=&quot;http://www.opd.net/abstracts5.html&quot;&gt;this review from K. Nowack&lt;/a&gt; &lt;a href=&quot;#fnref:fn-job-perf&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
     &lt;li id=&quot;fn:fn-then-again&quot;&gt;
       &lt;p&gt;Then again, those sorts of people will use any means they can to assert superiority – be it IQ scores, taste in music, what have you. &lt;a href=&quot;#fnref:fn-then-again&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
@@ -214,12 +319,10 @@ This post addresses some frequently asked questions about this site.
  
  <entry>
    <title>Myers-Briggs -- Quality Resources</title>
-   <link href="/2015/04/07/myers-briggs-quality-resources/"/>
+   <link href="https://jhaug.com/2015/04/07/myers-briggs-quality-resources/"/>
    <updated>2015-04-07T01:02:23-07:00</updated>
-   <id>/2015/04/07/myers-briggs-quality-resources</id>
-   <content type="html">&lt;p&gt;This is the first in (what I hope will be) a series of Quality Resource compilations.&lt;/p&gt;
-
-&lt;p&gt;Many people find it difficult to learn concepts on their own.  Here’s something to think about: straightforward &amp;amp; factual resources should be shared whenever possible.  It’s the only way we’ll separate the wheat from the chaff.&lt;/p&gt;
+   <id>https://jhaug.com/2015/04/07/myers-briggs-quality-resources</id>
+   <content type="html">&lt;p&gt;Many people find it difficult to learn concepts on their own.  Here’s something to think about: does one have a moral obligation to share straightforward &amp;amp; factual resources?&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Applications of Myers-Briggs (and personality theory in general) to human-computer interaction&lt;/li&gt;

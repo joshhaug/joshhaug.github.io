@@ -1,4 +1,11 @@
 <head>
+    
+  <script type="text/javascript">
+      var host = "yoursite.com";
+      if ((host == window.location.host) && (window.location.protocol != "https:"))
+          window.location.protocol = "https";
+  </script>
+      
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +16,7 @@
       {{ page.title }} &middot; {{ site.title }}
     {% endif %}
   </title>
-
+  <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="{{ site.baseurl }}/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="{{ site.baseurl }}/public/favicon.ico">

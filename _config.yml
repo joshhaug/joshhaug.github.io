@@ -9,6 +9,9 @@ paginate:            1
 #baseurl:             ""
 analytics_id:        UA-83227079-1
 
+url: https://jhaug.com   # with the https protocol
+enforce_ssl: jhaug.com   # without any protocol
+
 pages_list:       
   About: '/about'
   All Posts: '/archive'

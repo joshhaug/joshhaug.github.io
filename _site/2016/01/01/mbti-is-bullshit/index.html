@@ -2,6 +2,13 @@
 <html lang="en">
 
   <head>
+    
+  <script type="text/javascript">
+      var host = "yoursite.com";
+      if ((host == window.location.host) && (window.location.protocol != "https:"))
+          window.location.protocol = "https";
+  </script>
+      
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +17,7 @@
       MBTI© is Junk Science &middot; Joshua Haug
     
   </title>
-
+  <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
@@ -54,7 +61,7 @@
   <p>You know it’s bullshit, right?</p>
 </blockquote>
 
-<p><img src="/assets/MBTI.gif" alt="a common search" /></p>
+<p><img src="https://jhaug.com/assets/MBTI.gif" alt="a common search" /></p>
 
 <p>Go ahead and perform a web search with <code class="highlighter-rouge">MBTI bullshit</code> as the query.  You’ll find <em>plenty</em> of people fuming over the MBTI© for a myriad of reasons.  The most common of these are…</p>
 
@@ -69,8 +76,6 @@
   <li><strong>The tests don’t work</strong>
     <ul>
       <li>Most people get a different result upon re-taking the test <sup id="fnref:fn-half-diff"><a href="#fn:fn-half-diff" class="footnote">1</a></sup></li>
-      <li>Forces people into one of 16 boxes (which seems arbitrary)</li>
-      <li>Doesn’t effectively predict job performance <sup id="fnref:fn-job-perf"><a href="#fn:fn-job-perf" class="footnote">2</a></sup></li>
     </ul>
   </li>
   <li>
@@ -101,13 +106,13 @@
 <ul>
   <li>Classifying people’s personalities is inherently ambiguous</li>
   <li>
-    <p>Fuels navel-gazing-and-elitism<sup id="fnref:fn-then-again"><a href="#fn:fn-then-again" class="footnote">3</a></sup></p>
+    <p>Fuels navel-gazing-and-elitism<sup id="fnref:fn-then-again"><a href="#fn:fn-then-again" class="footnote">2</a></sup></p>
   </li>
   <li>It’s an interesting system of classification</li>
   <li>Most importantly, MBTI crudely describes human behavior in a way that makes sense to awkward people (INTP and INTJ then INFs, ENT, ENF, everyone else) (Dylan 2016)</li>
 </ul>
 
-<p>I am an INTP. <strong>INTP</strong>s constitute 3-5% of the U.S. population.<sup id="fnref:fn-type-freq"><a href="#fn:fn-type-freq" class="footnote">4</a></sup>  INTPs share some bizarre quirks like a fondness for discordant music and a strong suspicion towards their own emotions.  For more information, see <a href="http://www.intp.org/intprofile.html">An INTP Profile</a> by Paul James.</p>
+<p>I am an INTP. <strong>INTP</strong>s constitute 3-5% of the U.S. population.<sup id="fnref:fn-type-freq"><a href="#fn:fn-type-freq" class="footnote">3</a></sup>  INTPs share some bizarre quirks like a fondness for discordant music and a strong suspicion towards their own emotions.  For more information, see <a href="http://www.intp.org/intprofile.html">An INTP Profile</a> by Paul James.</p>
 
 <p>Here are some INTP sites I’m familiar with:</p>
 
@@ -119,7 +124,7 @@
 
 <p>Most online personality forums seem to share the masturbatory “nobody understands us” mentality.  These are no exception – you’ve been warned.  Unlike other forums, however, many commenters express sincere gratitude for the typology.  INTPs often have a hell of a time finding others that they can relate to.</p>
 
-<p><img src="/assets/INTP-gratitude.png" alt="a common post on INTP forums" /></p>
+<p><img src="https://jhaug.com/assets/INTP-gratitude.png" alt="a common post on INTP forums" /></p>
 
 <h2 id="bibliography">Bibliography</h2>
 
@@ -135,9 +140,6 @@
   <ol>
     <li id="fn:fn-half-diff">
       <p>See <a href="http://www.indiana.edu/~jobtalk/HRMWebsite/hrm/articles/develop/mbti.pdf">this paper</a> for more information <a href="#fnref:fn-half-diff" class="reversefootnote">&#8617;</a></p>
-    </li>
-    <li id="fn:fn-job-perf">
-      <p>Job performance is addressed in <a href="http://www.opd.net/abstracts5.html">this review from K. Nowack</a> <a href="#fnref:fn-job-perf" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:fn-then-again">
       <p>Then again, those sorts of people will use any means they can to assert superiority – be it IQ scores, taste in music, what have you. <a href="#fnref:fn-then-again" class="reversefootnote">&#8617;</a></p>
@@ -164,7 +166,7 @@
     
       <li>
         <a href="/2016/08/26/clarifications-states-of-matter/">
-          Aerosols, Vapors, and Gases -- The Differences
+          Aerosols vs. Vapors vs. Gases
           <small><time datetime="2016-08-26T00:00:00-07:00">26 Aug 2016</time></small>
         </a>
       </li>
@@ -184,7 +186,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2016-10-06T22:48:45-07:00">2016</time>. All rights reserved.
+          &copy; <time datetime="2016-10-15T14:19:34-07:00">2016</time>. All rights reserved.
         </small>
       </footer>
     </div>

@@ -2,6 +2,13 @@
 <html lang="en">
 
   <head>
+    
+  <script type="text/javascript">
+      var host = "yoursite.com";
+      if ((host == window.location.host) && (window.location.protocol != "https:"))
+          window.location.protocol = "https";
+  </script>
+      
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +17,7 @@
       About &middot; Joshua Haug
     
   </title>
-
+  <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
@@ -63,7 +70,7 @@
 <h2 id="what-i-look-like">What I Look Like</h2>
 
 <p>This is me on a hike in Malibu:
-<img src="/assets/Me-hiking.jpg" alt="me" />
+<img src="https://jhaug.com/assets/Me-hiking.jpg" alt="me" />
 I’ve been told I look like <a href="https://en.wikipedia.org/wiki/Bo_Burnham">Bo Burnham</a> and <a href="https://en.wikipedia.org/wiki/Ellen_DeGeneres">Ellen DeGeneres</a>.</p>
 
 <h2 id="thanks-for-reading">Thanks for reading!</h2>
@@ -75,7 +82,7 @@ I’ve been told I look like <a href="https://en.wikipedia.org/wiki/Bo_Burnham">
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2016-10-06T22:48:45-07:00">2016</time>. All rights reserved.
+          &copy; <time datetime="2016-10-15T14:19:34-07:00">2016</time>. All rights reserved.
         </small>
       </footer>
     </div>
