@@ -4,7 +4,7 @@
  <title>Joshua Haug</title>
  <link href="https://jhaug.com/atom.xml" rel="self"/>
  <link href="https://jhaug.com/"/>
- <updated>2016-10-15T14:19:34-07:00</updated>
+ <updated>2016-10-15T23:02:59-07:00</updated>
  <id>https://jhaug.com</id>
  <author>
    <name>Joshua Haug</name>
@@ -66,6 +66,12 @@ This post addresses some frequently asked questions about this site.
 
 &lt;blockquote&gt;
   &lt;p&gt;The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to &lt;code class=&quot;highlighter-rouge&quot;&gt;_sass/_code.scss&lt;/code&gt;, found the block that started with &lt;code class=&quot;highlighter-rouge&quot;&gt;pre {&lt;/code&gt; and added in &lt;code class=&quot;highlighter-rouge&quot;&gt;white-space: pre-wrap;&lt;/code&gt;, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;How did you set up SSL?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions on &lt;a href=&quot;https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/&quot;&gt;this blog post&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;

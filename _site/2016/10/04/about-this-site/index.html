@@ -4,7 +4,7 @@
   <head>
     
   <script type="text/javascript">
-      var host = "yoursite.com";
+      var host = "jhaug.com";
       if ((host == window.location.host) && (window.location.protocol != "https:"))
           window.location.protocol = "https";
   </script>
@@ -100,6 +100,12 @@ This post addresses some frequently asked questions about this site.
   <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
 </blockquote>
 
+<p><strong>How did you set up SSL?</strong></p>
+
+<blockquote>
+  <p>SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions on <a href="https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/">this blog post</a>.</p>
+</blockquote>
+
 <hr />
 
 <div class="footnotes">
@@ -146,7 +152,7 @@ This post addresses some frequently asked questions about this site.
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2016-10-15T14:19:34-07:00">2016</time>. All rights reserved.
+          &copy; <time datetime="2016-10-15T23:02:59-07:00">2016</time>. All rights reserved.
         </small>
       </footer>
     </div>
