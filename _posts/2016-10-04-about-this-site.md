@@ -53,6 +53,10 @@ $${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$
 > The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to `_sass/_code.scss`, found the block that started with `pre {` and added in `white-space: pre-wrap;`, which did the trick.  If you're on mobile, however, the code blocks are gonna look ugly.  
 
 
+**How did you set up SSL?**
+
+> SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions on [this blog post](https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/).
+
 -----
 [^fn-aerodyn]: In case you're interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor.  
 
