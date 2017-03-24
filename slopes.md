@@ -3,14 +3,19 @@ layout: page
 title: Slopes
 ---
 
-Slopes is an app for iPhone and iPad. It solves differential equations.  More than that, it graphs, simulates, and animates the system.  You can save systems, export graphs (even to pdfs), etc.  Many a diff eq student has struggled with visualising the movement of a spring-mass system without setting up a whole spring-mass apparatus.   It is designed with 5 activities.  I wrote this app with Dr. Timothy Lucas.  
-Dr. Lucas is a professor of mathematics at Pepperdine.
+Slopes is an app for iPhone and iPad. It solves differential equations.  More than that, it graphs, simulates, and animates systems.  You can save systems, export graphs (even to pdfs), etc.  Many a diff eq student has struggled with visualising the topics, and we designed this app for that student. It is made up of 5 activities.  
 
-Get Slopes [on the app store](https://itunes.apple.com/us/app/slopes-graphical-view-differential/id1136920301?mt=8)
+<div class="message">
+I wrote this app with Dr. Timothy Lucas, a professor of mathematics at Pepperdine. He likes to say that we each wrote 55% of the code.
+</div>
 
+[Quick, get Slopes on the app store!](https://itunes.apple.com/us/app/slopes-graphical-view-differential/id1136920301?mt=8) 
 
+---
 
-Slopes is an interactive environment for exploring graphical solutions to ordinary differential equations.  Slopes consists of five activities with preloaded examples to get you started and the ability to input your own content. "Slopefields" and “Phase Planes” both plot vector fields and solutions corresponding to multiple initial conditions. “Systems” dynamically solves systems of up to six equations. “Waves” solves second-order constant coefficient equations animates the corresponding spring-mass system or RLC circuit. “Methods” constructs numerical approximations of a single ordinary differential equation using Euler’s method as well as Second and Fourth Order Runge-Kutta methods.  Slopes is a playground for ODEs.  You can use it for homework, in-class activities or a new research project.  Slopes is currently available for the iPad via the App Store.  We hope to expand to other platforms in the future.  
+# Activities, in Detail
+
+Slopes consists of five activities with preloaded examples to get you started and the ability to input your own content. "Slopefields" and “Phase Planes” both plot vector fields and solutions corresponding to multiple initial conditions. “Systems” dynamically solves systems of up to six equations. “Waves” solves second-order constant coefficient equations animates the corresponding spring-mass system or RLC circuit. “Methods” constructs numerical approximations of a single ordinary differential equation using Euler’s method as well as Second and Fourth Order Runge-Kutta methods.  Slopes is a playground for ODEs.  You can use it for homework, in-class activities or a new research project.  Slopes is currently available for the iPad via the App Store.  We hope to expand to other platforms in the future.  
 
 
 ## Slopefields ##
