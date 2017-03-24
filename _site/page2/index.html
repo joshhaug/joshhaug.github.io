@@ -14,14 +14,14 @@
 
   <title>
     
-      Joshua Haug &middot; The personal website of Joshua Haug.
+      J. Haug &middot; Joshua and Jason Haug.
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="Joshua Haug" href="/atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="J. Haug" href="/atom.xml">
 </head>
 
 
@@ -30,17 +30,17 @@
     <div class="container content">
       <header class="masthead">
         <h3 class="masthead-title">
-        <a href="/" title="Home">Joshua Haug</a>
+        <a href="/" title="Home">J. Haug</a>
 
         
           &nbsp;&nbsp;&nbsp;
           <small><a href="/about">About</a></small>
         
           &nbsp;&nbsp;&nbsp;
-          <small><a href="/archive">All Posts</a></small>
+          <small><a href="/archive">More</a></small>
         
           &nbsp;&nbsp;&nbsp;
-          <small><a href="/atom.xml">Feed</a></small>
+          <small><a href="/slopes">Slopes</a></small>
         
         </h3>
       </header>
@@ -50,125 +50,70 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/2016/08/26/clarifications-states-of-matter/">
-        Aerosols vs. Vapors vs. Gases
+      <a href="/2016/10/04/about-this-site/">
+        About This Website
       </a>
     </h1>
 
-    <time datetime="2016-08-26T00:00:00-07:00" class="post-date">26 Aug 2016</time>
+    <time datetime="2016-10-04T01:02:23-07:00" class="post-date">04 Oct 2016</time>
 
     <div class="message">
-At first glance, aerosols, vapors, and gases appear to be the same thing -- but there are subtle differences which cannot be observed with the human eye.  Here I'd like to clarify those differences and answer the most common questions about this topic.  
+How I developed this site.  Guaranteed to be boring for non-developers.
 </div>
 
-<h3 id="why-its-important">Why It’s Important</h3>
-
-<ul>
-  <li>Different processes of generation, different behaviors, different effects on our lungs, etc.</li>
-  <li>Clarifies the differences between e-cigarettes, herbal vaporizers, and combustion</li>
-  <li>The confusion is amplified by the e-cigarette industry’s use of terms for marketing that are not congruent with the science.</li>
-  <li>Gives scientists a clue on how to allow scientific jargon to evolve
-    <ul>
-      <li>Vapor redefinition to the gaseous phase or suspension of a liquid</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="definitions">Definitions</h3>
-<dl>
-    <dt>Suspension</dt>
-    <dd>A heterogeneous mixture containing solid particles that are sufficiently large for sedimentation. Diameter ≥ 1.0 µm.  The particles can be either solid or liquid. In theory, all suspensions settle.</dd>
-      
-    <dt>Aerosol</dt>
-    <dd>A suspension of liquid droplets or fine solid particles in a gas. Particles can range from 1 to 10 µm in diameter.</dd>
-        
-    <dt>Colloid</dt> 
-    <dd>Unlike suspensions, colloids do not settle.  Diameter &lt; 1.0 µm.  Kind of the gas version of a solution.</dd>    
-
-    <dt>Vapor</dt>
-    <dd>The gas phase of something that was once a liquid.  Colloquially refers to the aerosol produced by e-cigarettes and herbal vaporizers.</dd>
-    
-    <dt>Sublimation</dt>
-    <dd>A phase change: solid → gas.</dd>
-</dl>
-
-<p>What e-cigarettes produce: aerosol (suspension of small droplets of propylene glycol + nicotine solution + flavoring solution)</p>
-
-<p>What herbal vaporization produces: aerosol (small droplets of trichomes)</p>
-
-<p>What combustion produces: 
-Solid Aerosol</p>
-
-<p>How are droplets suspended in the air? 
-* Aerator Nozzle
-*</p>
-
-<h3 id="aerosol-categorization">Aerosol Categorization</h3>
-
-<p>Aerosols can be categorized by the measure of particle heterogeneity.  For instance, an aerosol can be <strong>monodisperse</strong> (all particles the same size – this one is very rare in nature) or <strong>polydisperse</strong> (many different sizes).  It’s useful to describe polydisperse aerosols with a distribution of particle sizes — simply divide the total size range into intervals and find the percent of particles that fall within each interval.  The two most common size intervals you’ll find in literature are PM-10 and PM-2.5.  These categories are convenient as they roughly describe where the particles would deposit, if inhaled by an adult human.</p>
-
-<ul>
-  <li><strong>PM-10</strong> is an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 10.0 µm.”  These particles deposit in the mouth, throat, and upper parts of the lungs.</li>
-  <li><strong>PM-2.5</strong> is therefore an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 2.5 µm.”  These particles are in the danger zone, so to speak – they are small enough to reach the alveolar region of the lungs, where they can be effortlessly absorbed into the bloodstream.</li>
-</ul>
-
-<h3 id="deposition">Deposition</h3>
+<p><strong>How did you get math to render on your site?</strong></p>
 
 <blockquote>
-  <p>Deposition is the process by which aerosol particles deposit themselves on solid surfaces.</p>
+  <p>The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
 </blockquote>
 
-<p>It is caused by one or more of the following…</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
+    <span class="na">src=</span><span class="s">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
 
-<ul>
-  <li>Impaction — some particles are unable to follow the curvature of the airflow due to their inertia, so they are flung out of the airstream and hit something</li>
-  <li>Settling (aka gravitational sedimentation) — particles fall and settle due to gravity</li>
-  <li>Interception — when following the streamline, some of the outermost particles will run into obstacles (note the difference between this and impaction, which is the result of a curvature in the air path)</li>
-  <li>Turbulence —</li>
-  <li>Thermophoresis</li>
-  <li>Turbophoresis — tendency for particles to collect in the area of least turbulence</li>
-  <li>Diffusiophoresis — spontaneous movement of particles caused by a concentration gradient</li>
-  <li>Electrophoresis</li>
-</ul>
+<blockquote>
+  <p>Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle<sup id="fnref:fn-aerodyn"><a href="#fn:fn-aerodyn" class="footnote">1</a></sup> is represented as <code class="highlighter-rouge">$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$</code> in my code, but produces…</p>
+</blockquote>
 
-<h3 id="respiratory-deposition">Respiratory Deposition</h3>
+<script type="math/tex; mode=display">{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}</script>
 
-<p>The diameter of the particle dₚ determines the region in which it will deposit.  Size-selective sampling is generally split into the following categories:</p>
+<blockquote>
+  <p>I should just use LaTeXit for this sort of thing, but haven’t had the time to change the site.</p>
+</blockquote>
 
-<ul>
-  <li>Inhalable fraction: enters the nose, mouth, pharynx, larynx (dₚ &gt; 10.0 µm)</li>
-  <li>Thoracic fraction: reaches the thorax/chest region, trachea to terminal bronchioles, corresponding to PM-10  (dₚ ≤ 10.0 µm)</li>
-  <li>Respirable fraction: reaches the alveolar/pulmonary region, corresponding to PM-2.5  (dₚ ≤ 2.5 µm)</li>
-</ul>
+<p><strong>Why do your code blocks look so nice?</strong></p>
 
-<p>The most important mechanisms of deposition in the respiratory system are impaction, settling, and diffusion.  Impaction is of primary concern in the large airways.  Settling is most important in the smaller airways and alveolar region.</p>
+<blockquote>
+  <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
+</blockquote>
 
-<p>￼</p>
+<p><strong>How did you make it?</strong></p>
 
-<p>Breathing Statistics
-Volume: At rest, about 0.5 L of tidal air is inhaled and exhaled with each breath. During heavy work, the tidal volume may exceed three times this amount. 
-Rate: A resting adult breathes about 12 times a minute, a rate that triples (36 breaths/min) during heavy work.</p>
+<blockquote>
+  <p>I modeled my effort on <a href="http://joshualande.com/jekyll-github-pages-poole">this one</a>. In short, I built it using <a href="https://github.com/poole/poole">Poole</a>, which is a wrapper for <a href="http://jekyllrb.com/">Jekyll</a>.  I write the posts in markdown and Jekyll converts the files to HTML.</p>
+</blockquote>
 
-<h3 id="aerosol-behavior">Aerosol Behavior</h3>
+<p><strong>How are you hosting <a href="jhaug.com">www.jhaug.com</a>?</strong></p>
 
-<p>The aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density of 1000 kg/m^3.  It is defined as…</p>
+<blockquote>
+  <p>This website is <a href="https://github.com/joshhaug/joshhaug.github.io">hosted on github</a>.</p>
+</blockquote>
 
-<script type="math/tex; mode=display">d_{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}</script>
+<p><strong>How did you set up that SSL certificate?</strong></p>
 
-<h3 id="measurement-techniques">Measurement Techniques</h3>
+<blockquote>
+  <p>SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions <a href="https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/">here</a>.</p>
+</blockquote>
 
-<p>Aerosol Mass Spectrometry — AMS
-- Specifically the off-line variant, as the aerosol is collected before measurement</p>
+<hr />
 
-<p>Particulate Matter Samplers
-https://en.wikipedia.org/wiki/Particulate_matter_sampler 
-- Inertial Separators
-    - Purpose: eliminate particles outside of a desired size range
-    - A gas stream is forced to turn a sharp corner, and the inertia of the large particles causes them to separate from the gas stream and attach to the walls of the vessel
-    - Use a volumetric flow control system to pull air at the required velocity to achieve the desired cutpoint
-    - Cyclonic Inertial Separators spin the gas stream
-    - Impactor Inertial Separators involve a greased metal plate which the heavier particles collide with</p>
-
+<div class="footnotes">
+  <ol>
+    <li id="fn:fn-aerodyn">
+      <p>In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. <a href="#fnref:fn-aerodyn" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
   </article>
   
@@ -187,7 +132,7 @@ https://en.wikipedia.org/wiki/Particulate_matter_sampler
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2016-10-15T23:10:55-07:00">2016</time>. All rights reserved.
+          &copy; <time datetime="2017-03-23T23:27:27-07:00">2017</time>. All rights reserved.
         </small>
       </footer>
     </div>
@@ -203,6 +148,9 @@ https://en.wikipedia.org/wiki/Particulate_matter_sampler
      </script>
     
     
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
     <script type="text/javascript"
         src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>

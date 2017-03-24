@@ -2,9 +2,8 @@
 permalink:           pretty
 
 # Setup
-title:               Joshua Haug
-tagline:             The personal website of Joshua Haug.
-#url:                 http://jhaug.com
+title:               J. Haug
+tagline:             Joshua and Jason Haug.
 paginate:            1
 #baseurl:             ""
 analytics_id:        UA-83227079-1
@@ -14,8 +13,8 @@ enforce_ssl: jhaug.com   # without any protocol
 
 pages_list:       
   About: '/about'
-  All Posts: '/archive'
-  Feed: '/atom.xml'
+  More: '/archive'
+  Slopes: '/slopes'
 
 # Assets
 #

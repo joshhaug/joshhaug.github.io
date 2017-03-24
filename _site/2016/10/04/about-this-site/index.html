@@ -14,14 +14,14 @@
 
   <title>
     
-      About This Website &middot; Joshua Haug
+      About This Website &middot; J. Haug
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="Joshua Haug" href="/atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="J. Haug" href="/atom.xml">
 </head>
 
 
@@ -30,17 +30,17 @@
     <div class="container content">
       <header class="masthead">
         <h3 class="masthead-title">
-        <a href="/" title="Home">Joshua Haug</a>
+        <a href="/" title="Home">J. Haug</a>
 
         
           &nbsp;&nbsp;&nbsp;
           <small><a href="/about">About</a></small>
         
           &nbsp;&nbsp;&nbsp;
-          <small><a href="/archive">All Posts</a></small>
+          <small><a href="/archive">More</a></small>
         
           &nbsp;&nbsp;&nbsp;
-          <small><a href="/atom.xml">Feed</a></small>
+          <small><a href="/slopes">Slopes</a></small>
         
         </h3>
       </header>
@@ -50,38 +50,13 @@
   <h1 class="post-title">About This Website</h1>
   <time datetime="2016-10-04T01:02:23-07:00" class="post-date">04 Oct 2016</time>
   <div class="message">
-This post addresses some frequently asked questions about this site.
+How I developed this site.  Guaranteed to be boring for non-developers.
 </div>
-
-<p><strong>How did you make it?</strong></p>
-
-<blockquote>
-  <p>I built this website using Poole, an open-source wrapper for Jekyll.  I write the posts in markdown and Jekyll converts the files to HTML.  All it takes is a simple <code class="highlighter-rouge">jekyll serve</code> followed by a quick <code class="highlighter-rouge">git commit</code> – just like that, it’s live!</p>
-</blockquote>
-
-<blockquote>
-  <ul>
-    <li>Learn more about Poole <a href="https://github.com/poole/poole">at the official repository</a></li>
-    <li>If you don’t know what Jekyll is, <a href="http://jekyllrb.com/">learn about it here</a></li>
-  </ul>
-</blockquote>
-
-<p><strong>How did you know how to do it?</strong></p>
-
-<blockquote>
-  <p>Joshua Lande wrote an insightful blog post about using Poole and I modeled my effort on his.  (Thanks, Joshua!) <a href="http://joshualande.com/about/">Click here</a> for more info about him.  Joshuas Unite!</p>
-</blockquote>
-
-<p><strong>How are you hosting <a href="jhaug.com">www.jhaug.com</a>?</strong></p>
-
-<blockquote>
-  <p>This website is hosted on <a href="https://github.com/joshhaug/joshhaug.github.io">github</a>.</p>
-</blockquote>
 
 <p><strong>How did you get math to render on your site?</strong></p>
 
 <blockquote>
-  <p>Great question.  The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
+  <p>The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
 </blockquote>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
@@ -89,10 +64,14 @@ This post addresses some frequently asked questions about this site.
 <span class="nt">&lt;/script&gt;</span></code></pre></figure>
 
 <blockquote>
-  <p>Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation!  For example, the equation for the aerodynamic diameter of an aerosol particle<sup id="fnref:fn-aerodyn"><a href="#fn:fn-aerodyn" class="footnote">1</a></sup> is represented as <code class="highlighter-rouge">$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$</code> in my code, but produces…</p>
+  <p>Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle<sup id="fnref:fn-aerodyn"><a href="#fn:fn-aerodyn" class="footnote">1</a></sup> is represented as <code class="highlighter-rouge">$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$</code> in my code, but produces…</p>
 </blockquote>
 
 <script type="math/tex; mode=display">{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}</script>
+
+<blockquote>
+  <p>I should just use LaTeXit for this sort of thing, but haven’t had the time to change the site.</p>
+</blockquote>
 
 <p><strong>Why do your code blocks look so nice?</strong></p>
 
@@ -100,10 +79,22 @@ This post addresses some frequently asked questions about this site.
   <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
 </blockquote>
 
-<p><strong>How did you set up SSL?</strong></p>
+<p><strong>How did you make it?</strong></p>
 
 <blockquote>
-  <p>SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions on <a href="https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/">this blog post</a>.</p>
+  <p>I modeled my effort on <a href="http://joshualande.com/jekyll-github-pages-poole">this one</a>. In short, I built it using <a href="https://github.com/poole/poole">Poole</a>, which is a wrapper for <a href="http://jekyllrb.com/">Jekyll</a>.  I write the posts in markdown and Jekyll converts the files to HTML.</p>
+</blockquote>
+
+<p><strong>How are you hosting <a href="jhaug.com">www.jhaug.com</a>?</strong></p>
+
+<blockquote>
+  <p>This website is <a href="https://github.com/joshhaug/joshhaug.github.io">hosted on github</a>.</p>
+</blockquote>
+
+<p><strong>How did you set up that SSL certificate?</strong></p>
+
+<blockquote>
+  <p>SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions <a href="https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/">here</a>.</p>
 </blockquote>
 
 <hr />
@@ -111,7 +102,7 @@ This post addresses some frequently asked questions about this site.
 <div class="footnotes">
   <ol>
     <li id="fn:fn-aerodyn">
-      <p>In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor. <a href="#fnref:fn-aerodyn" class="reversefootnote">&#8617;</a></p>
+      <p>In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. <a href="#fnref:fn-aerodyn" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -124,8 +115,15 @@ This post addresses some frequently asked questions about this site.
   <ul class="related-posts">
     
       <li>
+        <a href="/2017/01/02/wood-finishes/">
+          Wood Finishes, Summarized
+          <small><time datetime="2017-01-02T00:00:00-08:00">02 Jan 2017</time></small>
+        </a>
+      </li>
+    
+      <li>
         <a href="/2016/08/26/clarifications-states-of-matter/">
-          Aerosols vs. Vapors vs. Gases
+          The Subtle Differences Between Aerosols, Vapors, and Gases
           <small><time datetime="2016-08-26T00:00:00-07:00">26 Aug 2016</time></small>
         </a>
       </li>
@@ -137,13 +135,6 @@ This post addresses some frequently asked questions about this site.
         </a>
       </li>
     
-      <li>
-        <a href="/2016/01/01/mbti-is-bullshit/">
-          MBTI© is Junk Science
-          <small><time datetime="2016-01-01T00:02:23-08:00">01 Jan 2016</time></small>
-        </a>
-      </li>
-    
   </ul>
 </aside>
 
@@ -152,7 +143,7 @@ This post addresses some frequently asked questions about this site.
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2016-10-15T23:10:55-07:00">2016</time>. All rights reserved.
+          &copy; <time datetime="2017-03-23T23:27:27-07:00">2017</time>. All rights reserved.
         </small>
       </footer>
     </div>
@@ -168,6 +159,9 @@ This post addresses some frequently asked questions about this site.
      </script>
     
     
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
     <script type="text/javascript"
         src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Joshua Haug</title>
+ <title>J. Haug</title>
  <link href="https://jhaug.com/atom.xml" rel="self"/>
  <link href="https://jhaug.com/"/>
- <updated>2016-10-15T23:10:55-07:00</updated>
+ <updated>2017-03-23T23:27:27-07:00</updated>
  <id>https://jhaug.com</id>
  <author>
    <name>Joshua Haug</name>
@@ -13,43 +13,123 @@
 
  
  <entry>
+   <title>Wood Finishes, Summarized</title>
+   <link href="https://jhaug.com/2017/01/02/wood-finishes/"/>
+   <updated>2017-01-02T00:00:00-08:00</updated>
+   <id>https://jhaug.com/2017/01/02/wood-finishes</id>
+   <content type="html">&lt;p&gt;If you have ever visited the wood finishing aisle at your local hardware store, you’re probably familiar with the sheer volume of options.
+To a newcomer, these options all &lt;em&gt;sound&lt;/em&gt; familiar and seem to be the same thing.  However, different wood finishes provide different protections and have different effects on the appearance of your final project.&lt;/p&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+Wrote this for myself as a cheat sheet 👍
+&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;stain&quot;&gt;Stain&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Change the color of wood while leaving the grain visible&lt;/li&gt;
+  &lt;li&gt;Doesn’t offer much protection&lt;/li&gt;
+  &lt;li&gt;Add mineral spirits to dilute or add multiple coats to intensify&lt;/li&gt;
+  &lt;li&gt;Apply with a paint brush or cloth&lt;/li&gt;
+  &lt;li&gt;Dries quickly&lt;/li&gt;
+  &lt;li&gt;Raises the grain, so sand lightly in between coats&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;oil&quot;&gt;Oil&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Brings out the natural beauty of wood&lt;/li&gt;
+  &lt;li&gt;Protect against moisture but are nowhere near as effective as, say, varnish or shellac&lt;/li&gt;
+  &lt;li&gt;Lots of types, including…
+    &lt;ul&gt;
+      &lt;li&gt;Boiled linseed oil
+        &lt;ul&gt;
+          &lt;li&gt;Cheap, good for decorative things that don’t require much protection (like a picture frame)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Teak oil&lt;/li&gt;
+      &lt;li&gt;Tung oil&lt;/li&gt;
+      &lt;li&gt;Mineral oil
+        &lt;ul&gt;
+          &lt;li&gt;Food-safe, so good for items like chopping boards or spoons&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Danish oil
+        &lt;ul&gt;
+          &lt;li&gt;Offers more protection than other oils, b/c is a mixture of oil and varnish&lt;/li&gt;
+          &lt;li&gt;Good for things that require protection, like a tabletop&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;polyurethane&quot;&gt;Polyurethane&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Plastic coating for wood&lt;/li&gt;
+  &lt;li&gt;Variants include…
+    &lt;ul&gt;
+      &lt;li&gt;water-based (dries quickly, doesn’t beautify the wood)&lt;/li&gt;
+      &lt;li&gt;oil-based (dries slowly, beautifies the wood)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Most durable finish&lt;/li&gt;
+  &lt;li&gt;Leaves a plastic-y feel to it&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;varnish&quot;&gt;Varnish&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Made of oils, resins, solvents&lt;/li&gt;
+  &lt;li&gt;Dries slowly&lt;/li&gt;
+  &lt;li&gt;Brings out natural beauty&lt;/li&gt;
+  &lt;li&gt;Durable, although not as much as polyurethane&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;laquer&quot;&gt;Laquer&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;A thin, liquid varnish that is usually sprayed&lt;/li&gt;
+  &lt;li&gt;Durable&lt;/li&gt;
+  &lt;li&gt;Dries quickly&lt;/li&gt;
+  &lt;li&gt;Can be polished&lt;/li&gt;
+  &lt;li&gt;Brings out natural beauty in the wood&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;shellac&quot;&gt;Shellac&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Glossy finish&lt;/li&gt;
+  &lt;li&gt;Dries quickly&lt;/li&gt;
+  &lt;li&gt;Easy to apply&lt;/li&gt;
+  &lt;li&gt;Often used on antiques and fine furniture&lt;/li&gt;
+  &lt;li&gt;Not as durable as varnish/poly&lt;/li&gt;
+  &lt;li&gt;Dulls with age&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;finishing-waxbeeswax&quot;&gt;Finishing Wax/Beeswax&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Protects against moisture (indoors only)&lt;/li&gt;
+  &lt;li&gt;Brings out beauty&lt;/li&gt;
+  &lt;li&gt;Leaves a smooth finish&lt;/li&gt;
+  &lt;li&gt;Can be polished&lt;/li&gt;
+  &lt;li&gt;Clear or colored variants available&lt;/li&gt;
+  &lt;li&gt;Apply sparingly with a cloth in a circular motion&lt;/li&gt;
+  &lt;li&gt;Can be re-applied as needed&lt;/li&gt;
+  &lt;li&gt;Can’t use another finish after wax&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>About This Website</title>
    <link href="https://jhaug.com/2016/10/04/about-this-site/"/>
    <updated>2016-10-04T01:02:23-07:00</updated>
    <id>https://jhaug.com/2016/10/04/about-this-site</id>
    <content type="html">&lt;div class=&quot;message&quot;&gt;
-This post addresses some frequently asked questions about this site.
+How I developed this site.  Guaranteed to be boring for non-developers.
 &lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;How did you make it?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I built this website using Poole, an open-source wrapper for Jekyll.  I write the posts in markdown and Jekyll converts the files to HTML.  All it takes is a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt; followed by a quick &lt;code class=&quot;highlighter-rouge&quot;&gt;git commit&lt;/code&gt; – just like that, it’s live!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Learn more about Poole &lt;a href=&quot;https://github.com/poole/poole&quot;&gt;at the official repository&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;If you don’t know what Jekyll is, &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;learn about it here&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;How did you know how to do it?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Joshua Lande wrote an insightful blog post about using Poole and I modeled my effort on his.  (Thanks, Joshua!) &lt;a href=&quot;http://joshualande.com/about/&quot;&gt;Click here&lt;/a&gt; for more info about him.  Joshuas Unite!&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;How are you hosting &lt;a href=&quot;jhaug.com&quot;&gt;www.jhaug.com&lt;/a&gt;?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This website is hosted on &lt;a href=&quot;https://github.com/joshhaug/joshhaug.github.io&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
 
 &lt;p&gt;&lt;strong&gt;How did you get math to render on your site?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Great question.  The math on this site is rendered using &lt;a href=&quot;https://www.mathjax.org/&quot;&gt;MathJax&lt;/a&gt;.  To get this working, I navigated to Jekyll’s &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt; and included this snippet:&lt;/p&gt;
+  &lt;p&gt;The math on this site is rendered using &lt;a href=&quot;https://www.mathjax.org/&quot;&gt;MathJax&lt;/a&gt;.  To get this working, I navigated to Jekyll’s &lt;code class=&quot;highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt; and included this snippet:&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;
@@ -57,10 +137,14 @@ This post addresses some frequently asked questions about this site.
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation!  For example, the equation for the aerodynamic diameter of an aerosol particle&lt;sup id=&quot;fnref:fn-aerodyn&quot;&gt;&lt;a href=&quot;#fn:fn-aerodyn&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; is represented as &lt;code class=&quot;highlighter-rouge&quot;&gt;$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$&lt;/code&gt; in my code, but produces…&lt;/p&gt;
+  &lt;p&gt;Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle&lt;sup id=&quot;fnref:fn-aerodyn&quot;&gt;&lt;a href=&quot;#fn:fn-aerodyn&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; is represented as &lt;code class=&quot;highlighter-rouge&quot;&gt;$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$&lt;/code&gt; in my code, but produces…&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}&lt;/script&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I should just use LaTeXit for this sort of thing, but haven’t had the time to change the site.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;&lt;strong&gt;Why do your code blocks look so nice?&lt;/strong&gt;&lt;/p&gt;
 
@@ -68,10 +152,22 @@ This post addresses some frequently asked questions about this site.
   &lt;p&gt;The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to &lt;code class=&quot;highlighter-rouge&quot;&gt;_sass/_code.scss&lt;/code&gt;, found the block that started with &lt;code class=&quot;highlighter-rouge&quot;&gt;pre {&lt;/code&gt; and added in &lt;code class=&quot;highlighter-rouge&quot;&gt;white-space: pre-wrap;&lt;/code&gt;, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;strong&gt;How did you set up SSL?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How did you make it?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions on &lt;a href=&quot;https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/&quot;&gt;this blog post&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;I modeled my effort on &lt;a href=&quot;http://joshualande.com/jekyll-github-pages-poole&quot;&gt;this one&lt;/a&gt;. In short, I built it using &lt;a href=&quot;https://github.com/poole/poole&quot;&gt;Poole&lt;/a&gt;, which is a wrapper for &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;.  I write the posts in markdown and Jekyll converts the files to HTML.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;How are you hosting &lt;a href=&quot;jhaug.com&quot;&gt;www.jhaug.com&lt;/a&gt;?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This website is &lt;a href=&quot;https://github.com/joshhaug/joshhaug.github.io&quot;&gt;hosted on github&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;How did you set up that SSL certificate?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions &lt;a href=&quot;https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
@@ -79,7 +175,7 @@ This post addresses some frequently asked questions about this site.
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
     &lt;li id=&quot;fn:fn-aerodyn&quot;&gt;
-      &lt;p&gt;In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor. &lt;a href=&quot;#fnref:fn-aerodyn&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. &lt;a href=&quot;#fnref:fn-aerodyn&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
@@ -87,12 +183,12 @@ This post addresses some frequently asked questions about this site.
  </entry>
  
  <entry>
-   <title>Aerosols vs. Vapors vs. Gases</title>
+   <title>The Subtle Differences Between Aerosols, Vapors, and Gases</title>
    <link href="https://jhaug.com/2016/08/26/clarifications-states-of-matter/"/>
    <updated>2016-08-26T00:00:00-07:00</updated>
    <id>https://jhaug.com/2016/08/26/clarifications-states-of-matter</id>
    <content type="html">&lt;div class=&quot;message&quot;&gt;
-At first glance, aerosols, vapors, and gases appear to be the same thing -- but there are subtle differences which cannot be observed with the human eye.  Here I'd like to clarify those differences and answer the most common questions about this topic.  
+The differences between &lt;b&gt;aerosols&lt;/b&gt;, &lt;b&gt;vapors&lt;/b&gt;, and &lt;b&gt;gases&lt;/b&gt; are subtle, to say the least.  In fact, the differences are practically invisible to the naked eye. Here I clarify those differences, answer common questions, and address popular misconceptions.  
 &lt;/div&gt;
 
 &lt;h3 id=&quot;why-its-important&quot;&gt;Why It’s Important&lt;/h3&gt;
@@ -108,43 +204,94 @@ At first glance, aerosols, vapors, and gases appear to be the same thing -- but 
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;definitions&quot;&gt;Definitions&lt;/h3&gt;
-&lt;dl&gt;
-    &lt;dt&gt;Suspension&lt;/dt&gt;
-    &lt;dd&gt;A heterogeneous mixture containing solid particles that are sufficiently large for sedimentation. Diameter ≥ 1.0 µm.  The particles can be either solid or liquid. In theory, all suspensions settle.&lt;/dd&gt;
-      
-    &lt;dt&gt;Aerosol&lt;/dt&gt;
-    &lt;dd&gt;A suspension of liquid droplets or fine solid particles in a gas. Particles can range from 1 to 10 µm in diameter.&lt;/dd&gt;
-        
-    &lt;dt&gt;Colloid&lt;/dt&gt; 
-    &lt;dd&gt;Unlike suspensions, colloids do not settle.  Diameter &amp;lt; 1.0 µm.  Kind of the gas version of a solution.&lt;/dd&gt;    
+&lt;hr /&gt;
 
-    &lt;dt&gt;Vapor&lt;/dt&gt;
-    &lt;dd&gt;The gas phase of something that was once a liquid.  Colloquially refers to the aerosol produced by e-cigarettes and herbal vaporizers.&lt;/dd&gt;
-    
-    &lt;dt&gt;Sublimation&lt;/dt&gt;
-    &lt;dd&gt;A phase change: solid → gas.&lt;/dd&gt;
-&lt;/dl&gt;
+&lt;h3 id=&quot;definitions-of-things&quot;&gt;Definitions of Things&lt;/h3&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Term&lt;/th&gt;
+      &lt;th&gt;Definition&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Suspension&lt;/td&gt;
+      &lt;td&gt;A heterogeneous mixture containing solid particles that are big enough for sedimentation. Diameter ≥ 1.0 µm.  The particles can be either solid or liquid. In theory, all suspensions settle.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Aerosol&lt;/td&gt;
+      &lt;td&gt;A suspension of liquid droplets or fine solid particles in a gas. Particles can range from 1 to 10 µm in diameter.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Colloid&lt;/td&gt;
+      &lt;td&gt;Unlike suspensions, colloids do not settle.  Diameter &amp;lt; 1.0 µm.  Kind of the gas version of a solution.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+       &lt;td&gt;Vapor&lt;/td&gt;
+       &lt;td&gt;The gas phase of something that was once a liquid.  Colloquially refers to the aerosol produced by e-cigarettes and herbal vaporizers.&lt;/td&gt; 
+    &lt;/tr&gt;
+    &lt;tr&gt;
+       &lt;td&gt;Steam&lt;/td&gt;
+       &lt;td&gt;The gas phase of water.  Steam itself is invisible.&lt;/td&gt; 
+    &lt;/tr&gt;
+    &lt;tr&gt;
+       &lt;td&gt;Wet Steam&lt;/td&gt;
+       &lt;td&gt;Steam itself is invisible, but wet steam is not.  Wet steam is a mist (or aerosol) of water droplets.  It's caused by water vapor condensing in mid-air.&lt;/td&gt; 
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;definitions-of-processes&quot;&gt;Definitions of Processes&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Process&lt;/th&gt;
+      &lt;th&gt;Definition&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+       &lt;td&gt;Sublimation&lt;/td&gt;
+       &lt;td&gt;A phase change: solid → gas.  The substance skips the liquid phase entirely.&lt;/td&gt; 
+    &lt;/tr&gt;
+    &lt;tr&gt;
+       &lt;td&gt;Vaporization&lt;/td&gt;
+       &lt;td&gt;A phase change: liquid → gas.  Includes such processes as boiling and evaporation.&lt;/td&gt; 
+    &lt;/tr&gt;
+    &lt;tr&gt;
+       &lt;td&gt;Condesation&lt;/td&gt;
+       &lt;td&gt;A phase change: gas → liquid.  This is best illustrated by a cold glass of water &quot;sweating.&quot;&lt;/td&gt; 
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;When you boil a pot of water on the stove, you’ll see a plume of &lt;strong&gt;steam&lt;/strong&gt;.  However, water vapor is itself &lt;a href=&quot;http://www.weatherquestions.com/What_is_water_vapor.htm&quot;&gt;invisible!&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;What e-cigarettes produce: aerosol (suspension of small droplets of propylene glycol + nicotine solution + flavoring solution)&lt;/p&gt;
 
 &lt;p&gt;What herbal vaporization produces: aerosol (small droplets of trichomes)&lt;/p&gt;
 
 &lt;p&gt;What combustion produces: 
-Solid Aerosol&lt;/p&gt;
+Solid and Liquid Aerosol&lt;/p&gt;
 
-&lt;p&gt;How are droplets suspended in the air? 
-* Aerator Nozzle
-*&lt;/p&gt;
+&lt;p&gt;How are droplets suspended in the air?&lt;/p&gt;
 
 &lt;h3 id=&quot;aerosol-categorization&quot;&gt;Aerosol Categorization&lt;/h3&gt;
 
-&lt;p&gt;Aerosols can be categorized by the measure of particle heterogeneity.  For instance, an aerosol can be &lt;strong&gt;monodisperse&lt;/strong&gt; (all particles the same size – this one is very rare in nature) or &lt;strong&gt;polydisperse&lt;/strong&gt; (many different sizes).  It’s useful to describe polydisperse aerosols with a distribution of particle sizes — simply divide the total size range into intervals and find the percent of particles that fall within each interval.  The two most common size intervals you’ll find in literature are PM-10 and PM-2.5.  These categories are convenient as they roughly describe where the particles would deposit, if inhaled by an adult human.&lt;/p&gt;
+&lt;p&gt;Aerosols can be categorized by the measure of particle heterogeneity.  For instance, an aerosol can be &lt;strong&gt;monodisperse&lt;/strong&gt; (all particles the same size – this one is very rare in nature) or &lt;strong&gt;polydisperse&lt;/strong&gt; (many different sizes).&lt;/p&gt;
+
+&lt;p&gt;In this post I’ll be covering polydisperse aerosols, as they are the most common.  It’s useful to describe polydisperse aerosols in terms of their particle size makeup (i.e. divide the total size range into intervals and find the percent of particles that fall within each interval.)  The two most common size intervals you’ll find in literature are PM-10 and PM-2.5.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;PM-10&lt;/strong&gt; is an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 10.0 µm.”  These particles deposit in the mouth, throat, and upper parts of the lungs.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;PM-2.5&lt;/strong&gt; is therefore an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 2.5 µm.”  These particles are in the danger zone, so to speak – they are small enough to reach the alveolar region of the lungs, where they can be effortlessly absorbed into the bloodstream.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
 
 &lt;h3 id=&quot;deposition&quot;&gt;Deposition&lt;/h3&gt;
 
@@ -152,17 +299,22 @@ Solid Aerosol&lt;/p&gt;
   &lt;p&gt;Deposition is the process by which aerosol particles deposit themselves on solid surfaces.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;It is caused by one or more of the following…&lt;/p&gt;
+&lt;p&gt;The most common causes of deposition in human lungs are…&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Impaction — some particles are unable to follow the curvature of the airflow due to their inertia, so they are flung out of the airstream and hit something&lt;/li&gt;
   &lt;li&gt;Settling (aka gravitational sedimentation) — particles fall and settle due to gravity&lt;/li&gt;
-  &lt;li&gt;Interception — when following the streamline, some of the outermost particles will run into obstacles (note the difference between this and impaction, which is the result of a curvature in the air path)&lt;/li&gt;
-  &lt;li&gt;Turbulence —&lt;/li&gt;
-  &lt;li&gt;Thermophoresis&lt;/li&gt;
-  &lt;li&gt;Turbophoresis — tendency for particles to collect in the area of least turbulence&lt;/li&gt;
   &lt;li&gt;Diffusiophoresis — spontaneous movement of particles caused by a concentration gradient&lt;/li&gt;
-  &lt;li&gt;Electrophoresis&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Other (not significant in respiratory system) deposition causes include…&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Interception — when following the streamline, some of the outermost particles will run into obstacles (note the difference between this and impaction, which is the result of a curvature in the air path)&lt;/li&gt;
+  &lt;li&gt;Turbulence — I don’t know this one, but read it somewhere.&lt;/li&gt;
+  &lt;li&gt;Thermophoresis - (aka thermodiffusion, thermomigration, the Soret effect, the Ludwig-Soret effect) movement of particles due to a temperature gradient&lt;/li&gt;
+  &lt;li&gt;Turbophoresis — tendency for particles to collect in the area of least turbulence&lt;/li&gt;
+  &lt;li&gt;Electrophoresis - movement of particles induced by a uniform electric field&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;respiratory-deposition&quot;&gt;Respiratory Deposition&lt;/h3&gt;
@@ -177,31 +329,13 @@ Solid Aerosol&lt;/p&gt;
 
 &lt;p&gt;The most important mechanisms of deposition in the respiratory system are impaction, settling, and diffusion.  Impaction is of primary concern in the large airways.  Settling is most important in the smaller airways and alveolar region.&lt;/p&gt;
 
-&lt;p&gt;￼&lt;/p&gt;
-
-&lt;p&gt;Breathing Statistics
-Volume: At rest, about 0.5 L of tidal air is inhaled and exhaled with each breath. During heavy work, the tidal volume may exceed three times this amount. 
-Rate: A resting adult breathes about 12 times a minute, a rate that triples (36 breaths/min) during heavy work.&lt;/p&gt;
-
 &lt;h3 id=&quot;aerosol-behavior&quot;&gt;Aerosol Behavior&lt;/h3&gt;
 
-&lt;p&gt;The aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density of 1000 kg/m^3.  It is defined as…&lt;/p&gt;
+&lt;p&gt;In practice, aerosolized particles may not be spherical.  However, one can approximate a non-spherical particle’s depositional behavior by calculating an &lt;strong&gt;aerodynamic diameter&lt;/strong&gt;.  This is done by pretending that the irregular particle (with settling velocity s) is spherical, keeping the settling velocity constant.  This idealized particle is assumed to have a standard particle density of 1000 kg/m&lt;sup&gt;3&lt;/sup&gt;.  The diameter of this new particle is defined as…&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;d_{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}&lt;/script&gt;
 
-&lt;h3 id=&quot;measurement-techniques&quot;&gt;Measurement Techniques&lt;/h3&gt;
-
-&lt;p&gt;Aerosol Mass Spectrometry — AMS
-- Specifically the off-line variant, as the aerosol is collected before measurement&lt;/p&gt;
-
-&lt;p&gt;Particulate Matter Samplers
-https://en.wikipedia.org/wiki/Particulate_matter_sampler 
-- Inertial Separators
-    - Purpose: eliminate particles outside of a desired size range
-    - A gas stream is forced to turn a sharp corner, and the inertia of the large particles causes them to separate from the gas stream and attach to the walls of the vessel
-    - Use a volumetric flow control system to pull air at the required velocity to achieve the desired cutpoint
-    - Cyclonic Inertial Separators spin the gas stream
-    - Impactor Inertial Separators involve a greased metal plate which the heavier particles collide with&lt;/p&gt;
+&lt;p&gt;where $\rho_{0}$ is the standard particle density and $\chi$ is the dynamic shape factor (a ratio of the resistive force of an irregular particle to that of a spherical particle).&lt;/p&gt;
 
 </content>
  </entry>
