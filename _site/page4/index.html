@@ -14,14 +14,14 @@
 
   <title>
     
-      J. Haug &middot; Joshua and Jason Haug.
+      BeeSci &middot; Beehive Science
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="J. Haug" href="/atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="BeeSci" href="/atom.xml">
 </head>
 
 
@@ -30,17 +30,14 @@
     <div class="container content">
       <header class="masthead">
         <h3 class="masthead-title">
-        <a href="/" title="Home">J. Haug</a>
+        <a href="/" title="Home">BeeSci</a>
 
         
           &nbsp;&nbsp;&nbsp;
           <small><a href="/about">About</a></small>
         
           &nbsp;&nbsp;&nbsp;
-          <small><a href="/archive">More</a></small>
-        
-          &nbsp;&nbsp;&nbsp;
-          <small><a href="/slopes">Slopes</a></small>
+          <small><a href="/archive">Archive</a></small>
         
         </h3>
       </header>
@@ -50,25 +47,75 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/2016/04/24/fluid-dynamics-and-traffic/">
-        Fluid Dynamics and Traffic
+      <a href="/hive-temp.html">
+        Hive Temperature Analysis
       </a>
     </h1>
 
-    <time datetime="2016-04-24T01:55:21-07:00" class="post-date">24 Apr 2016</time>
+    <time datetime="2020-05-02T00:00:00-07:00" class="post-date">02 May 2020</time>
 
-    <p>I bet you didn’t know that <a href="http://www.trafficwaves.org">traffic can be mathematically represented as an emergent phenomenon in fluid dynamics.</a></p>
+    <p>Here is what the initial data looks like from my <a href="hardware.html">small hive monitoring setup</a>:</p>
 
-  </article>
-  
+<p><img src="/assets/temp.jpg" alt="  " /></p>
+
+<p>As you can see, the TMP006 produces two readings: object temperature (the reading from the surface the thermopile is pointed at) and die temperature (the temperature from the die itself).   For more info see the TMP006 <a href="https://cdn.sparkfun.com/datasheets/Sensors/Temp/sbou107.pdf">user guide</a>.</p>
+
+<p>The large spike on 4/24 was due to the hive being in direct sunlight.  The night of the 24th, we placed shade covers over the hives to prevent them from overheating.   This clearly made a difference.</p>
+
+<h3 id="potential-evidence-of-thermoregulation">Potential Evidence of Thermoregulation</h3>
+
+<p>Here’s a plot showing the hive temperature, the attic temperature, and the temperature at Burbank Airport (from <a href="www.wunderground.com">Weather Underground</a>) over a 36-hour period:</p>
+
+<p><img src="assets/36-hour-annotated.jpg" alt=" " /></p>
+
+<p>The hive’s temperature clearly rises and falls with the ambient temperature. But more interesting is the difference between the BUR temperature (green line) and the hive temperature (blue line).  Notice that, at 14:00 on the 28th, the hive is ~12.5 degrees warmer than BUR, but by 4:00 on the 29th, the hive is ~20 degrees warmer.  This seems to indicate that the bees regulate the internal temperature of the hive to keep it warmer.</p>
+
+<h3 id="why-do-bees-thermoregulate">Why do bees thermoregulate?</h3>
+
+<p>Bees work hard to keep the temperature of the hive <em>just</em> right.  But why?  The later-stage young, called pupae, are like little Goldilocks – they need to be kept between 33 and 36ºC (91.4 - 96.8ºF) to prevent physical and behavioral defects. Pupae develop in sealed-off cells of the honeycomb, called “capped brood cells.”  Here’s a picture I took of some capped brood cells:</p>
+
+<p><img src="assets/capped-brood.jpg" alt=" Capped Brood" /></p>
+
+<p>If these cells get too hot, workers use evaporative cooling – they splash the cells with water and fan them with their wings.  If the cells get too cold, workers will vibrate their flight muscles to produce heat.  Here is what the heating process looks like under a thermal camera.<sup id="fnref:fn-thermo" role="doc-noteref"><a href="#fn:fn-thermo" class="footnote">1</a></sup></p>
+
+<p><img src="assets/heater-bees.jpg" alt="" /></p>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<div class="message">
+<b>TL;DR</b> Need better ambient temperature sensor, a thermocouple would be best. Need better attic with more insulation. The sample rate is too damn high!   
 </div>
 
-<div class="pagination">
-  
-    <a class="pagination-item older" href="/page5">Older</a>
-  
-  
-    <a class="pagination-item newer" href="/page3">Newer</a>
+<ul>
+  <li>
+    <p><strong>Using IR sensor for ambient temperature is bad</strong> – My hope was that the attic measurements could be used as a baseline for comparison with the inside of the hive (i.e. it would provide the ambient temperature inside a wooden box, thus accounting for any insulation that the hive boxes provide). In theory, then, the difference between the attic temperature and the hive temperature would be due entirely to bee activity. But this is not necessarily the case, due to:</p>
+
+    <ul>
+      <li>
+        <p>differences in sensor properties (e.g. rate of heat absorption of the IR die vs the thermocouple)  → can be fixed by using a thermocouple</p>
+      </li>
+      <li>
+        <p>differences in construction between the hive boxes (solid wood, painted white) and the attic (plywood top and bottom, solid wood sides, unpainted) → can be re-made</p>
+      </li>
+      <li>
+        <p>interactions between the attic and the hive boxes (e.g. attic absorbes most of the sunlight at noon, and heat transfer between the hive boxes and the attic) → not yet sure how this can be addressed</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>My sampling rate is too high</strong> – A reading every ten seconds is excessive. It’s clear that interesting events happen over the course of minute, not seconds. The BUR dataset resolution of one hour might be a little coarse, but I feel comfortable sampling every 5 minutes (30 times fewer datapoints than the current setup).</p>
+  </li>
+</ul>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:fn-thermo" role="doc-endnote">
+      <p>Stabentheiner A, Kovac H, Brodschneider R. Honeybee colony thermoregulation–regulatory mechanisms and contribution of individuals in dependence on age, location and thermal stress. <em>PLoS One</em>. 2010;5(1):e8967. Published 2010 Jan 29. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2813292/">pdf</a> <a href="#fnref:fn-thermo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </article>
   
 </div>
 
@@ -76,7 +123,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2017-03-23T23:49:13-07:00">2017</time>. All rights reserved.
+          &copy; <time datetime="2020-07-08T12:22:08-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>
@@ -91,13 +138,109 @@
        ga('send', 'pageview');
      </script>
     
-    
+
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
     <script type="text/javascript"
         src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
-    
+
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                if(p[i].innerHTML.indexOf('start=') !== -1) theInnerHTML += '&start='+p[i].innerHTML.substring(p[i].innerHTML.indexOf('start=')+6);
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+
   </body>
 </html>

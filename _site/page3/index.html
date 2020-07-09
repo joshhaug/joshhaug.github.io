@@ -14,14 +14,14 @@
 
   <title>
     
-      J. Haug &middot; Joshua and Jason Haug.
+      BeeSci &middot; Beehive Science
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="J. Haug" href="/atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="BeeSci" href="/atom.xml">
 </head>
 
 
@@ -30,17 +30,14 @@
     <div class="container content">
       <header class="masthead">
         <h3 class="masthead-title">
-        <a href="/" title="Home">J. Haug</a>
+        <a href="/" title="Home">BeeSci</a>
 
         
           &nbsp;&nbsp;&nbsp;
           <small><a href="/about">About</a></small>
         
           &nbsp;&nbsp;&nbsp;
-          <small><a href="/archive">More</a></small>
-        
-          &nbsp;&nbsp;&nbsp;
-          <small><a href="/slopes">Slopes</a></small>
+          <small><a href="/archive">Archive</a></small>
         
         </h3>
       </header>
@@ -50,174 +47,111 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/2016/08/26/clarifications-states-of-matter/">
-        The Subtle Differences Between Aerosols, Vapors, and Gases
+      <a href="/hardware.html">
+        Prototype For Hive Monitoring
       </a>
     </h1>
 
-    <time datetime="2016-08-26T00:00:00-07:00" class="post-date">26 Aug 2016</time>
+    <time datetime="2020-05-14T00:00:00-07:00" class="post-date">14 May 2020</time>
 
-    <div class="message">
-The differences between <b>aerosols</b>, <b>vapors</b>, and <b>gases</b> are subtle, to say the least.  In fact, the differences are practically invisible to the naked eye. Here I clarify those differences, answer common questions, and address popular misconceptions.  
+    <p>I’m using a super simple setup for hive monitoring.  The brains of the operation is a Raspberry Pi 4 running Raspbian.   Here’s what it looks like on the inside:</p>
+
+<p><img src="../assets/setup.jpg" alt=" " /></p>
+
+<h3 id="temperature-data-collection">Temperature Data Collection</h3>
+
+<p>I’m measuring hive temperature with two sensors:</p>
+
+<ul>
+  <li>k-type thermocouple and amplifier (MAX6675) for internal temperature</li>
+  <li>infrared thermopile (TMP006) for ambient temperature</li>
+</ul>
+
+<p>Ideally I’d use just thermocouples, but these are the only sensors I have on hand.</p>
+
+<p>I’m using a <a href="https://github.com/tdack/MAX6675">python library</a> to read the temperature every ten seconds.  The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings.  Here’s the basic idea:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"/home/pi/bees/temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">dat</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">temp1</span><span class="p">,</span> <span class="n">temp2</span><span class="p">,</span> <span class="n">temp3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">temp1</span> <span class="o">=</span> <span class="n">c_to_f</span><span class="p">(</span><span class="n">sensor1</span><span class="p">.</span><span class="n">readTempC</span><span class="p">())</span>
+            <span class="n">temp2</span> <span class="o">=</span> <span class="n">c_to_f</span><span class="p">(</span><span class="n">sensor2</span><span class="p">.</span><span class="n">readDieTempC</span><span class="p">())</span>
+            <span class="n">temp3</span> <span class="o">=</span> <span class="n">c_to_f</span><span class="p">(</span><span class="n">sensor2</span><span class="p">.</span><span class="n">readObjTempC</span><span class="p">())</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">"An error occured"</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">','</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">dat</span><span class="p">,</span> <span class="n">temp1</span><span class="p">,</span> <span class="n">temp2</span><span class="p">,</span> <span class="n">temp3</span><span class="p">])</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Initially, I wrote the script with the <code class="highlighter-rouge">open</code> statement outside the loop, like so…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"/home/pi/bees/temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="c1"># ... get temperatures
+</span>        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>… to save on the cost of reopening the file for each iteration of the loop.  Because why not?  The behavior is the same, right?</p>
+
+<p style="color:red"><b>Wrong.</b> This code causes the writes to be bundled into larger writes -- the file will update occassionally (in my experience, every couple hundred writes or so) and again when you terminate the python script.</p>
+
+<p><strong>Why does this happen, you ask?</strong> I don’t know. Maybe the writes are being bundled by the python interpreter, maybe it’s the OS’s disk scheduler, maybe it’s just plain ol’ witchcraft.  Some day I’d like to get to the bottom of this, but today is not that day.</p>
+
+<h2 id="audio-data-collection">Audio Data Collection</h2>
+
+<p>Audio is coming from an old Guitar Hero USB mic I cannibalized.</p>
+
+<p>The audio is recorded using <a href="http://manpages.org/arecord">arecord</a> in a bash script more or less like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="o">[</span><span class="nb">true</span><span class="o">]</span>    
+    arecord <span class="nt">--device</span> sysdefault:CARD<span class="o">=</span>1 <span class="nt">--format</span> S16_LE <span class="nt">--rate</span> 11025 <span class="nt">--channels</span><span class="o">=</span>1 <span class="nt">--duration</span> 3600 out.wav <span class="o">||</span> <span class="nb">break</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>What is this command doing? It’s recording an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.</p>
+
+<p>Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers<sup id="fnref:fn-acoustics" role="doc-noteref"><a href="#fn:fn-acoustics" class="footnote">1</a></sup><sup id="fnref:fn-vibratory" role="doc-noteref"><a href="#fn:fn-vibratory" class="footnote">2</a></sup> indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics. Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.</p>
+
+<p><img src="assets/acoustic-signature.jpg" alt="  " /></p>
+
+<p>Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.</p>
+
+<h2 id="networking">Networking</h2>
+
+<p>The Pi is connected via WLAN to an old AirPort Extreme. From the house, I can connect to the network and <code class="highlighter-rouge">ssh</code> into the Pi to download the data, modify scripts, etc. To keep data collection running after I close the session, I’m running <code class="highlighter-rouge">tmux</code> and detaching. There are other ways to do this, like <code class="highlighter-rouge">nohup</code>, <code class="highlighter-rouge">screen</code>, <code class="highlighter-rouge">disown</code>, <code class="highlighter-rouge">bg</code>, etc., but <code class="highlighter-rouge">tmux</code> is part of my regular workflow.</p>
+
+<p>From my laptop, I can run a small script to switch networks and download the data every so often:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"Connecting to beenet..."</span>
+networksetup <span class="nt">-setairportnetwork</span> en0 beenet password
+<span class="nb">echo</span> <span class="s2">"Downloading data..."</span>
+scp pi@raspberrypi.local:~/bees/temp.txt <span class="nb">.</span>
+<span class="nb">echo</span> <span class="s2">"Connecting to home network..."</span>
+networksetup <span class="nt">-setairportnetwork</span> en0 homenet password
+</code></pre></div></div>
+
+<p>This data collection scheme is fine for prototyping, but would be very inconvenient for live metrics.</p>
+
+<h2 id="housing">Housing</h2>
+
+<p>These sensors are arranged in a crappy box made from literal garbage – plywood and pallet wood I found in a dumpster.  Here’s  what it looks like all assembled:</p>
+
+<p><img src="../assets/hive-with-sensors.jpg" alt=" " /></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:fn-acoustics" role="doc-endnote">
+      <p>Qandour, Amro &amp; Ahmad, Iftekhar &amp; Habibi, Daryoush &amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. <a href="#fnref:fn-acoustics" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:fn-vibratory" role="doc-endnote">
+      <p>M. Hrncir, F. G. Barth, and J. Tautz, “32 vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. <a href="#fnref:fn-vibratory" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
 </div>
-
-<h3 id="why-its-important">Why It’s Important</h3>
-
-<ul>
-  <li>Different processes of generation, different behaviors, different effects on our lungs, etc.</li>
-  <li>Clarifies the differences between e-cigarettes, herbal vaporizers, and combustion</li>
-  <li>The confusion is amplified by the e-cigarette industry’s use of terms for marketing that are not congruent with the science.</li>
-  <li>Gives scientists a clue on how to allow scientific jargon to evolve
-    <ul>
-      <li>Vapor redefinition to the gaseous phase or suspension of a liquid</li>
-    </ul>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="definitions-of-things">Definitions of Things</h3>
-<table>
-  <thead>
-    <tr>
-      <th>Term</th>
-      <th>Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Suspension</td>
-      <td>A heterogeneous mixture containing solid particles that are big enough for sedimentation. Diameter ≥ 1.0 µm.  The particles can be either solid or liquid. In theory, all suspensions settle.</td>
-    </tr>
-    <tr>
-      <td>Aerosol</td>
-      <td>A suspension of liquid droplets or fine solid particles in a gas. Particles can range from 1 to 10 µm in diameter.</td>
-    </tr>
-    <tr>
-      <td>Colloid</td>
-      <td>Unlike suspensions, colloids do not settle.  Diameter &lt; 1.0 µm.  Kind of the gas version of a solution.</td>
-    </tr>
-    <tr>
-       <td>Vapor</td>
-       <td>The gas phase of something that was once a liquid.  Colloquially refers to the aerosol produced by e-cigarettes and herbal vaporizers.</td> 
-    </tr>
-    <tr>
-       <td>Steam</td>
-       <td>The gas phase of water.  Steam itself is invisible.</td> 
-    </tr>
-    <tr>
-       <td>Wet Steam</td>
-       <td>Steam itself is invisible, but wet steam is not.  Wet steam is a mist (or aerosol) of water droplets.  It's caused by water vapor condensing in mid-air.</td> 
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="definitions-of-processes">Definitions of Processes</h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>Process</th>
-      <th>Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-       <td>Sublimation</td>
-       <td>A phase change: solid → gas.  The substance skips the liquid phase entirely.</td> 
-    </tr>
-    <tr>
-       <td>Vaporization</td>
-       <td>A phase change: liquid → gas.  Includes such processes as boiling and evaporation.</td> 
-    </tr>
-    <tr>
-       <td>Condesation</td>
-       <td>A phase change: gas → liquid.  This is best illustrated by a cold glass of water "sweating."</td> 
-    </tr>
-  </tbody>
-</table>
-
-<hr />
-
-<p>When you boil a pot of water on the stove, you’ll see a plume of <strong>steam</strong>.  However, water vapor is itself <a href="http://www.weatherquestions.com/What_is_water_vapor.htm">invisible!</a></p>
-
-<p>What e-cigarettes produce: aerosol (suspension of small droplets of propylene glycol + nicotine solution + flavoring solution)</p>
-
-<p>What herbal vaporization produces: aerosol (small droplets of trichomes)</p>
-
-<p>What combustion produces: 
-Solid and Liquid Aerosol</p>
-
-<p>How are droplets suspended in the air?</p>
-
-<h3 id="aerosol-categorization">Aerosol Categorization</h3>
-
-<p>Aerosols can be categorized by the measure of particle heterogeneity.  For instance, an aerosol can be <strong>monodisperse</strong> (all particles the same size – this one is very rare in nature) or <strong>polydisperse</strong> (many different sizes).</p>
-
-<p>In this post I’ll be covering polydisperse aerosols, as they are the most common.  It’s useful to describe polydisperse aerosols in terms of their particle size makeup (i.e. divide the total size range into intervals and find the percent of particles that fall within each interval.)  The two most common size intervals you’ll find in literature are PM-10 and PM-2.5.</p>
-
-<ul>
-  <li><strong>PM-10</strong> is an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 10.0 µm.”  These particles deposit in the mouth, throat, and upper parts of the lungs.</li>
-  <li><strong>PM-2.5</strong> is therefore an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 2.5 µm.”  These particles are in the danger zone, so to speak – they are small enough to reach the alveolar region of the lungs, where they can be effortlessly absorbed into the bloodstream.</li>
-</ul>
-
-<hr />
-
-<h3 id="deposition">Deposition</h3>
-
-<blockquote>
-  <p>Deposition is the process by which aerosol particles deposit themselves on solid surfaces.</p>
-</blockquote>
-
-<p>The most common causes of deposition in human lungs are…</p>
-
-<ul>
-  <li>Impaction — some particles are unable to follow the curvature of the airflow due to their inertia, so they are flung out of the airstream and hit something</li>
-  <li>Settling (aka gravitational sedimentation) — particles fall and settle due to gravity</li>
-  <li>Diffusiophoresis — spontaneous movement of particles caused by a concentration gradient</li>
-</ul>
-
-<p>Other (not significant in respiratory system) deposition causes include…</p>
-
-<ul>
-  <li>Interception — when following the streamline, some of the outermost particles will run into obstacles (note the difference between this and impaction, which is the result of a curvature in the air path)</li>
-  <li>Turbulence — I don’t know this one, but read it somewhere.</li>
-  <li>Thermophoresis - (aka thermodiffusion, thermomigration, the Soret effect, the Ludwig-Soret effect) movement of particles due to a temperature gradient</li>
-  <li>Turbophoresis — tendency for particles to collect in the area of least turbulence</li>
-  <li>Electrophoresis - movement of particles induced by a uniform electric field</li>
-</ul>
-
-<h3 id="respiratory-deposition">Respiratory Deposition</h3>
-
-<p>The diameter of the particle dₚ determines the region in which it will deposit.  Size-selective sampling is generally split into the following categories:</p>
-
-<ul>
-  <li>Inhalable fraction: enters the nose, mouth, pharynx, larynx (dₚ &gt; 10.0 µm)</li>
-  <li>Thoracic fraction: reaches the thorax/chest region, trachea to terminal bronchioles, corresponding to PM-10  (dₚ ≤ 10.0 µm)</li>
-  <li>Respirable fraction: reaches the alveolar/pulmonary region, corresponding to PM-2.5  (dₚ ≤ 2.5 µm)</li>
-</ul>
-
-<p>The most important mechanisms of deposition in the respiratory system are impaction, settling, and diffusion.  Impaction is of primary concern in the large airways.  Settling is most important in the smaller airways and alveolar region.</p>
-
-<h3 id="aerosol-behavior">Aerosol Behavior</h3>
-
-<p>In practice, aerosolized particles may not be spherical.  However, one can approximate a non-spherical particle’s depositional behavior by calculating an <strong>aerodynamic diameter</strong>.  This is done by pretending that the irregular particle (with settling velocity s) is spherical, keeping the settling velocity constant.  This idealized particle is assumed to have a standard particle density of 1000 kg/m<sup>3</sup>.  The diameter of this new particle is defined as…</p>
-
-<script type="math/tex; mode=display">d_{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}</script>
-
-<p>where $\rho_{0}$ is the standard particle density and $\chi$ is the dynamic shape factor (a ratio of the resistive force of an irregular particle to that of a spherical particle).</p>
-
 
   </article>
-  
-</div>
-
-<div class="pagination">
-  
-    <a class="pagination-item older" href="/page4">Older</a>
-  
-  
-    <a class="pagination-item newer" href="/page2">Newer</a>
   
 </div>
 
@@ -225,7 +159,7 @@ Solid and Liquid Aerosol</p>
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2017-03-23T23:49:13-07:00">2017</time>. All rights reserved.
+          &copy; <time datetime="2020-07-08T12:22:08-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>
@@ -240,13 +174,109 @@ Solid and Liquid Aerosol</p>
        ga('send', 'pageview');
      </script>
     
-    
+
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
     <script type="text/javascript"
         src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
-    
+
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                if(p[i].innerHTML.indexOf('start=') !== -1) theInnerHTML += '&start='+p[i].innerHTML.substring(p[i].innerHTML.indexOf('start=')+6);
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+
   </body>
 </html>

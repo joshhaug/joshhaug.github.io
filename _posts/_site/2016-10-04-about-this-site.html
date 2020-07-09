@@ -1,0 +1,57 @@
+<div class="message">
+How I developed this site.  Guaranteed to be boring for non-developers.
+</div>
+
+<p><strong>How did you get math to render on your site?</strong></p>
+
+<blockquote>
+  <p>The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
+    <span class="na">src=</span><span class="s">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
+
+<blockquote>
+  <p>Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle<sup id="fnref:fn-aerodyn"><a href="#fn:fn-aerodyn" class="footnote">1</a></sup> is represented as <code class="highlighter-rouge">$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$</code> in my code, but produces…</p>
+</blockquote>
+
+<script type="math/tex; mode=display">{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}</script>
+
+<blockquote>
+  <p>I should just use LaTeXit for this sort of thing, but haven’t had the time to change the site.</p>
+</blockquote>
+
+<p><strong>Why do your code blocks look so nice?</strong></p>
+
+<blockquote>
+  <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
+</blockquote>
+
+<p><strong>How did you make it?</strong></p>
+
+<blockquote>
+  <p>I modeled my effort on <a href="http://joshualande.com/jekyll-github-pages-poole">this one</a>. In short, I built it using <a href="https://github.com/poole/poole">Poole</a>, which is a wrapper for <a href="http://jekyllrb.com/">Jekyll</a>.  I write the posts in markdown and Jekyll converts the files to HTML.</p>
+</blockquote>
+
+<p><strong>How are you hosting <a href="jhaug.com">www.jhaug.com</a>?</strong></p>
+
+<blockquote>
+  <p>This website is <a href="https://github.com/joshhaug/joshhaug.github.io">hosted on github</a>.</p>
+</blockquote>
+
+<p><strong>How did you set up that SSL certificate?</strong></p>
+
+<blockquote>
+  <p>SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions <a href="https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/">here</a>.</p>
+</blockquote>
+
+<hr />
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:fn-aerodyn">
+      <p>In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. <a href="#fnref:fn-aerodyn" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>

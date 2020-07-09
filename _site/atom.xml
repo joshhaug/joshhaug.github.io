@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>J. Haug</title>
- <link href="https://jhaug.com/atom.xml" rel="self"/>
- <link href="https://jhaug.com/"/>
- <updated>2017-03-23T23:49:13-07:00</updated>
- <id>https://jhaug.com</id>
+ <title>BeeSci</title>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2020-07-08T12:22:08-07:00</updated>
+ <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
    <email>josh.haug55@gmail.com</email>
@@ -13,118 +13,412 @@
 
  
  <entry>
-   <title>Wood Finishes, Summarized</title>
-   <link href="https://jhaug.com/2017/01/02/wood-finishes/"/>
-   <updated>2017-01-02T00:00:00-08:00</updated>
-   <id>https://jhaug.com/2017/01/02/wood-finishes</id>
-   <content type="html">&lt;p&gt;If you have ever visited the wood finishing aisle at your local hardware store, you’re probably familiar with the sheer volume of options.
-To a newcomer, these options all &lt;em&gt;sound&lt;/em&gt; familiar and seem to be the same thing.  However, different wood finishes provide different protections and have different effects on the appearance of your final project.&lt;/p&gt;
+   <title>Hive Temperature Monitor, Version 2</title>
+   <link href="http://localhost:4000/hardware-v2.html"/>
+   <updated>2020-07-05T00:00:00-07:00</updated>
+   <id>http://localhost:4000/hardware-v2</id>
+   <content type="html">&lt;p&gt;In my &lt;a href=&quot;hardware.html&quot;&gt;previous prototype&lt;/a&gt;, I used one thermocouple and one IR thermopile to measure the hive and ambient temperatures, respectively. But that was an apples-to-oranges comparison. With identical thermometry hardware, I should be able to get a better sense of the tempertaures inside and outside the hive.&lt;/p&gt;
 
-&lt;div class=&quot;message&quot;&gt;
-Wrote this for myself as a cheat sheet 👍
-&lt;/div&gt;
-&lt;hr /&gt;
+&lt;p&gt;Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!&lt;/p&gt;
 
-&lt;h3 id=&quot;stain&quot;&gt;Stain&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Change the color of wood while leaving the grain visible&lt;/li&gt;
-  &lt;li&gt;Doesn’t offer much protection&lt;/li&gt;
-  &lt;li&gt;Add mineral spirits to dilute or add multiple coats to intensify&lt;/li&gt;
-  &lt;li&gt;Apply with a paint brush or cloth&lt;/li&gt;
-  &lt;li&gt;Dries quickly&lt;/li&gt;
-  &lt;li&gt;Raises the grain, so sand lightly in between coats&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Here’s a wiring diagram showing how the new MAX6675 breakouts are connected to the Raspberry Pi:&lt;/p&gt;
 
-&lt;h3 id=&quot;oil&quot;&gt;Oil&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Brings out the natural beauty of wood&lt;/li&gt;
-  &lt;li&gt;Protect against moisture but are nowhere near as effective as, say, varnish or shellac&lt;/li&gt;
-  &lt;li&gt;Lots of types, including…
-    &lt;ul&gt;
-      &lt;li&gt;Boiled linseed oil
-        &lt;ul&gt;
-          &lt;li&gt;Cheap, good for decorative things that don’t require much protection (like a picture frame)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Teak oil&lt;/li&gt;
-      &lt;li&gt;Tung oil&lt;/li&gt;
-      &lt;li&gt;Mineral oil
-        &lt;ul&gt;
-          &lt;li&gt;Food-safe, so good for items like chopping boards or spoons&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Danish oil
-        &lt;ul&gt;
-          &lt;li&gt;Offers more protection than other oils, b/c is a mixture of oil and varnish&lt;/li&gt;
-          &lt;li&gt;Good for things that require protection, like a tabletop&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/3tc-wiring.png&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;polyurethane&quot;&gt;Polyurethane&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Plastic coating for wood&lt;/li&gt;
-  &lt;li&gt;Variants include…
-    &lt;ul&gt;
-      &lt;li&gt;water-based (dries quickly, doesn’t beautify the wood)&lt;/li&gt;
-      &lt;li&gt;oil-based (dries slowly, beautifies the wood)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Most durable finish&lt;/li&gt;
-  &lt;li&gt;Leaves a plastic-y feel to it&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;varnish&quot;&gt;Varnish&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Made of oils, resins, solvents&lt;/li&gt;
-  &lt;li&gt;Dries slowly&lt;/li&gt;
-  &lt;li&gt;Brings out natural beauty&lt;/li&gt;
-  &lt;li&gt;Durable, although not as much as polyurethane&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;laquer&quot;&gt;Laquer&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;A thin, liquid varnish that is usually sprayed&lt;/li&gt;
-  &lt;li&gt;Durable&lt;/li&gt;
-  &lt;li&gt;Dries quickly&lt;/li&gt;
-  &lt;li&gt;Can be polished&lt;/li&gt;
-  &lt;li&gt;Brings out natural beauty in the wood&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;shellac&quot;&gt;Shellac&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Glossy finish&lt;/li&gt;
-  &lt;li&gt;Dries quickly&lt;/li&gt;
-  &lt;li&gt;Easy to apply&lt;/li&gt;
-  &lt;li&gt;Often used on antiques and fine furniture&lt;/li&gt;
-  &lt;li&gt;Not as durable as varnish/poly&lt;/li&gt;
-  &lt;li&gt;Dulls with age&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;finishing-waxbeeswax&quot;&gt;Finishing Wax/Beeswax&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Protects against moisture (indoors only)&lt;/li&gt;
-  &lt;li&gt;Brings out beauty&lt;/li&gt;
-  &lt;li&gt;Leaves a smooth finish&lt;/li&gt;
-  &lt;li&gt;Can be polished&lt;/li&gt;
-  &lt;li&gt;Clear or colored variants available&lt;/li&gt;
-  &lt;li&gt;Apply sparingly with a cloth in a circular motion&lt;/li&gt;
-  &lt;li&gt;Can be re-applied as needed&lt;/li&gt;
-  &lt;li&gt;Can’t use another finish after wax&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Note that I’m sharing the power (&lt;code class=&quot;highlighter-rouge&quot;&gt;VCC&lt;/code&gt;), ground (&lt;code class=&quot;highlighter-rouge&quot;&gt;GND&lt;/code&gt;), serial clock input (&lt;code class=&quot;highlighter-rouge&quot;&gt;SCK&lt;/code&gt;) and serial data output (&lt;code class=&quot;highlighter-rouge&quot;&gt;SO&lt;/code&gt;) lines across the three boards.  Each board has only one unique wire, going to the chip select (&lt;code class=&quot;highlighter-rouge&quot;&gt;CS&lt;/code&gt;) pin.  This pin is active low according to the &lt;a href=&quot;https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf&quot;&gt;datasheet&lt;/a&gt;, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>About This Website</title>
-   <link href="https://jhaug.com/2016/10/04/about-this-site/"/>
-   <updated>2016-10-04T01:02:23-07:00</updated>
-   <id>https://jhaug.com/2016/10/04/about-this-site</id>
+   <title>Counting Bee Movements Using a Convolutional Neural Network</title>
+   <link href="http://localhost:4000/counting-bees-using-a-cnn.html"/>
+   <updated>2020-05-14T14:46:20-07:00</updated>
+   <id>http://localhost:4000/counting-bees-using-a-cnn</id>
    <content type="html">&lt;div class=&quot;message&quot;&gt;
-How I developed this site.  Guaranteed to be boring for non-developers.
+Counting the number of &lt;b&gt;foragers&lt;/b&gt; (bees that collect pollen, nectar, and water) is an important measure of hive health. What if we could use a &lt;b&gt;convolutional neural network&lt;/b&gt; to count bees at the entrance of the hive?
 &lt;/div&gt;
+
+&lt;p&gt;Luckily, we can stand on the shoulders of giants. In &lt;a href=&quot;https://www.mdpi.com/2076-3417/9/18/3743&quot;&gt;this great paper&lt;/a&gt; by Vladimir Kulyukin and Sarbajit Mukherjee, the authors trained a CNN classifier for this very purpose.  More importantly, &lt;em&gt;they released their labeled datasets!&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s take a look at some of their data (from dataset BEE1, 32x32 images):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/classes.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The “no bee” class seems to have a red bias, but we’ll address that later.&lt;/p&gt;
+
+&lt;p&gt;Here’s the architecture that they say worked best for a 32x32 input image:
+&lt;img src=&quot;assets/cnn-1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With that image, I was able to implement the network in a few minutes using  Keras:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BatchNormalization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BatchNormalization&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conv2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MaxPooling2D&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;512&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;relu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;relu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;relu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;relu&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sigmoid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here’s what the accuracy looks like during training:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/training.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;applying-it-to-our-data&quot;&gt;Applying It To Our Data&lt;/h3&gt;
+
+&lt;p&gt;Note that this is an image &lt;strong&gt;classifier&lt;/strong&gt;, not a detector.  To apply this classifier to video, the authors used a scheme like this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;apply some background subtraction/motion detection algorithm like &lt;a href=&quot;http://www.ee.surrey.ac.uk/CVSSP/Publications/papers/KaewTraKulPong-AVBS01.pdf&quot;&gt;MOG&lt;/a&gt;, &lt;a href=&quot;https://ieeexplore.ieee.org/document/1333992&quot;&gt;MOG2&lt;/a&gt;, or &lt;a href=&quot;https://goldberg.berkeley.edu/pubs/acc-2012-visual-tracking-final.pdf&quot;&gt;GMG&lt;/a&gt; to determine regions of interest, then&lt;/li&gt;
+  &lt;li&gt;generate some 32x32 image tile containing the region of interest, then&lt;/li&gt;
+  &lt;li&gt;run the CNN on the tile to determine whether the motion was “bee related” or not&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In other words, &lt;strong&gt;rather than counting the number of bees, they are counting the number of movements that are bee-related&lt;/strong&gt;.  This is a useful metric to determine &lt;em&gt;relative&lt;/em&gt; changes in foraging behavior.  That said, a bee detection or pose estimation NN may provide even more insight.&lt;/p&gt;
+
+&lt;p&gt;Regardless, this should be pretty easy to implement.  Let’s revisit the video of a hive entrance I analyzed in an &lt;a href=&quot;quick-video-analysis.html&quot;&gt;earlier post&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/phone-basic.mp4&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s the video with the &lt;a href=&quot;https://docs.opencv.org/master/d1/dc5/tutorial_background_subtraction.html&quot;&gt;MOG2&lt;/a&gt; background subtraction algorithm applied:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/phone-mogmask.mp4&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can then threshold the background subtraction output to get regions with substantial movement only:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/phone-mogthresh.mp4&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Prototype For Hive Monitoring</title>
+   <link href="http://localhost:4000/hardware.html"/>
+   <updated>2020-05-14T00:00:00-07:00</updated>
+   <id>http://localhost:4000/hardware</id>
+   <content type="html">&lt;p&gt;I’m using a super simple setup for hive monitoring.  The brains of the operation is a Raspberry Pi 4 running Raspbian.   Here’s what it looks like on the inside:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/setup.jpg&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;temperature-data-collection&quot;&gt;Temperature Data Collection&lt;/h3&gt;
+
+&lt;p&gt;I’m measuring hive temperature with two sensors:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;k-type thermocouple and amplifier (MAX6675) for internal temperature&lt;/li&gt;
+  &lt;li&gt;infrared thermopile (TMP006) for ambient temperature&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ideally I’d use just thermocouples, but these are the only sensors I have on hand.&lt;/p&gt;
+
+&lt;p&gt;I’m using a &lt;a href=&quot;https://github.com/tdack/MAX6675&quot;&gt;python library&lt;/a&gt; to read the temperature every ten seconds.  The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings.  Here’s the basic idea:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/home/pi/bees/temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;temp1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;temp1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c_to_f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sensor1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;temp2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c_to_f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readDieTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;temp3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c_to_f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readObjTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;An error occured&quot;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;temp3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Initially, I wrote the script with the &lt;code class=&quot;highlighter-rouge&quot;&gt;open&lt;/code&gt; statement outside the loop, like so…&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/home/pi/bees/temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# ... get temperatures
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;… to save on the cost of reopening the file for each iteration of the loop.  Because why not?  The behavior is the same, right?&lt;/p&gt;
+
+&lt;p style=&quot;color:red&quot;&gt;&lt;b&gt;Wrong.&lt;/b&gt; This code causes the writes to be bundled into larger writes -- the file will update occassionally (in my experience, every couple hundred writes or so) and again when you terminate the python script.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Why does this happen, you ask?&lt;/strong&gt; I don’t know. Maybe the writes are being bundled by the python interpreter, maybe it’s the OS’s disk scheduler, maybe it’s just plain ol’ witchcraft.  Some day I’d like to get to the bottom of this, but today is not that day.&lt;/p&gt;
+
+&lt;h2 id=&quot;audio-data-collection&quot;&gt;Audio Data Collection&lt;/h2&gt;
+
+&lt;p&gt;Audio is coming from an old Guitar Hero USB mic I cannibalized.&lt;/p&gt;
+
+&lt;p&gt;The audio is recorded using &lt;a href=&quot;http://manpages.org/arecord&quot;&gt;arecord&lt;/a&gt; in a bash script more or less like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;    
+    arecord &lt;span class=&quot;nt&quot;&gt;--device&lt;/span&gt; sysdefault:CARD&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1 &lt;span class=&quot;nt&quot;&gt;--format&lt;/span&gt; S16_LE &lt;span class=&quot;nt&quot;&gt;--rate&lt;/span&gt; 11025 &lt;span class=&quot;nt&quot;&gt;--channels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1 &lt;span class=&quot;nt&quot;&gt;--duration&lt;/span&gt; 3600 out.wav &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;What is this command doing? It’s recording an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.&lt;/p&gt;
+
+&lt;p&gt;Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers&lt;sup id=&quot;fnref:fn-acoustics&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-acoustics&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:fn-vibratory&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-vibratory&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics. Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/acoustic-signature.jpg&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.&lt;/p&gt;
+
+&lt;h2 id=&quot;networking&quot;&gt;Networking&lt;/h2&gt;
+
+&lt;p&gt;The Pi is connected via WLAN to an old AirPort Extreme. From the house, I can connect to the network and &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; into the Pi to download the data, modify scripts, etc. To keep data collection running after I close the session, I’m running &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; and detaching. There are other ways to do this, like &lt;code class=&quot;highlighter-rouge&quot;&gt;nohup&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;disown&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bg&lt;/code&gt;, etc., but &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; is part of my regular workflow.&lt;/p&gt;
+
+&lt;p&gt;From my laptop, I can run a small script to switch networks and download the data every so often:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Connecting to beenet...&quot;&lt;/span&gt;
+networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en0 beenet password
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Downloading data...&quot;&lt;/span&gt;
+scp pi@raspberrypi.local:~/bees/temp.txt &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Connecting to home network...&quot;&lt;/span&gt;
+networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en0 homenet password
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This data collection scheme is fine for prototyping, but would be very inconvenient for live metrics.&lt;/p&gt;
+
+&lt;h2 id=&quot;housing&quot;&gt;Housing&lt;/h2&gt;
+
+&lt;p&gt;These sensors are arranged in a crappy box made from literal garbage – plywood and pallet wood I found in a dumpster.  Here’s  what it looks like all assembled:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/hive-with-sensors.jpg&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:fn-acoustics&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Qandour, Amro &amp;amp; Ahmad, Iftekhar &amp;amp; Habibi, Daryoush &amp;amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. &lt;a href=&quot;#fnref:fn-acoustics&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-vibratory&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;M. Hrncir, F. G. Barth, and J. Tautz, “32 vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. &lt;a href=&quot;#fnref:fn-vibratory&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Hive Temperature Analysis</title>
+   <link href="http://localhost:4000/hive-temp.html"/>
+   <updated>2020-05-02T00:00:00-07:00</updated>
+   <id>http://localhost:4000/hive-temp</id>
+   <content type="html">&lt;p&gt;Here is what the initial data looks like from my &lt;a href=&quot;hardware.html&quot;&gt;small hive monitoring setup&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/temp.jpg&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, the TMP006 produces two readings: object temperature (the reading from the surface the thermopile is pointed at) and die temperature (the temperature from the die itself).   For more info see the TMP006 &lt;a href=&quot;https://cdn.sparkfun.com/datasheets/Sensors/Temp/sbou107.pdf&quot;&gt;user guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The large spike on 4/24 was due to the hive being in direct sunlight.  The night of the 24th, we placed shade covers over the hives to prevent them from overheating.   This clearly made a difference.&lt;/p&gt;
+
+&lt;h3 id=&quot;potential-evidence-of-thermoregulation&quot;&gt;Potential Evidence of Thermoregulation&lt;/h3&gt;
+
+&lt;p&gt;Here’s a plot showing the hive temperature, the attic temperature, and the temperature at Burbank Airport (from &lt;a href=&quot;www.wunderground.com&quot;&gt;Weather Underground&lt;/a&gt;) over a 36-hour period:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/36-hour-annotated.jpg&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The hive’s temperature clearly rises and falls with the ambient temperature. But more interesting is the difference between the BUR temperature (green line) and the hive temperature (blue line).  Notice that, at 14:00 on the 28th, the hive is ~12.5 degrees warmer than BUR, but by 4:00 on the 29th, the hive is ~20 degrees warmer.  This seems to indicate that the bees regulate the internal temperature of the hive to keep it warmer.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-do-bees-thermoregulate&quot;&gt;Why do bees thermoregulate?&lt;/h3&gt;
+
+&lt;p&gt;Bees work hard to keep the temperature of the hive &lt;em&gt;just&lt;/em&gt; right.  But why?  The later-stage young, called pupae, are like little Goldilocks – they need to be kept between 33 and 36ºC (91.4 - 96.8ºF) to prevent physical and behavioral defects. Pupae develop in sealed-off cells of the honeycomb, called “capped brood cells.”  Here’s a picture I took of some capped brood cells:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/capped-brood.jpg&quot; alt=&quot; Capped Brood&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If these cells get too hot, workers use evaporative cooling – they splash the cells with water and fan them with their wings.  If the cells get too cold, workers will vibrate their flight muscles to produce heat.  Here is what the heating process looks like under a thermal camera.&lt;sup id=&quot;fnref:fn-thermo&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-thermo&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/heater-bees.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+&lt;b&gt;TL;DR&lt;/b&gt; Need better ambient temperature sensor, a thermocouple would be best. Need better attic with more insulation. The sample rate is too damn high!   
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Using IR sensor for ambient temperature is bad&lt;/strong&gt; – My hope was that the attic measurements could be used as a baseline for comparison with the inside of the hive (i.e. it would provide the ambient temperature inside a wooden box, thus accounting for any insulation that the hive boxes provide). In theory, then, the difference between the attic temperature and the hive temperature would be due entirely to bee activity. But this is not necessarily the case, due to:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;differences in sensor properties (e.g. rate of heat absorption of the IR die vs the thermocouple)  → can be fixed by using a thermocouple&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;differences in construction between the hive boxes (solid wood, painted white) and the attic (plywood top and bottom, solid wood sides, unpainted) → can be re-made&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;interactions between the attic and the hive boxes (e.g. attic absorbes most of the sunlight at noon, and heat transfer between the hive boxes and the attic) → not yet sure how this can be addressed&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;My sampling rate is too high&lt;/strong&gt; – A reading every ten seconds is excessive. It’s clear that interesting events happen over the course of minute, not seconds. The BUR dataset resolution of one hour might be a little coarse, but I feel comfortable sampling every 5 minutes (30 times fewer datapoints than the current setup).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:fn-thermo&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Stabentheiner A, Kovac H, Brodschneider R. Honeybee colony thermoregulation–regulatory mechanisms and contribution of individuals in dependence on age, location and thermal stress. &lt;em&gt;PLoS One&lt;/em&gt;. 2010;5(1):e8967. Published 2010 Jan 29. &lt;a href=&quot;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2813292/&quot;&gt;pdf&lt;/a&gt; &lt;a href=&quot;#fnref:fn-thermo&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>A Quick and Dirty Way to Count Bees</title>
+   <link href="http://localhost:4000/quick-video-analysis.html"/>
+   <updated>2020-05-01T00:00:00-07:00</updated>
+   <id>http://localhost:4000/quick-video-analysis</id>
+   <content type="html">&lt;div class=&quot;message&quot;&gt;
+Today we'll explore some basic image processing techniques to count bees. These require &lt;b&gt;no labeled training data&lt;/b&gt;, so we'll try them first before moving on to fancier techniques.
+&lt;/div&gt;
+
+&lt;p&gt;The number of bees in the entrance of the hive is a good indicator of the health of the hive.  NEED CITATION.&lt;/p&gt;
+
+&lt;p&gt;Say I have a video of the entrance of a beehive, like this:
+&lt;img src=&quot;assets/phone-basic.mp4&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If I wanted to count the number of bees in each frame, I &lt;em&gt;could&lt;/em&gt; set up and train an object detection CNN.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;But here’s a lazy way to do it.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;First, collapse the color data and apply a Gaussian blur to each frame, like so:
+&lt;img src=&quot;assets/phone-blur.mp4&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then apply pixel thresholding to get the dark spots, like so:
+&lt;img src=&quot;assets/phone-darkspots.mp4&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To interpret the list of points as separate objects, we can use a clustering algorithm.  Here’s an example using &lt;a href=&quot;https://en.wikipedia.org/wiki/Hierarchical_clustering&quot;&gt;hierarchical clustering&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/phone-clusters.mp4&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It &lt;strong&gt;kind of&lt;/strong&gt; works!  From here we can just count the clusters to get an approximation of the number of bees in frame.&lt;/p&gt;
+
+&lt;p&gt;Some clear problems though:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I had to determine a few values experimentally, like intensity threshold and clustering distance threshold&lt;/li&gt;
+  &lt;li&gt;This only works because the bees’ heads and thoraxes are the darkest things in frame. Any dark black objects on the ground would also be counted as bees.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This technique is fast but not reliably accurate.  But the small amount of computation required makes it suitable for a low-power application.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Hive Sound Analysis</title>
+   <link href="http://localhost:4000/hive-sound.html"/>
+   <updated>2020-05-01T00:00:00-07:00</updated>
+   <id>http://localhost:4000/hive-sound</id>
+   <content type="html">&lt;h2 id=&quot;the-bees-are-speaking&quot;&gt;The Bees Are Speaking&lt;/h2&gt;
+
+&lt;p&gt;Bees communicate with sound.  Newborn queens, for example, use their wing muscles to make a trumpeting sound called “piping”.  This is a battle cry.&lt;/p&gt;
+
+&lt;p&gt;/assets/piping.mp3&lt;/p&gt;
+
+&lt;h2 id=&quot;audio-data-collection-setup&quot;&gt;Audio Data Collection Setup&lt;/h2&gt;
+
+&lt;p&gt;Audio is coming from an old Guitar Hero USB mic I cannibalized.&lt;/p&gt;
+
+&lt;p&gt;The audio is recorded using &lt;a href=&quot;http://manpages.org/arecord&quot;&gt;arecord&lt;/a&gt; in a bash script more or less like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;    
+    &lt;span class=&quot;n&quot;&gt;arecord&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sysdefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CARD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S16_LE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rate&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11025&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;channels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duration&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3600&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wav&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s pretty easy to see what this command is doing: record an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.&lt;/p&gt;
+
+&lt;p&gt;Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics.&lt;sup id=&quot;fnref:fn-vibratory&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-vibratory&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;  Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.&lt;/p&gt;
+
+&lt;p&gt;Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.&lt;/p&gt;
+
+&lt;p&gt;So… what am I looking for? Here’s some examples:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/acoustic-signature.jpg&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This table is from the great paper &lt;em&gt;Remote Beehive Monitoring using Acoustic Signals&lt;/em&gt;.&lt;sup id=&quot;fnref:fn-acoustics&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-acoustics&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;The table fails to mention that worker piping also occurs in non-disturbed queenright hives.&lt;sup id=&quot;fnref:fn-worker-piping&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-worker-piping&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.beeculture.com/a-closer-look-piping-tooting-quacking/&quot;&gt;https://www.beeculture.com/a-closer-look-piping-tooting-quacking/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ideas-for-stuff&quot;&gt;Ideas for Stuff&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pics of setup&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sonogram of signal to show harmonics&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Commercial hive montioring tool
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://broodminder.com&quot;&gt;Broodminder&lt;/a&gt; Blutetooth LE devices&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ZoRyeiV7BSE&quot;&gt;Arnia&lt;/a&gt; setup&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Amateur tools
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=1hl_YaXvU0A&quot;&gt;Temperature and humidity&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:fn-vibratory&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;M. Hrncir, F. G. Barth, and J. Tautz, “Vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. &lt;a href=&quot;#fnref:fn-vibratory&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-acoustics&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Qandour, Amro &amp;amp; Ahmad, Iftekhar &amp;amp; Habibi, Daryoush &amp;amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. &lt;a href=&quot;#fnref:fn-acoustics&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-worker-piping&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Pratt, S. C., Kühnholz, S., Seeley, T. D., and Weidenmüller, A. Worker piping associated with foraging in undisturbed queenright colonies of honey bees. Apidologie, 27(1), 13-20. 1996. &lt;a href=&quot;https://www.apidologie.org/articles/apido/pdf/1996/01/Apidologie_0044-8435_1996_27_1_ART0002.pdf&quot;&gt;pdf&lt;/a&gt; &lt;a href=&quot;#fnref:fn-worker-piping&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>How To Make This Website</title>
+   <link href="http://localhost:4000/about-this-site.html"/>
+   <updated>2016-10-04T01:02:23-07:00</updated>
+   <id>http://localhost:4000/about-this-site</id>
+   <content type="html">&lt;div class=&quot;message&quot;&gt;
+How I made this website.  Guaranteed to be boring for non-developers.
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;How did you make it?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I modeled my effort on &lt;a href=&quot;http://joshualande.com/jekyll-github-pages-poole&quot;&gt;this one&lt;/a&gt;. In short, it uses &lt;a href=&quot;https://github.com/poole/poole&quot;&gt;Poole&lt;/a&gt;, which is a theme for &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;.  I write the posts in markdown and Jekyll converts the files to HTML.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;&lt;strong&gt;How did you get math to render on your site?&lt;/strong&gt;&lt;/p&gt;
 
@@ -137,14 +431,10 @@ How I developed this site.  Guaranteed to be boring for non-developers.
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle&lt;sup id=&quot;fnref:fn-aerodyn&quot;&gt;&lt;a href=&quot;#fn:fn-aerodyn&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; is represented as &lt;code class=&quot;highlighter-rouge&quot;&gt;$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$&lt;/code&gt; in my code, but produces…&lt;/p&gt;
+  &lt;p&gt;Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle&lt;sup id=&quot;fnref:fn-aerodyn&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-aerodyn&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; is represented as &lt;code class=&quot;highlighter-rouge&quot;&gt;$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$&lt;/code&gt; in my code, but produces…&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}&lt;/script&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I should just use LaTeXit for this sort of thing, but haven’t had the time to change the site.&lt;/p&gt;
-&lt;/blockquote&gt;
+\[{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}\]
 
 &lt;p&gt;&lt;strong&gt;Why do your code blocks look so nice?&lt;/strong&gt;&lt;/p&gt;
 
@@ -152,13 +442,7 @@ How I developed this site.  Guaranteed to be boring for non-developers.
   &lt;p&gt;The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to &lt;code class=&quot;highlighter-rouge&quot;&gt;_sass/_code.scss&lt;/code&gt;, found the block that started with &lt;code class=&quot;highlighter-rouge&quot;&gt;pre {&lt;/code&gt; and added in &lt;code class=&quot;highlighter-rouge&quot;&gt;white-space: pre-wrap;&lt;/code&gt;, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;strong&gt;How did you make it?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I modeled my effort on &lt;a href=&quot;http://joshualande.com/jekyll-github-pages-poole&quot;&gt;this one&lt;/a&gt;. In short, I built it using &lt;a href=&quot;https://github.com/poole/poole&quot;&gt;Poole&lt;/a&gt;, which is a wrapper for &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt;.  I write the posts in markdown and Jekyll converts the files to HTML.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;How are you hosting &lt;a href=&quot;jhaug.com&quot;&gt;www.jhaug.com&lt;/a&gt;?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How are you hosting it?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;This website is &lt;a href=&quot;https://github.com/joshhaug/joshhaug.github.io&quot;&gt;hosted on github&lt;/a&gt;.&lt;/p&gt;
@@ -172,303 +456,13 @@ How I developed this site.  Guaranteed to be boring for non-developers.
 
 &lt;hr /&gt;
 
-&lt;div class=&quot;footnotes&quot;&gt;
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
-    &lt;li id=&quot;fn:fn-aerodyn&quot;&gt;
-      &lt;p&gt;In case you’re interested, the aerodynamic diameter of a particle is the diameter of a spherical particle with the same settling velocity as the irregular particle.  This particle is assumed to have a density p₀ = 1000 kg/m³ where Ꭓ represents the correction factor.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. &lt;a href=&quot;#fnref:fn-aerodyn&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;li id=&quot;fn:fn-aerodyn&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;In case you’re interested, the particle is assumed to have a density p₀ = 1000 kg/m³.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. &lt;a href=&quot;#fnref:fn-aerodyn&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>The Subtle Differences Between Aerosols, Vapors, and Gases</title>
-   <link href="https://jhaug.com/2016/08/26/clarifications-states-of-matter/"/>
-   <updated>2016-08-26T00:00:00-07:00</updated>
-   <id>https://jhaug.com/2016/08/26/clarifications-states-of-matter</id>
-   <content type="html">&lt;div class=&quot;message&quot;&gt;
-The differences between &lt;b&gt;aerosols&lt;/b&gt;, &lt;b&gt;vapors&lt;/b&gt;, and &lt;b&gt;gases&lt;/b&gt; are subtle, to say the least.  In fact, the differences are practically invisible to the naked eye. Here I clarify those differences, answer common questions, and address popular misconceptions.  
-&lt;/div&gt;
-
-&lt;h3 id=&quot;why-its-important&quot;&gt;Why It’s Important&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Different processes of generation, different behaviors, different effects on our lungs, etc.&lt;/li&gt;
-  &lt;li&gt;Clarifies the differences between e-cigarettes, herbal vaporizers, and combustion&lt;/li&gt;
-  &lt;li&gt;The confusion is amplified by the e-cigarette industry’s use of terms for marketing that are not congruent with the science.&lt;/li&gt;
-  &lt;li&gt;Gives scientists a clue on how to allow scientific jargon to evolve
-    &lt;ul&gt;
-      &lt;li&gt;Vapor redefinition to the gaseous phase or suspension of a liquid&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;definitions-of-things&quot;&gt;Definitions of Things&lt;/h3&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Term&lt;/th&gt;
-      &lt;th&gt;Definition&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Suspension&lt;/td&gt;
-      &lt;td&gt;A heterogeneous mixture containing solid particles that are big enough for sedimentation. Diameter ≥ 1.0 µm.  The particles can be either solid or liquid. In theory, all suspensions settle.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Aerosol&lt;/td&gt;
-      &lt;td&gt;A suspension of liquid droplets or fine solid particles in a gas. Particles can range from 1 to 10 µm in diameter.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Colloid&lt;/td&gt;
-      &lt;td&gt;Unlike suspensions, colloids do not settle.  Diameter &amp;lt; 1.0 µm.  Kind of the gas version of a solution.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-       &lt;td&gt;Vapor&lt;/td&gt;
-       &lt;td&gt;The gas phase of something that was once a liquid.  Colloquially refers to the aerosol produced by e-cigarettes and herbal vaporizers.&lt;/td&gt; 
-    &lt;/tr&gt;
-    &lt;tr&gt;
-       &lt;td&gt;Steam&lt;/td&gt;
-       &lt;td&gt;The gas phase of water.  Steam itself is invisible.&lt;/td&gt; 
-    &lt;/tr&gt;
-    &lt;tr&gt;
-       &lt;td&gt;Wet Steam&lt;/td&gt;
-       &lt;td&gt;Steam itself is invisible, but wet steam is not.  Wet steam is a mist (or aerosol) of water droplets.  It's caused by water vapor condensing in mid-air.&lt;/td&gt; 
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;definitions-of-processes&quot;&gt;Definitions of Processes&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Process&lt;/th&gt;
-      &lt;th&gt;Definition&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-       &lt;td&gt;Sublimation&lt;/td&gt;
-       &lt;td&gt;A phase change: solid → gas.  The substance skips the liquid phase entirely.&lt;/td&gt; 
-    &lt;/tr&gt;
-    &lt;tr&gt;
-       &lt;td&gt;Vaporization&lt;/td&gt;
-       &lt;td&gt;A phase change: liquid → gas.  Includes such processes as boiling and evaporation.&lt;/td&gt; 
-    &lt;/tr&gt;
-    &lt;tr&gt;
-       &lt;td&gt;Condesation&lt;/td&gt;
-       &lt;td&gt;A phase change: gas → liquid.  This is best illustrated by a cold glass of water &quot;sweating.&quot;&lt;/td&gt; 
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;When you boil a pot of water on the stove, you’ll see a plume of &lt;strong&gt;steam&lt;/strong&gt;.  However, water vapor is itself &lt;a href=&quot;http://www.weatherquestions.com/What_is_water_vapor.htm&quot;&gt;invisible!&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;What e-cigarettes produce: aerosol (suspension of small droplets of propylene glycol + nicotine solution + flavoring solution)&lt;/p&gt;
-
-&lt;p&gt;What herbal vaporization produces: aerosol (small droplets of trichomes)&lt;/p&gt;
-
-&lt;p&gt;What combustion produces: 
-Solid and Liquid Aerosol&lt;/p&gt;
-
-&lt;p&gt;How are droplets suspended in the air?&lt;/p&gt;
-
-&lt;h3 id=&quot;aerosol-categorization&quot;&gt;Aerosol Categorization&lt;/h3&gt;
-
-&lt;p&gt;Aerosols can be categorized by the measure of particle heterogeneity.  For instance, an aerosol can be &lt;strong&gt;monodisperse&lt;/strong&gt; (all particles the same size – this one is very rare in nature) or &lt;strong&gt;polydisperse&lt;/strong&gt; (many different sizes).&lt;/p&gt;
-
-&lt;p&gt;In this post I’ll be covering polydisperse aerosols, as they are the most common.  It’s useful to describe polydisperse aerosols in terms of their particle size makeup (i.e. divide the total size range into intervals and find the percent of particles that fall within each interval.)  The two most common size intervals you’ll find in literature are PM-10 and PM-2.5.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;PM-10&lt;/strong&gt; is an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 10.0 µm.”  These particles deposit in the mouth, throat, and upper parts of the lungs.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;PM-2.5&lt;/strong&gt; is therefore an abbreviation for “Particulate Matter of Aerodynamic Diameter ≤ 2.5 µm.”  These particles are in the danger zone, so to speak – they are small enough to reach the alveolar region of the lungs, where they can be effortlessly absorbed into the bloodstream.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;deposition&quot;&gt;Deposition&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Deposition is the process by which aerosol particles deposit themselves on solid surfaces.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The most common causes of deposition in human lungs are…&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Impaction — some particles are unable to follow the curvature of the airflow due to their inertia, so they are flung out of the airstream and hit something&lt;/li&gt;
-  &lt;li&gt;Settling (aka gravitational sedimentation) — particles fall and settle due to gravity&lt;/li&gt;
-  &lt;li&gt;Diffusiophoresis — spontaneous movement of particles caused by a concentration gradient&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Other (not significant in respiratory system) deposition causes include…&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Interception — when following the streamline, some of the outermost particles will run into obstacles (note the difference between this and impaction, which is the result of a curvature in the air path)&lt;/li&gt;
-  &lt;li&gt;Turbulence — I don’t know this one, but read it somewhere.&lt;/li&gt;
-  &lt;li&gt;Thermophoresis - (aka thermodiffusion, thermomigration, the Soret effect, the Ludwig-Soret effect) movement of particles due to a temperature gradient&lt;/li&gt;
-  &lt;li&gt;Turbophoresis — tendency for particles to collect in the area of least turbulence&lt;/li&gt;
-  &lt;li&gt;Electrophoresis - movement of particles induced by a uniform electric field&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;respiratory-deposition&quot;&gt;Respiratory Deposition&lt;/h3&gt;
-
-&lt;p&gt;The diameter of the particle dₚ determines the region in which it will deposit.  Size-selective sampling is generally split into the following categories:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Inhalable fraction: enters the nose, mouth, pharynx, larynx (dₚ &amp;gt; 10.0 µm)&lt;/li&gt;
-  &lt;li&gt;Thoracic fraction: reaches the thorax/chest region, trachea to terminal bronchioles, corresponding to PM-10  (dₚ ≤ 10.0 µm)&lt;/li&gt;
-  &lt;li&gt;Respirable fraction: reaches the alveolar/pulmonary region, corresponding to PM-2.5  (dₚ ≤ 2.5 µm)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The most important mechanisms of deposition in the respiratory system are impaction, settling, and diffusion.  Impaction is of primary concern in the large airways.  Settling is most important in the smaller airways and alveolar region.&lt;/p&gt;
-
-&lt;h3 id=&quot;aerosol-behavior&quot;&gt;Aerosol Behavior&lt;/h3&gt;
-
-&lt;p&gt;In practice, aerosolized particles may not be spherical.  However, one can approximate a non-spherical particle’s depositional behavior by calculating an &lt;strong&gt;aerodynamic diameter&lt;/strong&gt;.  This is done by pretending that the irregular particle (with settling velocity s) is spherical, keeping the settling velocity constant.  This idealized particle is assumed to have a standard particle density of 1000 kg/m&lt;sup&gt;3&lt;/sup&gt;.  The diameter of this new particle is defined as…&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;d_{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}&lt;/script&gt;
-
-&lt;p&gt;where $\rho_{0}$ is the standard particle density and $\chi$ is the dynamic shape factor (a ratio of the resistive force of an irregular particle to that of a spherical particle).&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>Fluid Dynamics and Traffic</title>
-   <link href="https://jhaug.com/2016/04/24/fluid-dynamics-and-traffic/"/>
-   <updated>2016-04-24T01:55:21-07:00</updated>
-   <id>https://jhaug.com/2016/04/24/fluid-dynamics-and-traffic</id>
-   <content type="html">&lt;p&gt;I bet you didn’t know that &lt;a href=&quot;http://www.trafficwaves.org&quot;&gt;traffic can be mathematically represented as an emergent phenomenon in fluid dynamics.&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>MBTI© is Junk Science</title>
-   <link href="https://jhaug.com/2016/01/01/mbti-is-bullshit/"/>
-   <updated>2016-01-01T00:02:23-08:00</updated>
-   <id>https://jhaug.com/2016/01/01/mbti-is-bullshit</id>
-   <content type="html">&lt;p&gt;Here’s a question I get asked from time to time:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Why does it matter what my Myers-Briggs type is?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;It’s often followed by this, usually in a hushed voice:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;You know it’s bullshit, right?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://jhaug.com/assets/MBTI.gif&quot; alt=&quot;a common search&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Go ahead and perform a web search with &lt;code class=&quot;highlighter-rouge&quot;&gt;MBTI bullshit&lt;/code&gt; as the query.  You’ll find &lt;em&gt;plenty&lt;/em&gt; of people fuming over the MBTI© for a myriad of reasons.  The most common of these are…&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Weak factual basis&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Neither Isabel Briggs Myers nor Katherine Briggs had a formal background in psychology&lt;/li&gt;
-      &lt;li&gt;Based on binary characteristics, which is too restrictive for personality&lt;/li&gt;
-      &lt;li&gt;Jung’s &lt;a href=&quot;https://en.wikipedia.org/wiki/Analytical_psychology&quot;&gt;analytic psychology&lt;/a&gt; is based on anecdotal rather than empirical evidence, and is therefore unscientific&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;The tests don’t work&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Most people get a different result upon re-taking the test &lt;sup id=&quot;fnref:fn-half-diff&quot;&gt;&lt;a href=&quot;#fn:fn-half-diff&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;hr /&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Reinforces stereotypes of personality&lt;/li&gt;
-      &lt;li&gt;Seems like a scam&lt;/li&gt;
-      &lt;li&gt;MBTI Trust® has trademarked Myers-Briggs Type Indicator®, Myers Briggs®, and MBTI®.  &lt;a href=&quot;http://www.myersbriggs.org/myers-and-briggs-foundation/ethical-use-of-the-mbti-instrument/trademark-guidelines.htm&quot;&gt;Here are their guidelines for usage.&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Moreover, the bulk of scientific literature pertaining to MBTI is published for conferences of the &lt;em&gt;Center for the Application of Psychological Type&lt;/em&gt; or as papers in the &lt;em&gt;Journal of Psychological Type&lt;/em&gt;, both of which are funded by sales of MBTI-related tests and services.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;When stacked up, these arguments are pretty convincing.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;the-importance-of-helpful-bullshit&quot;&gt;The Importance of Helpful Bullshit&lt;/h2&gt;
-
-&lt;p&gt;While I totally agree that MBTI is &lt;em&gt;not&lt;/em&gt; legitimate science, I disagree with&lt;/p&gt;
-
-&lt;p&gt;And that is precisely what should happen to MBTI – it should be demoted.  The scientific community and Fortune 500 companies alike should respect the evidence.&lt;/p&gt;
-
-&lt;p&gt;In fact, the majority of the population has little need for personality categorization.&lt;/p&gt;
-
-&lt;p&gt;There is a small minority for whom MBTI serves a valuable purpose.  In the Big 5, these are called BLANK and BLANK.  MBTI classifies them as INTPs and INTJs.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Classifying people’s personalities is inherently ambiguous&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Fuels navel-gazing-and-elitism&lt;sup id=&quot;fnref:fn-then-again&quot;&gt;&lt;a href=&quot;#fn:fn-then-again&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;It’s an interesting system of classification&lt;/li&gt;
-  &lt;li&gt;Most importantly, MBTI crudely describes human behavior in a way that makes sense to awkward people (INTP and INTJ then INFs, ENT, ENF, everyone else) (Dylan 2016)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I am an INTP. &lt;strong&gt;INTP&lt;/strong&gt;s constitute 3-5% of the U.S. population.&lt;sup id=&quot;fnref:fn-type-freq&quot;&gt;&lt;a href=&quot;#fn:fn-type-freq&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;  INTPs share some bizarre quirks like a fondness for discordant music and a strong suspicion towards their own emotions.  For more information, see &lt;a href=&quot;http://www.intp.org/intprofile.html&quot;&gt;An INTP Profile&lt;/a&gt; by Paul James.&lt;/p&gt;
-
-&lt;p&gt;Here are some INTP sites I’m familiar with:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/intp&quot;&gt;INTP subreddit&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.intp.org&quot;&gt;intp.org&lt;/a&gt; has a few cool resources&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.intpexperience.com&quot;&gt;intpexperience.com&lt;/a&gt; goes into depth about the INTP’s relationship with emotion&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Most online personality forums seem to share the masturbatory “nobody understands us” mentality.  These are no exception – you’ve been warned.  Unlike other forums, however, many commenters express sincere gratitude for the typology.  INTPs often have a hell of a time finding others that they can relate to.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://jhaug.com/assets/INTP-gratitude.png&quot; alt=&quot;a common post on INTP forums&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;bibliography&quot;&gt;Bibliography&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://thoughtcatalog.com/lorenzo-jensen-iii/2015/05/13-reasons-why-the-myers-briggs-test-is-absolute-nonsense/&quot;&gt;13 Reasons Why The Myers-Briggs Test Is Absolute Nonsense&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://skepdic.com/myersb.html&quot;&gt;The Skeptic’s Dictionary&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.psychologytoday.com/blog/give-and-take/201309/goodbye-mbti-the-fad-won-t-die&quot;&gt;Adam Grant’s critique of MBTI&lt;/a&gt; as well as &lt;a href=&quot;http://www.cppblogcentral.com/cpp-connect/the-myers-briggs-assessment-is-no-fad-its-a-research-based-instrument-that-delivers-results/&quot;&gt;CPP’s response&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;div class=&quot;footnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:fn-half-diff&quot;&gt;
-      &lt;p&gt;See &lt;a href=&quot;http://www.indiana.edu/~jobtalk/HRMWebsite/hrm/articles/develop/mbti.pdf&quot;&gt;this paper&lt;/a&gt; for more information &lt;a href=&quot;#fnref:fn-half-diff&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:fn-then-again&quot;&gt;
-      &lt;p&gt;Then again, those sorts of people will use any means they can to assert superiority – be it IQ scores, taste in music, what have you. &lt;a href=&quot;#fnref:fn-then-again&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:fn-type-freq&quot;&gt;
-      &lt;p&gt;This figure comes from &lt;a href=&quot;http://www.myersbriggs.org/my-mbti-personality-type/my-mbti-results/how-frequent-is-my-type.htm&quot;&gt;the official Myers-Briggs page&lt;/a&gt; &lt;a href=&quot;#fnref:fn-type-freq&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Myers-Briggs -- Quality Resources</title>
-   <link href="https://jhaug.com/2015/04/07/myers-briggs-quality-resources/"/>
-   <updated>2015-04-07T01:02:23-07:00</updated>
-   <id>https://jhaug.com/2015/04/07/myers-briggs-quality-resources</id>
-   <content type="html">&lt;p&gt;Many people find it difficult to learn concepts on their own.  Here’s something to think about: does one have a moral obligation to share straightforward &amp;amp; factual resources?&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Applications of Myers-Briggs (and personality theory in general) to human-computer interaction&lt;/li&gt;
-  &lt;li&gt;Audiovisual folks might appreciate Michael Pierce’s Sixteen Types&lt;/li&gt;
-  &lt;li&gt;Keirsey’s first and second works on the subject&lt;/li&gt;
-&lt;/ul&gt;
 </content>
  </entry>
  

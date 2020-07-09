@@ -14,14 +14,14 @@
 
   <title>
     
-      J. Haug &middot; Joshua and Jason Haug.
+      BeeSci &middot; Beehive Science
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="J. Haug" href="/atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="BeeSci" href="/atom.xml">
 </head>
 
 
@@ -30,17 +30,14 @@
     <div class="container content">
       <header class="masthead">
         <h3 class="masthead-title">
-        <a href="/" title="Home">J. Haug</a>
+        <a href="/" title="Home">BeeSci</a>
 
         
           &nbsp;&nbsp;&nbsp;
           <small><a href="/about">About</a></small>
         
           &nbsp;&nbsp;&nbsp;
-          <small><a href="/archive">More</a></small>
-        
-          &nbsp;&nbsp;&nbsp;
-          <small><a href="/slopes">Slopes</a></small>
+          <small><a href="/archive">Archive</a></small>
         
         </h3>
       </header>
@@ -50,121 +47,24 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/2017/01/02/wood-finishes/">
-        Wood Finishes, Summarized
+      <a href="/hardware-v2.html">
+        Hive Temperature Monitor, Version 2
       </a>
     </h1>
 
-    <time datetime="2017-01-02T00:00:00-08:00" class="post-date">02 Jan 2017</time>
+    <time datetime="2020-07-05T00:00:00-07:00" class="post-date">05 Jul 2020</time>
 
-    <p>If you have ever visited the wood finishing aisle at your local hardware store, you’re probably familiar with the sheer volume of options.
-To a newcomer, these options all <em>sound</em> familiar and seem to be the same thing.  However, different wood finishes provide different protections and have different effects on the appearance of your final project.</p>
+    <p>In my <a href="hardware.html">previous prototype</a>, I used one thermocouple and one IR thermopile to measure the hive and ambient temperatures, respectively. But that was an apples-to-oranges comparison. With identical thermometry hardware, I should be able to get a better sense of the tempertaures inside and outside the hive.</p>
 
-<div class="message">
-Wrote this for myself as a cheat sheet 👍
-</div>
-<hr />
+<p>Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!</p>
 
-<h3 id="stain">Stain</h3>
-<ul>
-  <li>Change the color of wood while leaving the grain visible</li>
-  <li>Doesn’t offer much protection</li>
-  <li>Add mineral spirits to dilute or add multiple coats to intensify</li>
-  <li>Apply with a paint brush or cloth</li>
-  <li>Dries quickly</li>
-  <li>Raises the grain, so sand lightly in between coats</li>
-</ul>
+<p>Here’s a wiring diagram showing how the new MAX6675 breakouts are connected to the Raspberry Pi:</p>
 
-<h3 id="oil">Oil</h3>
-<ul>
-  <li>Brings out the natural beauty of wood</li>
-  <li>Protect against moisture but are nowhere near as effective as, say, varnish or shellac</li>
-  <li>Lots of types, including…
-    <ul>
-      <li>Boiled linseed oil
-        <ul>
-          <li>Cheap, good for decorative things that don’t require much protection (like a picture frame)</li>
-        </ul>
-      </li>
-      <li>Teak oil</li>
-      <li>Tung oil</li>
-      <li>Mineral oil
-        <ul>
-          <li>Food-safe, so good for items like chopping boards or spoons</li>
-        </ul>
-      </li>
-      <li>Danish oil
-        <ul>
-          <li>Offers more protection than other oils, b/c is a mixture of oil and varnish</li>
-          <li>Good for things that require protection, like a tabletop</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+<p><img src="../assets/3tc-wiring.png" alt=" " /></p>
 
-<h3 id="polyurethane">Polyurethane</h3>
-<ul>
-  <li>Plastic coating for wood</li>
-  <li>Variants include…
-    <ul>
-      <li>water-based (dries quickly, doesn’t beautify the wood)</li>
-      <li>oil-based (dries slowly, beautifies the wood)</li>
-    </ul>
-  </li>
-  <li>Most durable finish</li>
-  <li>Leaves a plastic-y feel to it</li>
-</ul>
-
-<h3 id="varnish">Varnish</h3>
-<ul>
-  <li>Made of oils, resins, solvents</li>
-  <li>Dries slowly</li>
-  <li>Brings out natural beauty</li>
-  <li>Durable, although not as much as polyurethane</li>
-</ul>
-
-<h3 id="laquer">Laquer</h3>
-<ul>
-  <li>A thin, liquid varnish that is usually sprayed</li>
-  <li>Durable</li>
-  <li>Dries quickly</li>
-  <li>Can be polished</li>
-  <li>Brings out natural beauty in the wood</li>
-</ul>
-
-<h3 id="shellac">Shellac</h3>
-<ul>
-  <li>Glossy finish</li>
-  <li>Dries quickly</li>
-  <li>Easy to apply</li>
-  <li>Often used on antiques and fine furniture</li>
-  <li>Not as durable as varnish/poly</li>
-  <li>Dulls with age</li>
-</ul>
-
-<h3 id="finishing-waxbeeswax">Finishing Wax/Beeswax</h3>
-<ul>
-  <li>Protects against moisture (indoors only)</li>
-  <li>Brings out beauty</li>
-  <li>Leaves a smooth finish</li>
-  <li>Can be polished</li>
-  <li>Clear or colored variants available</li>
-  <li>Apply sparingly with a cloth in a circular motion</li>
-  <li>Can be re-applied as needed</li>
-  <li>Can’t use another finish after wax</li>
-</ul>
+<p>Note that I’m sharing the power (<code class="highlighter-rouge">VCC</code>), ground (<code class="highlighter-rouge">GND</code>), serial clock input (<code class="highlighter-rouge">SCK</code>) and serial data output (<code class="highlighter-rouge">SO</code>) lines across the three boards.  Each board has only one unique wire, going to the chip select (<code class="highlighter-rouge">CS</code>) pin.  This pin is active low according to the <a href="https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf">datasheet</a>, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.</p>
 
   </article>
-  
-</div>
-
-<div class="pagination">
-  
-    <a class="pagination-item older" href="/page2">Older</a>
-  
-  
-    <span class="pagination-item newer">Newer</span>
   
 </div>
 
@@ -172,7 +72,7 @@ Wrote this for myself as a cheat sheet 👍
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2017-03-23T23:49:13-07:00">2017</time>. All rights reserved.
+          &copy; <time datetime="2020-07-08T12:22:08-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>
@@ -187,13 +87,109 @@ Wrote this for myself as a cheat sheet 👍
        ga('send', 'pageview');
      </script>
     
-    
+
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
     <script type="text/javascript"
         src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
-    
+
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>';
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                if(p[i].innerHTML.indexOf('start=') !== -1) theInnerHTML += '&start='+p[i].innerHTML.substring(p[i].innerHTML.indexOf('start=')+6);
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+
   </body>
 </html>

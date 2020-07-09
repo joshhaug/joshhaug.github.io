@@ -1,3 +1,2 @@
-# joshhaug.github.io
-The personal website of Joshua Haug
-
+# README
+This is a site about backyard bee science. 
