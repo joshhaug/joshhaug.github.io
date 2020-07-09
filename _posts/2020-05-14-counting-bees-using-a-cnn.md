@@ -21,7 +21,7 @@ Here's the architecture that they say worked best for a 32x32 input image:
 
 With that image, I was able to implement the network in a few minutes using  Keras:
 
-```
+```python
 model = models.Sequential()
 
 model.add(layers.Conv2D(64, (3, 3), activation='relu', input_shape=(32, 32, 3)))
