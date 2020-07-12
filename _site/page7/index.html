@@ -47,63 +47,85 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/about-this-site.html">
-        How To Make This Website
+      <a href="/hive-sound.html">
+        Hive Sound Analysis
       </a>
     </h1>
 
-    <time datetime="2016-10-04T01:02:23-07:00" class="post-date">04 Oct 2016</time>
+    <time datetime="2020-05-01T00:00:00-07:00" class="post-date">01 May 2020</time>
 
-    <div class="message">
-How I made this website.  Guaranteed to be boring for non-developers.
-</div>
+    <h2 id="the-bees-are-speaking">The Bees Are Speaking</h2>
 
-<p><strong>How did you make it?</strong></p>
+<p>Bees communicate with sound.  Newborn queens, for example, use their wing muscles to make a trumpeting sound called “piping”.  This is a battle cry.</p>
 
-<blockquote>
-  <p>I modeled my effort on <a href="http://joshualande.com/jekyll-github-pages-poole">this one</a>. In short, it uses <a href="https://github.com/poole/poole">Poole</a>, which is a theme for <a href="http://jekyllrb.com/">Jekyll</a>.  I write the posts in markdown and Jekyll converts the files to HTML.</p>
-</blockquote>
+<p>/assets/piping.mp3</p>
 
-<p><strong>How did you get math to render on your site?</strong></p>
+<h2 id="audio-data-collection-setup">Audio Data Collection Setup</h2>
 
-<blockquote>
-  <p>The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
-</blockquote>
+<p>Audio is coming from an old Guitar Hero USB mic I cannibalized.</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
-    <span class="na">src=</span><span class="s">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/script&gt;</span></code></pre></figure>
+<p>The audio is recorded using <a href="http://manpages.org/arecord">arecord</a> in a bash script more or less like this:</p>
 
-<blockquote>
-  <p>Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle<sup id="fnref:fn-aerodyn" role="doc-noteref"><a href="#fn:fn-aerodyn" class="footnote">1</a></sup> is represented as <code class="highlighter-rouge">$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$</code> in my code, but produces…</p>
-</blockquote>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="p">[</span><span class="n">true</span><span class="p">]</span>    
+    <span class="n">arecord</span> <span class="o">--</span><span class="n">device</span> <span class="n">sysdefault</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="nb">format</span> <span class="n">S16_LE</span> <span class="o">--</span><span class="n">rate</span> <span class="mi">11025</span> <span class="o">--</span><span class="n">channels</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="n">duration</span> <span class="mi">3600</span> <span class="n">out</span><span class="p">.</span><span class="n">wav</span> <span class="o">||</span> <span class="k">break</span><span class="p">;</span>
+</code></pre></div></div>
 
-\[{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}\]
+<p>It’s pretty easy to see what this command is doing: record an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.</p>
 
-<p><strong>Why do your code blocks look so nice?</strong></p>
+<p>Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics.<sup id="fnref:fn-vibratory" role="doc-noteref"><a href="#fn:fn-vibratory" class="footnote">1</a></sup>  Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.</p>
 
-<blockquote>
-  <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
-</blockquote>
+<p>Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.</p>
 
-<p><strong>How are you hosting it?</strong></p>
+<p>So… what am I looking for? Here’s some examples:</p>
 
-<blockquote>
-  <p>This website is <a href="https://github.com/joshhaug/joshhaug.github.io">hosted on github</a>.</p>
-</blockquote>
+<p><img src="assets/acoustic-signature.jpg" alt="  " /></p>
 
-<p><strong>How did you set up that SSL certificate?</strong></p>
+<p>This table is from the great paper <em>Remote Beehive Monitoring using Acoustic Signals</em>.<sup id="fnref:fn-acoustics" role="doc-noteref"><a href="#fn:fn-acoustics" class="footnote">2</a></sup></p>
 
-<blockquote>
-  <p>SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions <a href="https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/">here</a>.</p>
-</blockquote>
+<p>The table fails to mention that worker piping also occurs in non-disturbed queenright hives.<sup id="fnref:fn-worker-piping" role="doc-noteref"><a href="#fn:fn-worker-piping" class="footnote">3</a></sup></p>
+
+<p><a href="https://www.beeculture.com/a-closer-look-piping-tooting-quacking/">https://www.beeculture.com/a-closer-look-piping-tooting-quacking/</a></p>
+
+<h3 id="ideas-for-stuff">Ideas for Stuff</h3>
+
+<ul>
+  <li>
+    <p>Pics of setup</p>
+  </li>
+  <li>
+    <p>Sonogram of signal to show harmonics</p>
+  </li>
+  <li>
+    <p>Commercial hive montioring tool</p>
+
+    <ul>
+      <li><a href="https://broodminder.com">Broodminder</a> Blutetooth LE devices</li>
+      <li><a href="https://www.youtube.com/watch?v=ZoRyeiV7BSE">Arnia</a> setup</li>
+    </ul>
+  </li>
+  <li>
+    <p>Amateur tools</p>
+
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=1hl_YaXvU0A">Temperature and humidity</a></li>
+    </ul>
+  </li>
+</ul>
 
 <hr />
 
+<h3 id="references">References</h3>
+
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:fn-aerodyn" role="doc-endnote">
-      <p>In case you’re interested, the particle is assumed to have a density p₀ = 1000 kg/m³.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. <a href="#fnref:fn-aerodyn" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    <li id="fn:fn-vibratory" role="doc-endnote">
+      <p>M. Hrncir, F. G. Barth, and J. Tautz, “Vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. <a href="#fnref:fn-vibratory" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:fn-acoustics" role="doc-endnote">
+      <p>Qandour, Amro &amp; Ahmad, Iftekhar &amp; Habibi, Daryoush &amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. <a href="#fnref:fn-acoustics" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:fn-worker-piping" role="doc-endnote">
+      <p>Pratt, S. C., Kühnholz, S., Seeley, T. D., and Weidenmüller, A. Worker piping associated with foraging in undisturbed queenright colonies of honey bees. Apidologie, 27(1), 13-20. 1996. <a href="https://www.apidologie.org/articles/apido/pdf/1996/01/Apidologie_0044-8435_1996_27_1_ART0002.pdf">pdf</a> <a href="#fnref:fn-worker-piping" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -116,7 +138,7 @@ How I made this website.  Guaranteed to be boring for non-developers.
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-08T22:05:52-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-07-11T01:51:04-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

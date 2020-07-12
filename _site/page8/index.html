@@ -14,7 +14,7 @@
 
   <title>
     
-      About &middot; BeeSci
+      BeeSci &middot; Beehive Science
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
@@ -43,43 +43,68 @@
       </header>
 
       <main>
-        <article class="page">
-  <h1 class="page-title">About</h1>
-  <h2 id="what-is-this">What Is This?</h2>
+        <div class="posts">
+  
+  <article class="post">
+    <h1 class="post-title">
+      <a href="/about-this-site.html">
+        How To Make This Website
+      </a>
+    </h1>
 
-<p>This website is about beekeeping and computer science. If you’re curious about this website’s technical details, you can <a href="about-this-site.html">read this post</a>.</p>
+    <time datetime="2016-10-04T01:02:23-07:00" class="post-date">04 Oct 2016</time>
 
-<h2 id="who-made-this">Who Made This?</h2>
+    <div class="message">
+How I made this website.  Guaranteed to be boring for non-developers.
+</div>
 
-<p>I made this.</p>
+<p><strong>How did you make it?</strong></p>
 
-<p><img src="assets/i-made-this.jpg" alt=" " /></p>
+<blockquote>
+  <p>I modeled my effort on <a href="http://joshualande.com/jekyll-github-pages-poole">this one</a>. In short, it uses <a href="https://github.com/poole/poole">Poole</a>, which is a theme for <a href="http://jekyllrb.com/">Jekyll</a>.  I write the posts in markdown and Jekyll converts the files to HTML.</p>
+</blockquote>
 
-<p>My name is <strong>Josh Haug</strong>, and I’m passionate about bees and computer science. My educational background:</p>
+<p><strong>How did you get math to render on your site?</strong></p>
 
-<ul>
-  <li>B.S. in Math / Computer Science from <a href="http://www.pepperdine.edu/">Pepperdine</a></li>
-  <li>Pursing an M.S. in Computer Science from <a href="https://www.cs.usc.edu">USC</a></li>
-</ul>
+<blockquote>
+  <p>The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
+</blockquote>
 
-<p>My beekeeping background:</p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
+    <span class="na">src=</span><span class="s">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
 
-<ul>
-  <li>Five hives in my backyard</li>
-  <li>Stung more than 15 times</li>
-</ul>
+<blockquote>
+  <p>Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle<sup id="fnref:fn-aerodyn" role="doc-noteref"><a href="#fn:fn-aerodyn" class="footnote">1</a></sup> is represented as <code class="highlighter-rouge">$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$</code> in my code, but produces…</p>
+</blockquote>
 
-<h2 id="contact">Contact</h2>
+\[{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}\]
 
-<p>If you’d like to contact me, there are a few ways of doing it:</p>
+<p><strong>Why do your code blocks look so nice?</strong></p>
 
-<ul>
-  <li>Send me an email at <a href="mailto:josh.haug55@gmail.com?Subject=Hello%20World">josh.haug55@gmail.com</a></li>
-  <li>Check me out on <a href="https://www.github.com/joshhaug">GitHub</a></li>
-  <li>Find me on <a href="https://www.linkedin.com/in/joshua-haug-64a04897">LinkedIn</a></li>
-</ul>
+<blockquote>
+  <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
+</blockquote>
 
-</article>
+<p><strong>How are you hosting it?</strong></p>
+
+<blockquote>
+  <p>This website is <a href="https://github.com/joshhaug/joshhaug.github.io">hosted on github pages</a>.</p>
+</blockquote>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:fn-aerodyn" role="doc-endnote">
+      <p>In case you’re interested, the particle is assumed to have a density p₀ = 1000 kg/m³.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. <a href="#fnref:fn-aerodyn" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </article>
+  
+</div>
 
       </main>
 

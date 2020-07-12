@@ -4,7 +4,7 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-07-08T22:05:52-07:00</updated>
+ <updated>2020-07-11T01:51:04-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -13,11 +13,51 @@
 
  
  <entry>
-   <title>Hive Temperature Monitor, Version 2</title>
+   <title>Python File Buffering and You</title>
+   <link href="http://localhost:4000/python-file-buffering-and-you.html"/>
+   <updated>2020-07-10T01:35:00-07:00</updated>
+   <id>http://localhost:4000/python-file-buffering-and-you</id>
+   <content type="html">&lt;p&gt;Python File Buffering&lt;/p&gt;
+
+&lt;p&gt;I’m using a &lt;a href=&quot;https://github.com/tdack/MAX6675&quot;&gt;python library&lt;/a&gt; to read the temperature every ten seconds. The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings. Here’s the basic idea:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
+&lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;        
+&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
+&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;        
+&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;            
+&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            
+&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readDieTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            
+&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readObjTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
+        &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;            
+        &lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;An error occured&quot;&lt;/span&gt;        
+        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Initially, I wrote the script with the &lt;code class=&quot;highlighter-rouge&quot;&gt;open&lt;/code&gt; statement outside the loop, like so…&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
+&lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;        
+&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ... get temperatures        
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;… to save on the cost of reopening the file for each iteration of the loop. But this one doesn’t update the file after every call to &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write('...')&lt;/code&gt; , thanks to the magic of unnecessary file buffering.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/file-buffering.gif&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This can be fixed by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;f.flush()&lt;/code&gt; after every &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write()&lt;/code&gt;, or specifying a buffer length of 0: &lt;code class=&quot;highlighter-rouge&quot;&gt;open('temp.txt', 'a', 0)&lt;/code&gt;.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Bettering the Temperature Thing</title>
    <link href="http://localhost:4000/hardware-v2.html"/>
    <updated>2020-07-05T00:00:00-07:00</updated>
    <id>http://localhost:4000/hardware-v2</id>
-   <content type="html">&lt;p&gt;In my &lt;a href=&quot;hardware.html&quot;&gt;previous prototype&lt;/a&gt;, I used one thermocouple and one IR thermopile to measure the hive and ambient temperatures, respectively. But that was an apples-to-oranges comparison. With identical thermometry hardware, I should be able to get a better sense of the tempertaures inside and outside the hive.&lt;/p&gt;
+   <content type="html">&lt;p&gt;In my &lt;a href=&quot;hardware.html&quot;&gt;previous prototype&lt;/a&gt;, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp.  It’s an apples-to-oranges comparison But that was an apples-to-oranges comparison. With identical thermometry hardware, I should be able to get a better sense of the tempertaures inside and outside the hive.&lt;/p&gt;
 
 &lt;p&gt;Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!&lt;/p&gt;
 
@@ -26,6 +66,8 @@
 &lt;p&gt;&lt;img src=&quot;../assets/3tc-wiring.png&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note that I’m sharing the power (&lt;code class=&quot;highlighter-rouge&quot;&gt;VCC&lt;/code&gt;), ground (&lt;code class=&quot;highlighter-rouge&quot;&gt;GND&lt;/code&gt;), serial clock input (&lt;code class=&quot;highlighter-rouge&quot;&gt;SCK&lt;/code&gt;) and serial data output (&lt;code class=&quot;highlighter-rouge&quot;&gt;SO&lt;/code&gt;) lines across the three boards.  Each board has only one unique wire, going to the chip select (&lt;code class=&quot;highlighter-rouge&quot;&gt;CS&lt;/code&gt;) pin.  This pin is active low according to the &lt;a href=&quot;https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf&quot;&gt;datasheet&lt;/a&gt;, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.&lt;/p&gt;
+
+&lt;p&gt;Each MAX6675 chip has a max current draw of 1.5mA, which is well within the limit.&lt;/p&gt;
 </content>
  </entry>
  
@@ -42,7 +84,7 @@ Counting the number of &lt;b&gt;foragers&lt;/b&gt; (bees that collect pollen, ne
 
 &lt;p&gt;Let’s take a look at some of their data (from dataset BEE1, 32x32 images):&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/classes.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/classes.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The “no bee” class seems to have a red bias, but we’ll address that later.&lt;/p&gt;
 
@@ -156,27 +198,25 @@ Counting the number of &lt;b&gt;foragers&lt;/b&gt; (bees that collect pollen, ne
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;# ... get temperatures
-&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;… to save on the cost of reopening the file for each iteration of the loop.  Because why not?  The behavior is the same, right?&lt;/p&gt;
+&lt;p&gt;… to save on the cost of reopening the file for each iteration of the loop. But this code doesn’t update the file after every call to &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write('...')&lt;/code&gt; , thanks to the magic of unnecessary file buffering.&lt;/p&gt;
 
-&lt;p style=&quot;color:red&quot;&gt;&lt;b&gt;Wrong.&lt;/b&gt; This code causes the writes to be bundled into larger writes -- the file will update occassionally (in my experience, every couple hundred writes or so) and again when you terminate the python script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/file-buffering.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Why does this happen, you ask?&lt;/strong&gt; I don’t know. Maybe the writes are being bundled by the python interpreter, maybe it’s the OS’s disk scheduler, maybe it’s just plain ol’ witchcraft.  Some day I’d like to get to the bottom of this, but today is not that day.&lt;/p&gt;
+&lt;p&gt;This can be fixed by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;f.flush()&lt;/code&gt; after every &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write()&lt;/code&gt;, or specifying a buffer length of 0: &lt;code class=&quot;highlighter-rouge&quot;&gt;open('temp.txt', 'a', 0)&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;audio-data-collection&quot;&gt;Audio Data Collection&lt;/h2&gt;
 
-&lt;p&gt;Audio is coming from an old Guitar Hero USB mic I cannibalized.&lt;/p&gt;
-
-&lt;p&gt;The audio is recorded using &lt;a href=&quot;http://manpages.org/arecord&quot;&gt;arecord&lt;/a&gt; in a bash script more or less like this:&lt;/p&gt;
+&lt;p&gt;Audio is coming from an old Guitar Hero USB mic I cannibalized.   On the Pi, I’m using  &lt;a href=&quot;http://manpages.org/arecord&quot;&gt;arecord&lt;/a&gt; in a bash script more or less like this:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;    
     arecord &lt;span class=&quot;nt&quot;&gt;--device&lt;/span&gt; sysdefault:CARD&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1 &lt;span class=&quot;nt&quot;&gt;--format&lt;/span&gt; S16_LE &lt;span class=&quot;nt&quot;&gt;--rate&lt;/span&gt; 11025 &lt;span class=&quot;nt&quot;&gt;--channels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1 &lt;span class=&quot;nt&quot;&gt;--duration&lt;/span&gt; 3600 out.wav &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;What is this command doing? It’s recording an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.&lt;/p&gt;
+&lt;p&gt;This is just recording an hour (3600 seconds) of mono (1 channel) sound (16 bit samples, little endian) at 11025 samples per second.&lt;/p&gt;
 
 &lt;p&gt;Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers&lt;sup id=&quot;fnref:fn-acoustics&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-acoustics&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;sup id=&quot;fnref:fn-vibratory&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-vibratory&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics. Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.&lt;/p&gt;
 
@@ -186,7 +226,11 @@ Counting the number of &lt;b&gt;foragers&lt;/b&gt; (bees that collect pollen, ne
 
 &lt;h2 id=&quot;networking&quot;&gt;Networking&lt;/h2&gt;
 
-&lt;p&gt;The Pi is connected via WLAN to an old AirPort Extreme. From the house, I can connect to the network and &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; into the Pi to download the data, modify scripts, etc. To keep data collection running after I close the session, I’m running &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; and detaching. There are other ways to do this, like &lt;code class=&quot;highlighter-rouge&quot;&gt;nohup&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;disown&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bg&lt;/code&gt;, etc., but &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; is part of my regular workflow.&lt;/p&gt;
+&lt;p&gt;The Pi is connected via WLAN to an old AirPort Extreme. From the house, I can connect to the network and &lt;code class=&quot;highlighter-rouge&quot;&gt;ssh&lt;/code&gt; into the Pi to download the data, modify scripts, etc. Here’s a technical schematic showing this network configuration:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/networking.png&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To keep data collection running after I close the session, I’m running &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; and detaching. There are other ways to do this, like &lt;code class=&quot;highlighter-rouge&quot;&gt;nohup&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;screen&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;disown&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bg&lt;/code&gt;, etc., but &lt;code class=&quot;highlighter-rouge&quot;&gt;tmux&lt;/code&gt; is part of my regular workflow.&lt;/p&gt;
 
 &lt;p&gt;From my laptop, I can run a small script to switch networks and download the data every so often:&lt;/p&gt;
 
@@ -314,7 +358,7 @@ Today we'll explore some basic image processing techniques to count bees. These 
 
 &lt;p&gt;To interpret the list of points as separate objects, we can use a clustering algorithm.  Here’s an example using &lt;a href=&quot;https://en.wikipedia.org/wiki/Hierarchical_clustering&quot;&gt;hierarchical clustering&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;assets/phone-clusters.mp4&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/phone-clusters.mp4&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It &lt;strong&gt;kind of&lt;/strong&gt; works!  From here we can just count the clusters to get an approximation of the number of bees in frame.&lt;/p&gt;
 
@@ -369,17 +413,23 @@ Today we'll explore some basic image processing techniques to count bees. These 
 &lt;h3 id=&quot;ideas-for-stuff&quot;&gt;Ideas for Stuff&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Pics of setup&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pics of setup&lt;/p&gt;
+  &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Sonogram of signal to show harmonics&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;Commercial hive montioring tool
+  &lt;li&gt;
+    &lt;p&gt;Commercial hive montioring tool&lt;/p&gt;
+
     &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;https://broodminder.com&quot;&gt;Broodminder&lt;/a&gt; Blutetooth LE devices&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ZoRyeiV7BSE&quot;&gt;Arnia&lt;/a&gt; setup&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;Amateur tools
+  &lt;li&gt;
+    &lt;p&gt;Amateur tools&lt;/p&gt;
+
     &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=1hl_YaXvU0A&quot;&gt;Temperature and humidity&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
@@ -387,6 +437,7 @@ Today we'll explore some basic image processing techniques to count bees. These 
 &lt;/ul&gt;
 
 &lt;hr /&gt;
+
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
@@ -445,13 +496,7 @@ How I made this website.  Guaranteed to be boring for non-developers.
 &lt;p&gt;&lt;strong&gt;How are you hosting it?&lt;/strong&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;This website is &lt;a href=&quot;https://github.com/joshhaug/joshhaug.github.io&quot;&gt;hosted on github&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;How did you set up that SSL certificate?&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions &lt;a href=&quot;https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;This website is &lt;a href=&quot;https://github.com/joshhaug/joshhaug.github.io&quot;&gt;hosted on github pages&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;

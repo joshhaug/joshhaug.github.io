@@ -17,7 +17,6 @@ Bees communicate with sound.  Newborn queens, for example, use their wing muscle
 
 /assets/piping.mp3
 
-
 ## Audio Data Collection Setup
 
 Audio is coming from an old Guitar Hero USB mic I cannibalized.
@@ -28,7 +27,6 @@ The audio is recorded using [arecord](http://manpages.org/arecord) in a bash scr
 while [true]    
     arecord --device sysdefault:CARD=1 --format S16_LE --rate 11025 --channels=1 --duration 3600 out.wav || break;
 ```
-
 
 It's pretty easy to see what this command is doing: record an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.
 
@@ -49,16 +47,20 @@ The table fails to mention that worker piping also occurs in non-disturbed queen
 ### Ideas for Stuff
 
 - Pics of setup
+
 - Sonogram of signal to show harmonics
 
 - Commercial hive montioring tool
+  
   - [Broodminder](https://broodminder.com) Blutetooth LE devices
   - [Arnia](https://www.youtube.com/watch?v=ZoRyeiV7BSE) setup
+
 - Amateur tools
+  
   - [Temperature and humidity](https://www.youtube.com/watch?v=1hl_YaXvU0A)
 
-
 ---
+
 ### References
 
 [^fn-acoustics]: Qandour, Amro & Ahmad, Iftekhar & Habibi, Daryoush & Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014.

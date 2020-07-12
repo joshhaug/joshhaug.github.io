@@ -47,81 +47,46 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/hive-sound.html">
-        Hive Sound Analysis
+      <a href="/quick-video-analysis.html">
+        A Quick and Dirty Way to Count Bees
       </a>
     </h1>
 
     <time datetime="2020-05-01T00:00:00-07:00" class="post-date">01 May 2020</time>
 
-    <h2 id="the-bees-are-speaking">The Bees Are Speaking</h2>
+    <div class="message">
+Today we'll explore some basic image processing techniques to count bees. These require <b>no labeled training data</b>, so we'll try them first before moving on to fancier techniques.
+</div>
 
-<p>Bees communicate with sound.  Newborn queens, for example, use their wing muscles to make a trumpeting sound called “piping”.  This is a battle cry.</p>
+<p>The number of bees in the entrance of the hive is a good indicator of the health of the hive.  NEED CITATION.</p>
 
-<p>/assets/piping.mp3</p>
+<p>Say I have a video of the entrance of a beehive, like this:
+<img src="assets/phone-basic.mp4" alt=" " /></p>
 
-<h2 id="audio-data-collection-setup">Audio Data Collection Setup</h2>
+<p>If I wanted to count the number of bees in each frame, I <em>could</em> set up and train an object detection CNN.</p>
 
-<p>Audio is coming from an old Guitar Hero USB mic I cannibalized.</p>
+<p><strong>But here’s a lazy way to do it.</strong></p>
 
-<p>The audio is recorded using <a href="http://manpages.org/arecord">arecord</a> in a bash script more or less like this:</p>
+<p>First, collapse the color data and apply a Gaussian blur to each frame, like so:
+<img src="assets/phone-blur.mp4" alt=" " /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="p">[</span><span class="n">true</span><span class="p">]</span>    
-    <span class="n">arecord</span> <span class="o">--</span><span class="n">device</span> <span class="n">sysdefault</span><span class="p">:</span><span class="n">CARD</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="nb">format</span> <span class="n">S16_LE</span> <span class="o">--</span><span class="n">rate</span> <span class="mi">11025</span> <span class="o">--</span><span class="n">channels</span><span class="o">=</span><span class="mi">1</span> <span class="o">--</span><span class="n">duration</span> <span class="mi">3600</span> <span class="n">out</span><span class="p">.</span><span class="n">wav</span> <span class="o">||</span> <span class="k">break</span><span class="p">;</span>
-</code></pre></div></div>
+<p>Then apply pixel thresholding to get the dark spots, like so:
+<img src="assets/phone-darkspots.mp4" alt=" " /></p>
 
-<p>It’s pretty easy to see what this command is doing: record an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.</p>
+<p>To interpret the list of points as separate objects, we can use a clustering algorithm.  Here’s an example using <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">hierarchical clustering</a>.</p>
 
-<p>Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics.<sup id="fnref:fn-vibratory" role="doc-noteref"><a href="#fn:fn-vibratory" class="footnote">1</a></sup>  Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.</p>
+<p><img src="../assets/phone-clusters.mp4" alt="  " /></p>
 
-<p>Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.</p>
+<p>It <strong>kind of</strong> works!  From here we can just count the clusters to get an approximation of the number of bees in frame.</p>
 
-<p>So… what am I looking for? Here’s some examples:</p>
-
-<p><img src="assets/acoustic-signature.jpg" alt="  " /></p>
-
-<p>This table is from the great paper <em>Remote Beehive Monitoring using Acoustic Signals</em>.<sup id="fnref:fn-acoustics" role="doc-noteref"><a href="#fn:fn-acoustics" class="footnote">2</a></sup></p>
-
-<p>The table fails to mention that worker piping also occurs in non-disturbed queenright hives.<sup id="fnref:fn-worker-piping" role="doc-noteref"><a href="#fn:fn-worker-piping" class="footnote">3</a></sup></p>
-
-<p><a href="https://www.beeculture.com/a-closer-look-piping-tooting-quacking/">https://www.beeculture.com/a-closer-look-piping-tooting-quacking/</a></p>
-
-<h3 id="ideas-for-stuff">Ideas for Stuff</h3>
+<p>Some clear problems though:</p>
 
 <ul>
-  <li>Pics of setup</li>
-  <li>
-    <p>Sonogram of signal to show harmonics</p>
-  </li>
-  <li>Commercial hive montioring tool
-    <ul>
-      <li><a href="https://broodminder.com">Broodminder</a> Blutetooth LE devices</li>
-      <li><a href="https://www.youtube.com/watch?v=ZoRyeiV7BSE">Arnia</a> setup</li>
-    </ul>
-  </li>
-  <li>Amateur tools
-    <ul>
-      <li><a href="https://www.youtube.com/watch?v=1hl_YaXvU0A">Temperature and humidity</a></li>
-    </ul>
-  </li>
+  <li>I had to determine a few values experimentally, like intensity threshold and clustering distance threshold</li>
+  <li>This only works because the bees’ heads and thoraxes are the darkest things in frame. Any dark black objects on the ground would also be counted as bees.</li>
 </ul>
 
-<hr />
-<h3 id="references">References</h3>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:fn-vibratory" role="doc-endnote">
-      <p>M. Hrncir, F. G. Barth, and J. Tautz, “Vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. <a href="#fnref:fn-vibratory" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:fn-acoustics" role="doc-endnote">
-      <p>Qandour, Amro &amp; Ahmad, Iftekhar &amp; Habibi, Daryoush &amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. <a href="#fnref:fn-acoustics" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:fn-worker-piping" role="doc-endnote">
-      <p>Pratt, S. C., Kühnholz, S., Seeley, T. D., and Weidenmüller, A. Worker piping associated with foraging in undisturbed queenright colonies of honey bees. Apidologie, 27(1), 13-20. 1996. <a href="https://www.apidologie.org/articles/apido/pdf/1996/01/Apidologie_0044-8435_1996_27_1_ART0002.pdf">pdf</a> <a href="#fnref:fn-worker-piping" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
+<p>This technique is fast but not reliably accurate.  But the small amount of computation required makes it suitable for a low-power application.</p>
 
   </article>
   
@@ -131,7 +96,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-08T22:05:52-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-07-11T01:51:04-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

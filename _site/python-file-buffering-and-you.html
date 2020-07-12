@@ -14,7 +14,7 @@
 
   <title>
     
-      About &middot; BeeSci
+      Python File Buffering and You &middot; BeeSci
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
@@ -43,43 +43,73 @@
       </header>
 
       <main>
-        <article class="page">
-  <h1 class="page-title">About</h1>
-  <h2 id="what-is-this">What Is This?</h2>
+        <article class="post">
+  <h1 class="post-title">Python File Buffering and You</h1>
+  <time datetime="2020-07-10T01:35:00-07:00" class="post-date">10 Jul 2020</time>
+  <p>Python File Buffering</p>
 
-<p>This website is about beekeeping and computer science. If you’re curious about this website’s technical details, you can <a href="about-this-site.html">read this post</a>.</p>
+<p>I’m using a <a href="https://github.com/tdack/MAX6675">python library</a> to read the temperature every ten seconds. The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings. Here’s the basic idea:</p>
 
-<h2 id="who-made-this">Who Made This?</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>    
+<span class="err">    </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>        
+<span class="err">        </span><span class="n">dat</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>        
+<span class="err">        </span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>        
+<span class="err">        </span><span class="k">try</span><span class="p">:</span>            
+<span class="err">            </span><span class="n">t1</span> <span class="o">=</span> <span class="n">sensor1</span><span class="p">.</span><span class="n">readTempC</span><span class="p">()</span>            
+<span class="err">            </span><span class="n">t2</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readDieTempC</span><span class="p">()</span>            
+<span class="err">            </span><span class="n">t3</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readObjTempC</span><span class="p">()</span>        
+        <span class="k">except</span><span class="p">:</span>            
+        <span class="err">    </span><span class="k">print</span> <span class="s">"An error occured"</span>        
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">','</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">dat</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">])</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> 
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p>I made this.</p>
+<p>Initially, I wrote the script with the <code class="highlighter-rouge">open</code> statement outside the loop, like so…</p>
 
-<p><img src="assets/i-made-this.jpg" alt=" " /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>    
+<span class="err">    </span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>        
+<span class="err">        </span><span class="c1"># ... get temperatures        
+</span><span class="err">        </span><span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p>My name is <strong>Josh Haug</strong>, and I’m passionate about bees and computer science. My educational background:</p>
+<p>… to save on the cost of reopening the file for each iteration of the loop. But this one doesn’t update the file after every call to <code class="highlighter-rouge">f.write('...')</code> , thanks to the magic of unnecessary file buffering.</p>
 
-<ul>
-  <li>B.S. in Math / Computer Science from <a href="http://www.pepperdine.edu/">Pepperdine</a></li>
-  <li>Pursing an M.S. in Computer Science from <a href="https://www.cs.usc.edu">USC</a></li>
-</ul>
+<p><img src="../assets/file-buffering.gif" alt=" " /></p>
 
-<p>My beekeeping background:</p>
-
-<ul>
-  <li>Five hives in my backyard</li>
-  <li>Stung more than 15 times</li>
-</ul>
-
-<h2 id="contact">Contact</h2>
-
-<p>If you’d like to contact me, there are a few ways of doing it:</p>
-
-<ul>
-  <li>Send me an email at <a href="mailto:josh.haug55@gmail.com?Subject=Hello%20World">josh.haug55@gmail.com</a></li>
-  <li>Check me out on <a href="https://www.github.com/joshhaug">GitHub</a></li>
-  <li>Find me on <a href="https://www.linkedin.com/in/joshua-haug-64a04897">LinkedIn</a></li>
-</ul>
+<p>This can be fixed by calling <code class="highlighter-rouge">f.flush()</code> after every <code class="highlighter-rouge">f.write()</code>, or specifying a buffer length of 0: <code class="highlighter-rouge">open('temp.txt', 'a', 0)</code>.</p>
 
 </article>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/hardware-v2.html">
+          Bettering the Temperature Thing
+          <small><time datetime="2020-07-05T00:00:00-07:00">05 Jul 2020</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/counting-bees-using-a-cnn.html">
+          Counting Bee Movements Using a Convolutional Neural Network
+          <small><time datetime="2020-05-14T14:46:20-07:00">14 May 2020</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/hardware.html">
+          Prototype For Hive Monitoring
+          <small><time datetime="2020-05-14T00:00:00-07:00">14 May 2020</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
 
       </main>
 

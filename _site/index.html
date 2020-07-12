@@ -47,22 +47,45 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/hardware-v2.html">
-        Hive Temperature Monitor, Version 2
+      <a href="/python-file-buffering-and-you.html">
+        Python File Buffering and You
       </a>
     </h1>
 
-    <time datetime="2020-07-05T00:00:00-07:00" class="post-date">05 Jul 2020</time>
+    <time datetime="2020-07-10T01:35:00-07:00" class="post-date">10 Jul 2020</time>
 
-    <p>In my <a href="hardware.html">previous prototype</a>, I used one thermocouple and one IR thermopile to measure the hive and ambient temperatures, respectively. But that was an apples-to-oranges comparison. With identical thermometry hardware, I should be able to get a better sense of the tempertaures inside and outside the hive.</p>
+    <p>Python File Buffering</p>
 
-<p>Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!</p>
+<p>I’m using a <a href="https://github.com/tdack/MAX6675">python library</a> to read the temperature every ten seconds. The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings. Here’s the basic idea:</p>
 
-<p>Here’s a wiring diagram showing how the new MAX6675 breakouts are connected to the Raspberry Pi:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>    
+<span class="err">    </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>        
+<span class="err">        </span><span class="n">dat</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>        
+<span class="err">        </span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>        
+<span class="err">        </span><span class="k">try</span><span class="p">:</span>            
+<span class="err">            </span><span class="n">t1</span> <span class="o">=</span> <span class="n">sensor1</span><span class="p">.</span><span class="n">readTempC</span><span class="p">()</span>            
+<span class="err">            </span><span class="n">t2</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readDieTempC</span><span class="p">()</span>            
+<span class="err">            </span><span class="n">t3</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readObjTempC</span><span class="p">()</span>        
+        <span class="k">except</span><span class="p">:</span>            
+        <span class="err">    </span><span class="k">print</span> <span class="s">"An error occured"</span>        
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">','</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">dat</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">])</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> 
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p><img src="../assets/3tc-wiring.png" alt=" " /></p>
+<p>Initially, I wrote the script with the <code class="highlighter-rouge">open</code> statement outside the loop, like so…</p>
 
-<p>Note that I’m sharing the power (<code class="highlighter-rouge">VCC</code>), ground (<code class="highlighter-rouge">GND</code>), serial clock input (<code class="highlighter-rouge">SCK</code>) and serial data output (<code class="highlighter-rouge">SO</code>) lines across the three boards.  Each board has only one unique wire, going to the chip select (<code class="highlighter-rouge">CS</code>) pin.  This pin is active low according to the <a href="https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf">datasheet</a>, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>    
+<span class="err">    </span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>        
+<span class="err">        </span><span class="c1"># ... get temperatures        
+</span><span class="err">        </span><span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>… to save on the cost of reopening the file for each iteration of the loop. But this one doesn’t update the file after every call to <code class="highlighter-rouge">f.write('...')</code> , thanks to the magic of unnecessary file buffering.</p>
+
+<p><img src="../assets/file-buffering.gif" alt=" " /></p>
+
+<p>This can be fixed by calling <code class="highlighter-rouge">f.flush()</code> after every <code class="highlighter-rouge">f.write()</code>, or specifying a buffer length of 0: <code class="highlighter-rouge">open('temp.txt', 'a', 0)</code>.</p>
 
   </article>
   
@@ -72,7 +95,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-08T22:05:52-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-07-11T01:51:04-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

@@ -47,70 +47,108 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/hive-temp.html">
-        Hive Temperature Analysis
+      <a href="/hardware.html">
+        Prototype For Hive Monitoring
       </a>
     </h1>
 
-    <time datetime="2020-05-02T00:00:00-07:00" class="post-date">02 May 2020</time>
+    <time datetime="2020-05-14T00:00:00-07:00" class="post-date">14 May 2020</time>
 
-    <p>Here is what the initial data looks like from my <a href="hardware.html">small hive monitoring setup</a>:</p>
+    <p>I’m using a super simple setup for hive monitoring.  The brains of the operation is a Raspberry Pi 4 running Raspbian.   Here’s what it looks like on the inside:</p>
 
-<p><img src="/assets/temp.jpg" alt="  " /></p>
+<p><img src="../assets/setup.jpg" alt=" " /></p>
 
-<p>As you can see, the TMP006 produces two readings: object temperature (the reading from the surface the thermopile is pointed at) and die temperature (the temperature from the die itself).   For more info see the TMP006 <a href="https://cdn.sparkfun.com/datasheets/Sensors/Temp/sbou107.pdf">user guide</a>.</p>
+<h3 id="temperature-data-collection">Temperature Data Collection</h3>
 
-<p>The large spike on 4/24 was due to the hive being in direct sunlight.  The night of the 24th, we placed shade covers over the hives to prevent them from overheating.   This clearly made a difference.</p>
-
-<h3 id="potential-evidence-of-thermoregulation">Potential Evidence of Thermoregulation</h3>
-
-<p>Here’s a plot showing the hive temperature, the attic temperature, and the temperature at Burbank Airport (from <a href="www.wunderground.com">Weather Underground</a>) over a 36-hour period:</p>
-
-<p><img src="assets/36-hour-annotated.jpg" alt=" " /></p>
-
-<p>The hive’s temperature clearly rises and falls with the ambient temperature. But more interesting is the difference between the BUR temperature (green line) and the hive temperature (blue line).  Notice that, at 14:00 on the 28th, the hive is ~12.5 degrees warmer than BUR, but by 4:00 on the 29th, the hive is ~20 degrees warmer.  This seems to indicate that the bees regulate the internal temperature of the hive to keep it warmer.</p>
-
-<h3 id="why-do-bees-thermoregulate">Why do bees thermoregulate?</h3>
-
-<p>Bees work hard to keep the temperature of the hive <em>just</em> right.  But why?  The later-stage young, called pupae, are like little Goldilocks – they need to be kept between 33 and 36ºC (91.4 - 96.8ºF) to prevent physical and behavioral defects. Pupae develop in sealed-off cells of the honeycomb, called “capped brood cells.”  Here’s a picture I took of some capped brood cells:</p>
-
-<p><img src="assets/capped-brood.jpg" alt=" Capped Brood" /></p>
-
-<p>If these cells get too hot, workers use evaporative cooling – they splash the cells with water and fan them with their wings.  If the cells get too cold, workers will vibrate their flight muscles to produce heat.  Here is what the heating process looks like under a thermal camera.<sup id="fnref:fn-thermo" role="doc-noteref"><a href="#fn:fn-thermo" class="footnote">1</a></sup></p>
-
-<p><img src="assets/heater-bees.jpg" alt="" /></p>
-
-<h1 id="conclusions">Conclusions</h1>
-
-<div class="message">
-<b>TL;DR</b> Need better ambient temperature sensor, a thermocouple would be best. Need better attic with more insulation. The sample rate is too damn high!   
-</div>
+<p>I’m measuring hive temperature with two sensors:</p>
 
 <ul>
-  <li>
-    <p><strong>Using IR sensor for ambient temperature is bad</strong> – My hope was that the attic measurements could be used as a baseline for comparison with the inside of the hive (i.e. it would provide the ambient temperature inside a wooden box, thus accounting for any insulation that the hive boxes provide). In theory, then, the difference between the attic temperature and the hive temperature would be due entirely to bee activity. But this is not necessarily the case, due to:</p>
-
-    <ul>
-      <li>
-        <p>differences in sensor properties (e.g. rate of heat absorption of the IR die vs the thermocouple)  → can be fixed by using a thermocouple</p>
-      </li>
-      <li>
-        <p>differences in construction between the hive boxes (solid wood, painted white) and the attic (plywood top and bottom, solid wood sides, unpainted) → can be re-made</p>
-      </li>
-      <li>
-        <p>interactions between the attic and the hive boxes (e.g. attic absorbes most of the sunlight at noon, and heat transfer between the hive boxes and the attic) → not yet sure how this can be addressed</p>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>My sampling rate is too high</strong> – A reading every ten seconds is excessive. It’s clear that interesting events happen over the course of minute, not seconds. The BUR dataset resolution of one hour might be a little coarse, but I feel comfortable sampling every 5 minutes (30 times fewer datapoints than the current setup).</p>
-  </li>
+  <li>k-type thermocouple and amplifier (MAX6675) for internal temperature</li>
+  <li>infrared thermopile (TMP006) for ambient temperature</li>
 </ul>
+
+<p>Ideally I’d use just thermocouples, but these are the only sensors I have on hand.</p>
+
+<p>I’m using a <a href="https://github.com/tdack/MAX6675">python library</a> to read the temperature every ten seconds.  The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings.  Here’s the basic idea:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">dat</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">sensor1</span><span class="p">.</span><span class="n">readTempC</span><span class="p">()</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readDieTempC</span><span class="p">()</span>
+            <span class="n">t3</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readObjTempC</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">"An error occured"</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">','</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">dat</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">])</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Initially, I wrote the script with the <code class="highlighter-rouge">open</code> statement outside the loop, like so…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>… to save on the cost of reopening the file for each iteration of the loop. But this code doesn’t update the file after every call to <code class="highlighter-rouge">f.write('...')</code> , thanks to the magic of unnecessary file buffering.</p>
+
+<p><img src="../assets/file-buffering.gif" alt="" /></p>
+
+<p>This can be fixed by calling <code class="highlighter-rouge">f.flush()</code> after every <code class="highlighter-rouge">f.write()</code>, or specifying a buffer length of 0: <code class="highlighter-rouge">open('temp.txt', 'a', 0)</code>.</p>
+
+<h2 id="audio-data-collection">Audio Data Collection</h2>
+
+<p>Audio is coming from an old Guitar Hero USB mic I cannibalized.   On the Pi, I’m using  <a href="http://manpages.org/arecord">arecord</a> in a bash script more or less like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="o">[</span><span class="nb">true</span><span class="o">]</span>    
+    arecord <span class="nt">--device</span> sysdefault:CARD<span class="o">=</span>1 <span class="nt">--format</span> S16_LE <span class="nt">--rate</span> 11025 <span class="nt">--channels</span><span class="o">=</span>1 <span class="nt">--duration</span> 3600 out.wav <span class="o">||</span> <span class="nb">break</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This is just recording an hour (3600 seconds) of mono (1 channel) sound (16 bit samples, little endian) at 11025 samples per second.</p>
+
+<p>Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers<sup id="fnref:fn-acoustics" role="doc-noteref"><a href="#fn:fn-acoustics" class="footnote">1</a></sup><sup id="fnref:fn-vibratory" role="doc-noteref"><a href="#fn:fn-vibratory" class="footnote">2</a></sup> indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics. Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.</p>
+
+<p><img src="assets/acoustic-signature.jpg" alt="  " /></p>
+
+<p>Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.</p>
+
+<h2 id="networking">Networking</h2>
+
+<p>The Pi is connected via WLAN to an old AirPort Extreme. From the house, I can connect to the network and <code class="highlighter-rouge">ssh</code> into the Pi to download the data, modify scripts, etc. Here’s a technical schematic showing this network configuration:</p>
+
+<p><img src="../assets/networking.png" alt="  " /></p>
+
+<p>To keep data collection running after I close the session, I’m running <code class="highlighter-rouge">tmux</code> and detaching. There are other ways to do this, like <code class="highlighter-rouge">nohup</code>, <code class="highlighter-rouge">screen</code>, <code class="highlighter-rouge">disown</code>, <code class="highlighter-rouge">bg</code>, etc., but <code class="highlighter-rouge">tmux</code> is part of my regular workflow.</p>
+
+<p>From my laptop, I can run a small script to switch networks and download the data every so often:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"Connecting to beenet..."</span>
+networksetup <span class="nt">-setairportnetwork</span> en0 beenet password
+<span class="nb">echo</span> <span class="s2">"Downloading data..."</span>
+scp pi@raspberrypi.local:~/bees/temp.txt <span class="nb">.</span>
+<span class="nb">echo</span> <span class="s2">"Connecting to home network..."</span>
+networksetup <span class="nt">-setairportnetwork</span> en0 homenet password
+</code></pre></div></div>
+
+<p>This data collection scheme is fine for prototyping, but would be very inconvenient for live metrics.</p>
+
+<h2 id="housing">Housing</h2>
+
+<p>These sensors are arranged in a crappy box made from literal garbage – plywood and pallet wood I found in a dumpster.  Here’s  what it looks like all assembled:</p>
+
+<p><img src="../assets/hive-with-sensors.jpg" alt=" " /></p>
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:fn-thermo" role="doc-endnote">
-      <p>Stabentheiner A, Kovac H, Brodschneider R. Honeybee colony thermoregulation–regulatory mechanisms and contribution of individuals in dependence on age, location and thermal stress. <em>PLoS One</em>. 2010;5(1):e8967. Published 2010 Jan 29. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2813292/">pdf</a> <a href="#fnref:fn-thermo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    <li id="fn:fn-acoustics" role="doc-endnote">
+      <p>Qandour, Amro &amp; Ahmad, Iftekhar &amp; Habibi, Daryoush &amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. <a href="#fnref:fn-acoustics" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:fn-vibratory" role="doc-endnote">
+      <p>M. Hrncir, F. G. Barth, and J. Tautz, “32 vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. <a href="#fnref:fn-vibratory" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -123,7 +161,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-08T22:05:52-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-07-11T01:51:04-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

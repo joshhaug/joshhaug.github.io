@@ -3,9 +3,9 @@ layout: page
 title: About
 ---
 
-## Website Info
+## What Is This?
 
-I wrote a [blog post](about-this-site.html) about how I made this site.  I host this site on GitHub.
+This website is about beekeeping and computer science. If you're curious about this website's technical details, you can [read this post](about-this-site.html).
 
 ## Who Made This?
 
@@ -15,7 +15,7 @@ I made this.
 
 My name is **Josh Haug**, and I'm passionate about bees and computer science. My educational background:
 
-* B.S. in Mathematics / Computer Science from [Pepperdine](http://www.pepperdine.edu/)
+* B.S. in Math / Computer Science from [Pepperdine](http://www.pepperdine.edu/)
 * Pursing an M.S. in Computer Science from [USC](https://www.cs.usc.edu)
 
 My beekeeping background:  

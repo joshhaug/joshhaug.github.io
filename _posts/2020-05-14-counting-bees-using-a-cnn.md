@@ -12,7 +12,7 @@ Luckily, we can stand on the shoulders of giants. In [this great paper](https://
 
 Let's take a look at some of their data (from dataset BEE1, 32x32 images):
 
-![](assets/classes.jpg)
+![](../assets/classes.jpg)
 
 The "no bee" class seems to have a red bias, but we'll address that later.  
 

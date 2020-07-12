@@ -81,27 +81,25 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="c1"># ... get temperatures
-</span>        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>… to save on the cost of reopening the file for each iteration of the loop.  Because why not?  The behavior is the same, right?</p>
+<p>… to save on the cost of reopening the file for each iteration of the loop. But this code doesn’t update the file after every call to <code class="highlighter-rouge">f.write('...')</code> , thanks to the magic of unnecessary file buffering.</p>
 
-<p style="color:red"><b>Wrong.</b> This code causes the writes to be bundled into larger writes -- the file will update occassionally (in my experience, every couple hundred writes or so) and again when you terminate the python script.</p>
+<p><img src="../assets/file-buffering.gif" alt="" /></p>
 
-<p><strong>Why does this happen, you ask?</strong> I don’t know. Maybe the writes are being bundled by the python interpreter, maybe it’s the OS’s disk scheduler, maybe it’s just plain ol’ witchcraft.  Some day I’d like to get to the bottom of this, but today is not that day.</p>
+<p>This can be fixed by calling <code class="highlighter-rouge">f.flush()</code> after every <code class="highlighter-rouge">f.write()</code>, or specifying a buffer length of 0: <code class="highlighter-rouge">open('temp.txt', 'a', 0)</code>.</p>
 
 <h2 id="audio-data-collection">Audio Data Collection</h2>
 
-<p>Audio is coming from an old Guitar Hero USB mic I cannibalized.</p>
-
-<p>The audio is recorded using <a href="http://manpages.org/arecord">arecord</a> in a bash script more or less like this:</p>
+<p>Audio is coming from an old Guitar Hero USB mic I cannibalized.   On the Pi, I’m using  <a href="http://manpages.org/arecord">arecord</a> in a bash script more or less like this:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="o">[</span><span class="nb">true</span><span class="o">]</span>    
     arecord <span class="nt">--device</span> sysdefault:CARD<span class="o">=</span>1 <span class="nt">--format</span> S16_LE <span class="nt">--rate</span> 11025 <span class="nt">--channels</span><span class="o">=</span>1 <span class="nt">--duration</span> 3600 out.wav <span class="o">||</span> <span class="nb">break</span><span class="p">;</span>
 </code></pre></div></div>
 
-<p>What is this command doing? It’s recording an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.</p>
+<p>This is just recording an hour (3600 seconds) of mono (1 channel) sound (16 bit samples, little endian) at 11025 samples per second.</p>
 
 <p>Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers<sup id="fnref:fn-acoustics" role="doc-noteref"><a href="#fn:fn-acoustics" class="footnote">1</a></sup><sup id="fnref:fn-vibratory" role="doc-noteref"><a href="#fn:fn-vibratory" class="footnote">2</a></sup> indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics. Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.</p>
 
@@ -111,7 +109,11 @@
 
 <h2 id="networking">Networking</h2>
 
-<p>The Pi is connected via WLAN to an old AirPort Extreme. From the house, I can connect to the network and <code class="highlighter-rouge">ssh</code> into the Pi to download the data, modify scripts, etc. To keep data collection running after I close the session, I’m running <code class="highlighter-rouge">tmux</code> and detaching. There are other ways to do this, like <code class="highlighter-rouge">nohup</code>, <code class="highlighter-rouge">screen</code>, <code class="highlighter-rouge">disown</code>, <code class="highlighter-rouge">bg</code>, etc., but <code class="highlighter-rouge">tmux</code> is part of my regular workflow.</p>
+<p>The Pi is connected via WLAN to an old AirPort Extreme. From the house, I can connect to the network and <code class="highlighter-rouge">ssh</code> into the Pi to download the data, modify scripts, etc. Here’s a technical schematic showing this network configuration:</p>
+
+<p><img src="../assets/networking.png" alt="  " /></p>
+
+<p>To keep data collection running after I close the session, I’m running <code class="highlighter-rouge">tmux</code> and detaching. There are other ways to do this, like <code class="highlighter-rouge">nohup</code>, <code class="highlighter-rouge">screen</code>, <code class="highlighter-rouge">disown</code>, <code class="highlighter-rouge">bg</code>, etc., but <code class="highlighter-rouge">tmux</code> is part of my regular workflow.</p>
 
 <p>From my laptop, I can run a small script to switch networks and download the data every so often:</p>
 
@@ -151,8 +153,15 @@ networksetup <span class="nt">-setairportnetwork</span> en0 homenet password
   <ul class="related-posts">
     
       <li>
+        <a href="/python-file-buffering-and-you.html">
+          Python File Buffering and You
+          <small><time datetime="2020-07-10T01:35:00-07:00">10 Jul 2020</time></small>
+        </a>
+      </li>
+    
+      <li>
         <a href="/hardware-v2.html">
-          Hive Temperature Monitor, Version 2
+          Bettering the Temperature Thing
           <small><time datetime="2020-07-05T00:00:00-07:00">05 Jul 2020</time></small>
         </a>
       </li>
@@ -164,13 +173,6 @@ networksetup <span class="nt">-setairportnetwork</span> en0 homenet password
         </a>
       </li>
     
-      <li>
-        <a href="/hive-temp.html">
-          Hive Temperature Analysis
-          <small><time datetime="2020-05-02T00:00:00-07:00">02 May 2020</time></small>
-        </a>
-      </li>
-    
   </ul>
 </aside>
 
@@ -179,7 +181,7 @@ networksetup <span class="nt">-setairportnetwork</span> en0 homenet password
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-08T22:05:52-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-07-11T01:51:04-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

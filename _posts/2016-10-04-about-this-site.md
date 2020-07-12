@@ -34,11 +34,7 @@ $${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$
 
 **How are you hosting it?**
 
-> This website is [hosted on github](https://github.com/joshhaug/joshhaug.github.io).  
-
-**How did you set up that SSL certificate?**
-
-> SSL is not enabled automatically for GitHub pages.  To get https working, I followed the instructions [here](https://sheharyar.me/blog/free-ssl-for-github-pages-with-custom-domains/).
+> This website is [hosted on github pages](https://github.com/joshhaug/joshhaug.github.io).  
 
 -----
 

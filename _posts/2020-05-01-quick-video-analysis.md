@@ -32,7 +32,7 @@ Then apply pixel thresholding to get the dark spots, like so:
 
 To interpret the list of points as separate objects, we can use a clustering algorithm.  Here's an example using [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering).
 
-![  ](assets/phone-clusters.mp4)
+![  ](../assets/phone-clusters.mp4)
 
 It **kind of** works!  From here we can just count the clusters to get an approximation of the number of bees in frame. 
 
