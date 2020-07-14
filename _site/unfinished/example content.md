@@ -2,8 +2,6 @@
 This post addresses some frequently asked questions about this site.
 </div>
 
-
-
 Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. *Aenean eu leo quam.* Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
 
 > Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
@@ -54,7 +52,6 @@ Inline code is available with the `<code>` element. Snippets of multiple lines o
 var adder: Int = 7;
 let adderb: Double = 14
 
-
 // Call the function
 adder(2, 6);
 // > 8
@@ -103,24 +100,18 @@ Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at
   <dt>HyperText Markup Language (HTML)</dt>
   <dd>The language used to describe and define the content of a Web page</dd>
 
-  <dt>Cascading Style Sheets (CSS)</dt>
+<dt>Cascading Style Sheets (CSS)</dt>
   <dd>Used to describe the appearance of Web content</dd>
 
-  <dt>JavaScript (JS)</dt>
+<dt>JavaScript (JS)</dt>
   <dd>The programming language used to build advanced Web sites and applications</dd>
 </dl>
 
-
-
 $$d_{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$
-
 
 $$d^{a}$$
 
-
-
 \\[ \mathbf{X} = \mathbf{Z} \mathbf{P^\mathsf{T}} \\]
-
 
 Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.
 

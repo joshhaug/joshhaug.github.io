@@ -47,45 +47,22 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/python-file-buffering-and-you.html">
-        Python File Buffering and You
+      <a href="/big-handle.html">
+        DIY Hive Boxes
       </a>
     </h1>
 
-    <time datetime="2020-07-10T01:35:00-07:00" class="post-date">10 Jul 2020</time>
+    <time datetime="2020-07-13T01:57:00-07:00" class="post-date">13 Jul 2020</time>
 
-    <p>Python File Buffering</p>
+    <p>Last year I made some hive boxes. I just measured the dimensions from store-bought ones and duplicated them, with one important exception: <strong>I didn’t make their dumb, stupid, idiot, piece of crap loser handles.</strong> Seriously, those recessed handles are garbage.</p>
 
-<p>I’m using a <a href="https://github.com/tdack/MAX6675">python library</a> to read the temperature every ten seconds. The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings. Here’s the basic idea:</p>
+<p>Consider the following: A fully-loaded deep super can weigh up to 70 pounds. In gloved hands, that half-inch finger grip isn’t gonna cut it. Often, it’s easier to pick these hives up from the bottom.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>    
-<span class="err">    </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>        
-<span class="err">        </span><span class="n">dat</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>        
-<span class="err">        </span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>        
-<span class="err">        </span><span class="k">try</span><span class="p">:</span>            
-<span class="err">            </span><span class="n">t1</span> <span class="o">=</span> <span class="n">sensor1</span><span class="p">.</span><span class="n">readTempC</span><span class="p">()</span>            
-<span class="err">            </span><span class="n">t2</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readDieTempC</span><span class="p">()</span>            
-<span class="err">            </span><span class="n">t3</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readObjTempC</span><span class="p">()</span>        
-        <span class="k">except</span><span class="p">:</span>            
-        <span class="err">    </span><span class="k">print</span> <span class="s">"An error occured"</span>        
-        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">','</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">dat</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">])</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> 
-        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
-</code></pre></div></div>
+<p>The ergronomics of picking up hive boxes.</p>
 
-<p>Initially, I wrote the script with the <code class="highlighter-rouge">open</code> statement outside the loop, like so…</p>
+<p>Am I a hero for putting a larger handle on hive boxes? Yes, I am.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>    
-<span class="err">    </span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>        
-<span class="err">        </span><span class="c1"># ... get temperatures        
-</span><span class="err">        </span><span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
-        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>… to save on the cost of reopening the file for each iteration of the loop. But this one doesn’t update the file after every call to <code class="highlighter-rouge">f.write('...')</code> , thanks to the magic of unnecessary file buffering.</p>
-
-<p><img src="../assets/file-buffering.gif" alt=" " /></p>
-
-<p>This can be fixed by calling <code class="highlighter-rouge">f.flush()</code> after every <code class="highlighter-rouge">f.write()</code>, or specifying a buffer length of 0: <code class="highlighter-rouge">open('temp.txt', 'a', 0)</code>.</p>
+<p><img src="../assets/big-handle.jpg" alt="Am I a hero? I suppose. A maverick? Sure, " />Am I a genius? Sure, why not. The greatest american hero who ever lived? That’s taking it too far.</p>
 
   </article>
   
@@ -95,7 +72,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-11T01:51:04-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-07-13T14:15:05-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

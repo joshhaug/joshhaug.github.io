@@ -6,16 +6,16 @@ date: 2020-05-01
 description:
 author: Josh Haug
 tags:
-
 - Bees
 - Video
+- Data
 ---
 
 <div class="message">
 Today we'll explore some basic image processing techniques to count bees. These require <b>no labeled training data</b>, so we'll try them first before moving on to fancier techniques.
 </div>
 
-The number of bees in the entrance of the hive is a good indicator of the health of the hive.  NEED CITATION.  
+Generally speaking, the number of bees at the entrance of the hive is a good indicator of the health of the hive. This means that the bees are collecting food (nectar and pollen). So let's try to count some bees with as little effort as possible!
 
 Say I have a video of the entrance of a beehive, like this:
 ![ ](assets/phone-basic.mp4)

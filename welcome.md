@@ -12,5 +12,7 @@ Here's a list of all the posts in this site.
 </div>
 
 {% for post in site.posts %}
+
 ### [ {{ post.title }} ]({{ post.url }})
+
 {% endfor %}

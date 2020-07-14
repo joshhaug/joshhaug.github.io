@@ -4,7 +4,7 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-07-11T01:51:04-07:00</updated>
+ <updated>2020-07-13T14:15:05-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -13,42 +13,19 @@
 
  
  <entry>
-   <title>Python File Buffering and You</title>
-   <link href="http://localhost:4000/python-file-buffering-and-you.html"/>
-   <updated>2020-07-10T01:35:00-07:00</updated>
-   <id>http://localhost:4000/python-file-buffering-and-you</id>
-   <content type="html">&lt;p&gt;Python File Buffering&lt;/p&gt;
+   <title>DIY Hive Boxes</title>
+   <link href="http://localhost:4000/big-handle.html"/>
+   <updated>2020-07-13T01:57:00-07:00</updated>
+   <id>http://localhost:4000/big-handle</id>
+   <content type="html">&lt;p&gt;Last year I made some hive boxes. I just measured the dimensions from store-bought ones and duplicated them, with one important exception: &lt;strong&gt;I didn’t make their dumb, stupid, idiot, piece of crap loser handles.&lt;/strong&gt; Seriously, those recessed handles are garbage.&lt;/p&gt;
 
-&lt;p&gt;I’m using a &lt;a href=&quot;https://github.com/tdack/MAX6675&quot;&gt;python library&lt;/a&gt; to read the temperature every ten seconds. The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings. Here’s the basic idea:&lt;/p&gt;
+&lt;p&gt;Consider the following: A fully-loaded deep super can weigh up to 70 pounds. In gloved hands, that half-inch finger grip isn’t gonna cut it. Often, it’s easier to pick these hives up from the bottom.&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
-&lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;        
-&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
-&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;        
-&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;            
-&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            
-&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readDieTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            
-&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readObjTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
-        &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;            
-        &lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;An error occured&quot;&lt;/span&gt;        
-        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The ergronomics of picking up hive boxes.&lt;/p&gt;
 
-&lt;p&gt;Initially, I wrote the script with the &lt;code class=&quot;highlighter-rouge&quot;&gt;open&lt;/code&gt; statement outside the loop, like so…&lt;/p&gt;
+&lt;p&gt;Am I a hero for putting a larger handle on hive boxes? Yes, I am.&lt;/p&gt;
 
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
-&lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;        
-&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ... get temperatures        
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;… to save on the cost of reopening the file for each iteration of the loop. But this one doesn’t update the file after every call to &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write('...')&lt;/code&gt; , thanks to the magic of unnecessary file buffering.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../assets/file-buffering.gif&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This can be fixed by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;f.flush()&lt;/code&gt; after every &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write()&lt;/code&gt;, or specifying a buffer length of 0: &lt;code class=&quot;highlighter-rouge&quot;&gt;open('temp.txt', 'a', 0)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/big-handle.jpg&quot; alt=&quot;Am I a hero? I suppose. A maverick? Sure, &quot; /&gt;Am I a genius? Sure, why not. The greatest american hero who ever lived? That’s taking it too far.&lt;/p&gt;
 </content>
  </entry>
  
@@ -72,7 +49,7 @@
  </entry>
  
  <entry>
-   <title>Counting Bee Movements Using a Convolutional Neural Network</title>
+   <title>Counting Bee Movements Using a CNN</title>
    <link href="http://localhost:4000/counting-bees-using-a-cnn.html"/>
    <updated>2020-05-14T14:46:20-07:00</updated>
    <id>http://localhost:4000/counting-bees-using-a-cnn</id>
@@ -80,9 +57,9 @@
 Counting the number of &lt;b&gt;foragers&lt;/b&gt; (bees that collect pollen, nectar, and water) is an important measure of hive health. What if we could use a &lt;b&gt;convolutional neural network&lt;/b&gt; to count bees at the entrance of the hive?
 &lt;/div&gt;
 
-&lt;p&gt;Luckily, we can stand on the shoulders of giants. In &lt;a href=&quot;https://www.mdpi.com/2076-3417/9/18/3743&quot;&gt;this great paper&lt;/a&gt; by Vladimir Kulyukin and Sarbajit Mukherjee, the authors trained a CNN classifier for this very purpose.  More importantly, &lt;em&gt;they released their labeled datasets!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Luckily, we can stand on the shoulders of giants. In &lt;a href=&quot;https://www.mdpi.com/2076-3417/9/18/3743&quot;&gt;this great paper&lt;/a&gt; by Vladimir Kulyukin and Sarbajit Mukherjee, the authors trained a CNN classifier for this very purpose.  &lt;strong&gt;And they released their labeled data!&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Let’s take a look at some of their data (from dataset BEE1, 32x32 images):&lt;/p&gt;
+&lt;p&gt;Let’s take a look at some of that sweet, sweet data (from dataset BEE1, 32x32 images):&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../assets/classes.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -341,7 +318,7 @@ networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en
 Today we'll explore some basic image processing techniques to count bees. These require &lt;b&gt;no labeled training data&lt;/b&gt;, so we'll try them first before moving on to fancier techniques.
 &lt;/div&gt;
 
-&lt;p&gt;The number of bees in the entrance of the hive is a good indicator of the health of the hive.  NEED CITATION.&lt;/p&gt;
+&lt;p&gt;Generally speaking, the number of bees at the entrance of the hive is a good indicator of the health of the hive. This means that the bees are collecting food (nectar and pollen). So let’s try to count some bees with as little effort as possible!&lt;/p&gt;
 
 &lt;p&gt;Say I have a video of the entrance of a beehive, like this:
 &lt;img src=&quot;assets/phone-basic.mp4&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;

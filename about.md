@@ -7,6 +7,10 @@ title: About
 
 This website is about beekeeping and computer science. If you're curious about this website's technical details, you can [read this post](about-this-site.html).
 
+## What's the goal?
+
+Making an affordable and open-source hive monitoring system using off-the-shelf components. 
+
 ## Who Made This?
 
 I made this.

@@ -1,16 +1,18 @@
 ---
 layout: post
-title: "Counting Bee Movements Using a Convolutional Neural Network"
+title: "Counting Bee Movements Using a CNN"
 date: "2020-05-14 14:46:20 -0700"
+tags: 
+- Data
 ---
 
 <div class="message">
 Counting the number of <b>foragers</b> (bees that collect pollen, nectar, and water) is an important measure of hive health. What if we could use a <b>convolutional neural network</b> to count bees at the entrance of the hive?
 </div>
 
-Luckily, we can stand on the shoulders of giants. In [this great paper](https://www.mdpi.com/2076-3417/9/18/3743) by Vladimir Kulyukin and Sarbajit Mukherjee, the authors trained a CNN classifier for this very purpose.  More importantly, *they released their labeled datasets!*
+Luckily, we can stand on the shoulders of giants. In [this great paper](https://www.mdpi.com/2076-3417/9/18/3743) by Vladimir Kulyukin and Sarbajit Mukherjee, the authors trained a CNN classifier for this very purpose.  **And they released their labeled data!**
 
-Let's take a look at some of their data (from dataset BEE1, 32x32 images):
+Let's take a look at some of that sweet, sweet data (from dataset BEE1, 32x32 images):
 
 ![](../assets/classes.jpg)
 
