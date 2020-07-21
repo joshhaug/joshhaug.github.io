@@ -21,7 +21,7 @@ The "no bee" class seems to have a red bias, but we'll address that later.
 Here's the architecture that they say worked best for a 32x32 input image:
 ![](assets/cnn-1.jpg)
 
-With that image, I was able to implement the network in a few minutes using  Keras:
+With that image, I was able to implement the network in a few minutes using Keras:
 
 ```python
 model = models.Sequential()
@@ -72,15 +72,3 @@ Note that this is an image **classifier**, not a detector.  To apply this classi
 3. run the CNN on the tile to determine whether the motion was "bee related" or not
 
 In other words, **rather than counting the number of bees, they are counting the number of movements that are bee-related**.  This is a useful metric to determine *relative* changes in foraging behavior.  That said, a bee detection or pose estimation NN may provide even more insight.   
-
-Regardless, this should be pretty easy to implement.  Let's revisit the video of a hive entrance I analyzed in an [earlier post](quick-video-analysis.html):
-
-![ ](assets/phone-basic.mp4)
-
-Here's the video with the [MOG2](https://docs.opencv.org/master/d1/dc5/tutorial_background_subtraction.html) background subtraction algorithm applied:
-
-![  ](assets/phone-mogmask.mp4)
-
-We can then threshold the background subtraction output to get regions with substantial movement only:
-
-![  ](assets/phone-mogthresh.mp4)

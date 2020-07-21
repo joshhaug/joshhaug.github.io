@@ -14,7 +14,7 @@
 
   <title>
     
-      Bettering the Temperature Thing &middot; BeeSci
+      Improving the Prototype's Temperature Sensor &middot; BeeSci
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
@@ -46,9 +46,9 @@
 
       <main>
         <article class="post">
-  <h1 class="post-title">Bettering the Temperature Thing</h1>
+  <h1 class="post-title">Improving the Prototype's Temperature Sensor</h1>
   <time datetime="2020-07-05T00:00:00-07:00" class="post-date">05 Jul 2020</time>
-  <p>In my <a href="hardware.html">previous prototype</a>, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp.  It’s an apples-to-oranges comparison But that was an apples-to-oranges comparison. With identical thermometry hardware, I should be able to get a better sense of the tempertaures inside and outside the hive.</p>
+  <p>In my <a href="hardware.html">previous prototype</a>, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp. which was an apples-to-oranges comparison. With identical thermometers I’ll get a better sense of the actual tempertaures inside and outside the hive.</p>
 
 <p>Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!</p>
 
@@ -58,7 +58,7 @@
 
 <p>Note that I’m sharing the power (<code class="highlighter-rouge">VCC</code>), ground (<code class="highlighter-rouge">GND</code>), serial clock input (<code class="highlighter-rouge">SCK</code>) and serial data output (<code class="highlighter-rouge">SO</code>) lines across the three boards.  Each board has only one unique wire, going to the chip select (<code class="highlighter-rouge">CS</code>) pin.  This pin is active low according to the <a href="https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf">datasheet</a>, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.</p>
 
-<p>Each MAX6675 chip has a max current draw of 1.5mA, which is well within the limit.</p>
+<p>Each MAX6675 chip has a max current draw of 1.5mA, so we’re well within the Pi’s pin limit of 16mA.</p>
 
 </article>
 
@@ -66,6 +66,13 @@
 <aside class="related">
   <h3>Related posts</h3>
   <ul class="related-posts">
+    
+      <li>
+        <a href="/hardware.html">
+          Prototype For Hive Monitoring
+          <small><time datetime="2020-07-14T00:00:00-07:00">14 Jul 2020</time></small>
+        </a>
+      </li>
     
       <li>
         <a href="/big-handle.html">
@@ -81,13 +88,6 @@
         </a>
       </li>
     
-      <li>
-        <a href="/hardware.html">
-          Prototype For Hive Monitoring
-          <small><time datetime="2020-05-14T00:00:00-07:00">14 May 2020</time></small>
-        </a>
-      </li>
-    
   </ul>
 </aside>
 
@@ -96,7 +96,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-13T20:24:58-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-07-21T00:57:04-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

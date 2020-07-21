@@ -63,7 +63,7 @@ Counting the number of <b>foragers</b> (bees that collect pollen, nectar, and wa
 <p>Here’s the architecture that they say worked best for a 32x32 input image:
 <img src="assets/cnn-1.jpg" alt="" /></p>
 
-<p>With that image, I was able to implement the network in a few minutes using  Keras:</p>
+<p>With that image, I was able to implement the network in a few minutes using Keras:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">Sequential</span><span class="p">()</span>
 
@@ -116,24 +116,19 @@ Counting the number of <b>foragers</b> (bees that collect pollen, nectar, and wa
 
 <p>In other words, <strong>rather than counting the number of bees, they are counting the number of movements that are bee-related</strong>.  This is a useful metric to determine <em>relative</em> changes in foraging behavior.  That said, a bee detection or pose estimation NN may provide even more insight.</p>
 
-<p>Regardless, this should be pretty easy to implement.  Let’s revisit the video of a hive entrance I analyzed in an <a href="quick-video-analysis.html">earlier post</a>:</p>
-
-<p><img src="assets/phone-basic.mp4" alt=" " /></p>
-
-<p>Here’s the video with the <a href="https://docs.opencv.org/master/d1/dc5/tutorial_background_subtraction.html">MOG2</a> background subtraction algorithm applied:</p>
-
-<p><img src="assets/phone-mogmask.mp4" alt="  " /></p>
-
-<p>We can then threshold the background subtraction output to get regions with substantial movement only:</p>
-
-<p><img src="assets/phone-mogthresh.mp4" alt="  " /></p>
-
 </article>
 
 
 <aside class="related">
   <h3>Related posts</h3>
   <ul class="related-posts">
+    
+      <li>
+        <a href="/hardware.html">
+          Prototype For Hive Monitoring
+          <small><time datetime="2020-07-14T00:00:00-07:00">14 Jul 2020</time></small>
+        </a>
+      </li>
     
       <li>
         <a href="/big-handle.html">
@@ -144,15 +139,8 @@ Counting the number of <b>foragers</b> (bees that collect pollen, nectar, and wa
     
       <li>
         <a href="/hardware-v2.html">
-          Bettering the Temperature Thing
+          Improving the Prototype's Temperature Sensor
           <small><time datetime="2020-07-05T00:00:00-07:00">05 Jul 2020</time></small>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/hardware.html">
-          Prototype For Hive Monitoring
-          <small><time datetime="2020-05-14T00:00:00-07:00">14 May 2020</time></small>
         </a>
       </li>
     
@@ -164,7 +152,7 @@ Counting the number of <b>foragers</b> (bees that collect pollen, nectar, and wa
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-13T20:24:58-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-07-21T00:57:04-07:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>
