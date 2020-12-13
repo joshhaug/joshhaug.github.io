@@ -29,14 +29,18 @@ function linegraph(data, xfactor, yfactor, container, graph, selector) {
   //.call(responsivefy);
 
 
+
+
   // Add X axis (datetime)
   var x = d3.scaleTime()
     .domain(d3.extent(data, function (d) { return d[xfactor]; }))
     .range([0, width]);
   var xAxisComputed = d3.axisBottom(x)
+  // number of ticks desired on x axis
+  var xTicks = 8;
   var xAxis = svg.append("g")
     .attr("transform", "translate(0," + height + ")")
-    .call(xAxisComputed);
+    .call(xAxisComputed.ticks(xTicks));
 
   // add x axis grid
   // var xGridAdded = svg.append("g")
@@ -229,7 +233,7 @@ function linegraph(data, xfactor, yfactor, container, graph, selector) {
     xAxis
       .transition()
       .duration(1000)
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x).ticks(xTicks));
 
     // transition the x axis to the new scale
     // xGridAdded
