@@ -49,20 +49,111 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/big-handle.html">
-        DIY Hive Boxes
+      <a href="/hardware.html">
+        Prototype For Hive Monitoring
       </a>
     </h1>
 
-    <time datetime="2020-07-13T01:57:00-07:00" class="post-date">13 Jul 2020</time>
+    <time datetime="2020-07-14T00:00:00-07:00" class="post-date">14 Jul 2020</time>
 
-    <p>Last year I made some hive boxes. I just measured the dimensions from store-bought ones and duplicated them.</p>
+    <p>Here’s a prototype I’m working on for monitoring a hive’s temperature and audio.  The brains of the operation is a Raspberry Pi 4 running Raspbian.  Here’s what it looks like on the inside:</p>
 
-<p>Commercially-available hives tend to include a recessed handle for your convenience. Sometimes they’ll throw in a couple of 3/4” sticks as a bonus. These handles are garbage.</p>
+<p><img src="../assets/setup.jpg" alt=" " /></p>
 
-<p>Consider the following: A fully-loaded deep super can weigh up to 70 pounds. In gloved hands, that half-inch finger grip isn’t gonna cut it.  That’s why you need a dowel-reinforced big handle.</p>
+<h3 id="temperature-data-collection">Temperature Data Collection</h3>
 
-<p><img src="../assets/big-handle.jpg" alt="" /></p>
+<p>I’m measuring hive temperature with two sensors:</p>
+
+<ul>
+  <li>k-type thermocouple and amplifier (MAX6675) for internal temperature</li>
+  <li>infrared thermopile (TMP006) for ambient temperature</li>
+</ul>
+
+<p>Ideally I’d use just thermocouples, but these are the only sensors I have on hand. <a href="hive-temp.html">Here’s an analysis of the temperature data I collected from this setup</a>.</p>
+
+<p>I’m using a <a href="https://github.com/tdack/MAX6675">python library</a> to read the temperature every ten seconds.  The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings.  Here’s the basic idea:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">dat</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">sensor1</span><span class="p">.</span><span class="n">readTempC</span><span class="p">()</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readDieTempC</span><span class="p">()</span>
+            <span class="n">t3</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readObjTempC</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">"An error occured"</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">','</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">dat</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">])</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Initially, I wrote the script with the <code class="highlighter-rouge">open</code> statement outside the loop, like so…</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
+        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>… to save on the cost of reopening the file for each iteration of the loop. But this code doesn’t update the file after every call to <code class="highlighter-rouge">f.write('...')</code> , thanks to the magic of unnecessary file buffering.</p>
+
+<p><img src="../assets/file-buffering.gif" alt="" /></p>
+
+<p>This can be fixed by calling <code class="highlighter-rouge">f.flush()</code> after every <code class="highlighter-rouge">f.write()</code>, or specifying a buffer length of 0: <code class="highlighter-rouge">open('temp.txt', 'a', 0)</code>.</p>
+
+<h2 id="audio-data-collection">Audio Data Collection</h2>
+
+<p>Audio is coming from an old Guitar Hero USB mic I cannibalized.   On the Pi, I’m using  <a href="http://manpages.org/arecord">arecord</a> in a bash script more or less like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="o">[</span><span class="nb">true</span><span class="o">]</span>    
+    arecord <span class="nt">--device</span> sysdefault:CARD<span class="o">=</span>1 <span class="nt">--format</span> S16_LE <span class="nt">--rate</span> 11025 <span class="nt">--channels</span><span class="o">=</span>1 <span class="nt">--duration</span> 3600 out.wav <span class="o">||</span> <span class="nb">break</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>This is just recording an hour (3600 seconds) of mono (1 channel) sound (16 bit samples, little endian) at 11025 samples per second.</p>
+
+<p>Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers<sup id="fnref:fn-acoustics" role="doc-noteref"><a href="#fn:fn-acoustics" class="footnote">1</a></sup><sup id="fnref:fn-vibratory" role="doc-noteref"><a href="#fn:fn-vibratory" class="footnote">2</a></sup> indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics. Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.</p>
+
+<p><img src="assets/acoustic-signature.jpg" alt="  " /></p>
+
+<p>Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.</p>
+
+<h2 id="networking">Networking</h2>
+
+<p>The Pi is connected via WLAN to an old AirPort Extreme. From the house, I can connect to the network and <code class="highlighter-rouge">ssh</code> into the Pi to download the data, modify scripts, etc. Here’s a technical schematic showing this network configuration:</p>
+
+<p><img src="../assets/networking.png" alt="  " /></p>
+
+<p>To keep data collection running after I close the session, I’m running <code class="highlighter-rouge">tmux</code> and detaching. There are other ways to do this, like <code class="highlighter-rouge">nohup</code>, <code class="highlighter-rouge">screen</code>, <code class="highlighter-rouge">disown</code>, <code class="highlighter-rouge">bg</code>, etc., but <code class="highlighter-rouge">tmux</code> is part of my regular workflow.</p>
+
+<p>From my laptop, I can run a small script to switch networks and download the data every so often:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"Connecting to beenet..."</span>
+networksetup <span class="nt">-setairportnetwork</span> en0 beenet password
+<span class="nb">echo</span> <span class="s2">"Downloading data..."</span>
+scp pi@raspberrypi.local:~/bees/temp.txt <span class="nb">.</span>
+<span class="nb">echo</span> <span class="s2">"Connecting to home network..."</span>
+networksetup <span class="nt">-setairportnetwork</span> en0 homenet password
+</code></pre></div></div>
+
+<p>This data collection scheme is fine for prototyping, but would be very inconvenient for live metrics.</p>
+
+<h2 id="housing">Housing</h2>
+
+<p>These sensors are arranged in a crappy box made from literal garbage – plywood and pallet wood I found in a dumpster.  Here’s  what it looks like all assembled:</p>
+
+<p><img src="../assets/hive-with-sensors.jpg" alt=" " /></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:fn-acoustics" role="doc-endnote">
+      <p>Qandour, Amro &amp; Ahmad, Iftekhar &amp; Habibi, Daryoush &amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. <a href="#fnref:fn-acoustics" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:fn-vibratory" role="doc-endnote">
+      <p>M. Hrncir, F. G. Barth, and J. Tautz, “32 vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. <a href="#fnref:fn-vibratory" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
   </article>
   
@@ -72,7 +163,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-21T00:57:04-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-12-13T11:09:58-08:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

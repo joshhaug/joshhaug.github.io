@@ -49,24 +49,20 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/hardware-v2.html">
-        Improving the Prototype's Temperature Sensor
+      <a href="/big-handle.html">
+        DIY Hive Boxes
       </a>
     </h1>
 
-    <time datetime="2020-07-05T00:00:00-07:00" class="post-date">05 Jul 2020</time>
+    <time datetime="2020-07-13T01:57:00-07:00" class="post-date">13 Jul 2020</time>
 
-    <p>In my <a href="hardware.html">previous prototype</a>, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp. which was an apples-to-oranges comparison. With identical thermometers I’ll get a better sense of the actual tempertaures inside and outside the hive.</p>
+    <p>Last year I made some hive boxes. I just measured the dimensions from store-bought ones and duplicated them.</p>
 
-<p>Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!</p>
+<p>Commercially-available hives tend to include a recessed handle for your convenience. Sometimes they’ll throw in a couple of 3/4” sticks as a bonus. These handles are garbage.</p>
 
-<p>Here’s a wiring diagram showing how the new MAX6675 breakouts are connected to the Raspberry Pi:</p>
+<p>Consider the following: A fully-loaded deep super can weigh up to 70 pounds. In gloved hands, that half-inch finger grip isn’t gonna cut it.  That’s why you need a dowel-reinforced big handle.</p>
 
-<p><img src="../assets/3tc-wiring.png" alt=" " /></p>
-
-<p>Note that I’m sharing the power (<code class="highlighter-rouge">VCC</code>), ground (<code class="highlighter-rouge">GND</code>), serial clock input (<code class="highlighter-rouge">SCK</code>) and serial data output (<code class="highlighter-rouge">SO</code>) lines across the three boards.  Each board has only one unique wire, going to the chip select (<code class="highlighter-rouge">CS</code>) pin.  This pin is active low according to the <a href="https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf">datasheet</a>, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.</p>
-
-<p>Each MAX6675 chip has a max current draw of 1.5mA, so we’re well within the Pi’s pin limit of 16mA.</p>
+<p><img src="../assets/big-handle.jpg" alt="" /></p>
 
   </article>
   
@@ -76,7 +72,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-21T00:57:04-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-12-13T11:09:58-08:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

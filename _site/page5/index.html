@@ -49,65 +49,14 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/hive-temp.html">
-        Hive Temperature Analysis
+      <a href="/big-handle.html">
+        Big Handle
       </a>
     </h1>
 
-    <time datetime="2020-05-02T00:00:00-07:00" class="post-date">02 May 2020</time>
+    <time datetime="2020-07-06T00:00:00-07:00" class="post-date">06 Jul 2020</time>
 
-    <p>Here is what the initial data looks like from my <a href="hardware.html">small hive monitoring setup</a>:</p>
-
-<p><img src="/assets/temp.jpg" alt="  " /></p>
-
-<p>As you can see, the TMP006 produces two readings: object temperature (the reading from the surface the thermopile is pointed at) and die temperature (the temperature from the die itself).   For more info see the TMP006 <a href="https://cdn.sparkfun.com/datasheets/Sensors/Temp/sbou107.pdf">user guide</a>.</p>
-
-<p>The large spike on 4/24 was due to the hive being in direct sunlight.  The night of the 24th, we placed shade covers over the hives to prevent them from overheating.   This clearly made a difference.</p>
-
-<h3 id="why-do-bees-thermoregulate">Why do bees thermoregulate?</h3>
-
-<p>Bees work hard to keep the temperature of the hive <em>just</em> right.  But why?  The later-stage young, called pupae, are like little Goldilocks – they need to be kept between 33 and 36ºC (91.4 - 96.8ºF) to prevent physical and behavioral defects. Pupae develop in sealed-off cells of the honeycomb, called “capped brood cells.”  Here’s a picture I took of some capped brood cells:</p>
-
-<p><img src="assets/capped-brood.jpg" alt=" Capped Brood" /></p>
-
-<p>If these cells get too hot, workers use evaporative cooling – they splash the cells with water and fan them with their wings.  If the cells get too cold, workers will vibrate their flight muscles to produce heat.  Here is what the heating process looks like under a thermal camera.<sup id="fnref:fn-thermo" role="doc-noteref"><a href="#fn:fn-thermo" class="footnote">1</a></sup></p>
-
-<p><img src="assets/heater-bees.jpg" alt="" /></p>
-
-<h1 id="conclusions">Conclusions</h1>
-
-<div class="message">
-<b>TL;DR</b> Need better ambient temperature sensor, a thermocouple would be best. Need better attic with more insulation. And the sample rate is too damn high!   
-</div>
-
-<ul>
-  <li>
-    <p><strong>Using IR sensor for ambient temperature is bad</strong> – My hope was that the attic measurements could be used as a baseline for comparison with the inside of the hive (i.e. it would provide the ambient temperature inside a wooden box, thus accounting for any insulation that the hive boxes provide). In theory, then, the difference between the attic temperature and the hive temperature would be due entirely to bee activity. But this is not necessarily the case, due to:</p>
-
-    <ul>
-      <li>
-        <p>differences in sensor properties (e.g. rate of heat absorption of the IR die vs the thermocouple)  → can be fixed by using a thermocouple</p>
-      </li>
-      <li>
-        <p>differences in construction between the hive boxes (solid wood, painted white) and the attic (plywood top and bottom, solid wood sides, unpainted) → can be re-made</p>
-      </li>
-      <li>
-        <p>interactions between the attic and the hive boxes (e.g. attic absorbes most of the sunlight at noon, and heat transfer between the hive boxes and the attic) → not yet sure how this can be addressed</p>
-      </li>
-    </ul>
-  </li>
-  <li>
-    <p><strong>My sampling rate is too high</strong> – A reading every ten seconds is excessive. It’s clear that interesting events happen over the course of minute, not seconds. The BUR dataset resolution of one hour might be a little coarse, but I feel comfortable sampling every 5 minutes (30 times fewer datapoints than the current setup).</p>
-  </li>
-</ul>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:fn-thermo" role="doc-endnote">
-      <p>Stabentheiner A, Kovac H, Brodschneider R. Honeybee colony thermoregulation–regulatory mechanisms and contribution of individuals in dependence on age, location and thermal stress. <em>PLoS One</em>. 2010;5(1):e8967. Published 2010 Jan 29. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2813292/">pdf</a> <a href="#fnref:fn-thermo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
+    
 
   </article>
   
@@ -117,7 +66,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-21T00:57:04-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-12-13T11:09:58-08:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>

@@ -3,38 +3,14 @@ layout: page
 title: All Posts
 ---
 
-# Prototypes
+<!-- {% for post in site.posts %}
+  * {{ post.date | date_to_string }} &raquo; [ {{ post.title }} ]({{ post.url }})
+{% endfor %} -->
+
+<div class="message">
+Here's a list of all the posts in this site.
+</div>
 
 {% for post in site.posts %}
-
-{% if post.tags contains "Hardware" %}
-
-## [ {{ post.title }} ]({{ post.url }})
-
-{% endif %}
-
-{% endfor %}
-
-# Data Analysis
-
-{% for post in site.posts %}
-
-{% if post.tags contains "Data" %}
-
-## [ {{ post.title }} ]({{ post.url }})
-
-{% endif %}
-
-{% endfor %}
-
-# Miscellaneous
-
-{% for post in site.posts %}
-
-{% if post.tags contains "Misc" %}
-
-## [ {{ post.title }} ]({{ post.url }})
-
-{% endif %}
-
+  * [ {{ post.title }} ]({{ post.url }})
 {% endfor %}

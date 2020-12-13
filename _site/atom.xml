@@ -4,13 +4,113 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-07-21T00:57:04-07:00</updated>
+ <updated>2020-12-13T11:09:58-08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
    <email>josh.haug55@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Charts</title>
+   <link href="http://localhost:4000/charts.html"/>
+   <updated>2020-12-13T00:00:00-08:00</updated>
+   <id>http://localhost:4000/charts</id>
+   <content type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;js/d3.v4.js&quot;&gt;&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/line-graph.js&quot;&gt;&lt;/script&gt;
+
+&lt;!-- &lt;script type=&quot;text/javascript&quot; src=&quot;js/line-test.js&quot;&gt;&lt;/script&gt; --&gt;
+
+&lt;h2 id=&quot;hive-statistics&quot;&gt;Hive Statistics&lt;/h2&gt;
+&lt;p&gt;&lt;span&gt;
+    &lt;b&gt;Hive Weight&lt;/b&gt;   
+    &lt;select id=&quot;weight_select&quot;&gt;&lt;/select&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;card-body pt-0&quot; id=&quot;weight_container&quot; height=&quot;300&quot;&gt;
+    &lt;div id=&quot;weight_graph&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;span&gt;
+    &lt;b&gt;Hive Temperature&lt;/b&gt;   
+    &lt;select id=&quot;temp_select&quot;&gt;&lt;/select&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;card-body pt-0&quot; id=&quot;temp_container&quot; height=&quot;300&quot;&gt;
+    &lt;div id=&quot;temp_graph&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;device-statistics&quot;&gt;Device Statistics&lt;/h2&gt;
+&lt;p&gt;&lt;span&gt;
+    &lt;b&gt;Power Consumption&lt;/b&gt;   
+    &lt;select id=&quot;power_select&quot;&gt;&lt;/select&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;card-body pt-0&quot; id=&quot;power_container&quot; height=&quot;350&quot;&gt;
+    &lt;div id=&quot;power_graph&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;span&gt;
+    &lt;b&gt;Battery Voltage&lt;/b&gt;   
+    &lt;select id=&quot;voltage_select&quot;&gt;&lt;/select&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;card-body pt-0&quot; id=&quot;voltage_container&quot; height=&quot;350&quot;&gt;
+    &lt;div id=&quot;voltage_graph&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+//Read the data
+d3.csv(&quot;data/power.csv&quot;, d =&gt; {
+    return {
+    // timestamp,voltage,current,power,shuntvolt,name
+    date: d3.timeParse(&quot;%Y-%m-%d %H:%M:%S&quot;)(d.timestamp),
+    voltage: +d.voltage,
+    power: +d.power,
+    name: d.name
+    }
+  }, function (data) {
+      console.log(data[0]);
+      console.log(data[0][&quot;power&quot;]);
+      console.log(d3.extent(data, function (d) { return d[&quot;power&quot;]; }));
+      var xn = &quot;power&quot;;
+      console.log(d3.extent(data, function (d) { return d[xn]; }));
+
+      linegraph(data, &quot;date&quot;, &quot;power&quot;, &quot;#power_container&quot;, &quot;#power_graph&quot;, &quot;#power_select&quot;);
+      linegraph(data, &quot;date&quot;, &quot;voltage&quot;, &quot;#voltage_container&quot;, &quot;#voltage_graph&quot;, &quot;#voltage_select&quot;);
+  });
+
+
+
+//Read the data
+d3.csv(&quot;data/weight.csv&quot;, d =&gt; {
+    return {
+      date: d3.timeParse(&quot;%Y-%m-%d %H:%M:%S&quot;)(d.timestamp),
+      weight: +d.weight,
+      name: d.name
+    }
+  }, function (data) {
+    linegraph(data, &quot;date&quot;, &quot;weight&quot;, &quot;#weight_container&quot;, &quot;#weight_graph&quot;, &quot;#weight_select&quot;);
+  });
+
+
+
+//Read the data
+d3.csv(&quot;data/temp.csv&quot;, d =&gt; {
+    return {
+      date: d3.timeParse(&quot;%Y-%m-%d %H:%M:%S&quot;)(d.timestamp),
+      temp: +d.temp,
+      humid: +d.humid,
+      name: d.name
+    }
+  }, function (data) {
+    linegraph(data, &quot;date&quot;, &quot;temp&quot;, &quot;#temp_container&quot;, &quot;#temp_graph&quot;, &quot;#temp_select&quot;);
+
+  });
+&lt;/script&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Prototype For Hive Monitoring</title>
@@ -130,6 +230,55 @@ networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en
 &lt;p&gt;Consider the following: A fully-loaded deep super can weigh up to 70 pounds. In gloved hands, that half-inch finger grip isn’t gonna cut it.  That’s why you need a dowel-reinforced big handle.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../assets/big-handle.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Python File Buffering and You</title>
+   <link href="http://localhost:4000/python-file-buffering-and-you.html"/>
+   <updated>2020-07-10T01:35:00-07:00</updated>
+   <id>http://localhost:4000/python-file-buffering-and-you</id>
+   <content type="html">&lt;p&gt;Python File Buffering&lt;/p&gt;
+
+&lt;p&gt;I’m using a &lt;a href=&quot;https://github.com/tdack/MAX6675&quot;&gt;python library&lt;/a&gt; to read the temperature every ten seconds. The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings. Here’s the basic idea:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
+&lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;        
+&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
+&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;        
+&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;            
+&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            
+&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readDieTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            
+&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readObjTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
+        &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;            
+        &lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;An error occured&quot;&lt;/span&gt;        
+        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Initially, I wrote the script with the &lt;code class=&quot;highlighter-rouge&quot;&gt;open&lt;/code&gt; statement outside the loop, like so…&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
+&lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;        
+&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ... get temperatures        
+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;… to save on the cost of reopening the file for each iteration of the loop. But this one doesn’t update the file after every call to &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write('...')&lt;/code&gt; , thanks to the magic of unnecessary file buffering.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/file-buffering.gif&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This can be fixed by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;f.flush()&lt;/code&gt; after every &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write()&lt;/code&gt;, or specifying a buffer length of 0: &lt;code class=&quot;highlighter-rouge&quot;&gt;open('temp.txt', 'a', 0)&lt;/code&gt;.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Big Handle</title>
+   <link href="http://localhost:4000/big-handle.html"/>
+   <updated>2020-07-06T00:00:00-07:00</updated>
+   <id>http://localhost:4000/big-handle</id>
+   <content type="html">
 </content>
  </entry>
  
@@ -325,6 +474,89 @@ Today we'll explore some basic image processing techniques to count bees. These 
 &lt;/ul&gt;
 
 &lt;p&gt;This technique is fast but not reliably accurate.  But the small amount of computation required makes it suitable for a low-power application.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Hive Sound Analysis</title>
+   <link href="http://localhost:4000/hive-sound.html"/>
+   <updated>2020-05-01T00:00:00-07:00</updated>
+   <id>http://localhost:4000/hive-sound</id>
+   <content type="html">&lt;h2 id=&quot;the-bees-are-speaking&quot;&gt;The Bees Are Speaking&lt;/h2&gt;
+
+&lt;p&gt;Bees communicate with sound.  Newborn queens, for example, use their wing muscles to make a trumpeting sound called “piping”.  This is a battle cry.&lt;/p&gt;
+
+&lt;p&gt;/assets/piping.mp3&lt;/p&gt;
+
+&lt;h2 id=&quot;audio-data-collection-setup&quot;&gt;Audio Data Collection Setup&lt;/h2&gt;
+
+&lt;p&gt;Audio is coming from an old Guitar Hero USB mic I cannibalized.&lt;/p&gt;
+
+&lt;p&gt;The audio is recorded using &lt;a href=&quot;http://manpages.org/arecord&quot;&gt;arecord&lt;/a&gt; in a bash script more or less like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;    
+    &lt;span class=&quot;n&quot;&gt;arecord&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sysdefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CARD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S16_LE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rate&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11025&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;channels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duration&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3600&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wav&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s pretty easy to see what this command is doing: record an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.&lt;/p&gt;
+
+&lt;p&gt;Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics.&lt;sup id=&quot;fnref:fn-vibratory&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-vibratory&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;  Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.&lt;/p&gt;
+
+&lt;p&gt;Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.&lt;/p&gt;
+
+&lt;p&gt;So… what am I looking for? Here’s some examples:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/acoustic-signature.jpg&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This table is from the great paper &lt;em&gt;Remote Beehive Monitoring using Acoustic Signals&lt;/em&gt;.&lt;sup id=&quot;fnref:fn-acoustics&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-acoustics&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;The table fails to mention that worker piping also occurs in non-disturbed queenright hives.&lt;sup id=&quot;fnref:fn-worker-piping&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-worker-piping&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.beeculture.com/a-closer-look-piping-tooting-quacking/&quot;&gt;https://www.beeculture.com/a-closer-look-piping-tooting-quacking/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ideas-for-stuff&quot;&gt;Ideas for Stuff&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pics of setup&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sonogram of signal to show harmonics&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Commercial hive montioring tool&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://broodminder.com&quot;&gt;Broodminder&lt;/a&gt; Blutetooth LE devices&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ZoRyeiV7BSE&quot;&gt;Arnia&lt;/a&gt; setup&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Amateur tools&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=1hl_YaXvU0A&quot;&gt;Temperature and humidity&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+
+&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:fn-vibratory&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;M. Hrncir, F. G. Barth, and J. Tautz, “Vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. &lt;a href=&quot;#fnref:fn-vibratory&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-acoustics&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Qandour, Amro &amp;amp; Ahmad, Iftekhar &amp;amp; Habibi, Daryoush &amp;amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. &lt;a href=&quot;#fnref:fn-acoustics&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-worker-piping&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Pratt, S. C., Kühnholz, S., Seeley, T. D., and Weidenmüller, A. Worker piping associated with foraging in undisturbed queenright colonies of honey bees. Apidologie, 27(1), 13-20. 1996. &lt;a href=&quot;https://www.apidologie.org/articles/apido/pdf/1996/01/Apidologie_0044-8435_1996_27_1_ART0002.pdf&quot;&gt;pdf&lt;/a&gt; &lt;a href=&quot;#fnref:fn-worker-piping&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
 </content>
  </entry>
  

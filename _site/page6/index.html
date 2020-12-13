@@ -49,46 +49,24 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/quick-video-analysis.html">
-        A Quick and Dirty Way to Count Bees
+      <a href="/hardware-v2.html">
+        Improving the Prototype's Temperature Sensor
       </a>
     </h1>
 
-    <time datetime="2020-05-01T00:00:00-07:00" class="post-date">01 May 2020</time>
+    <time datetime="2020-07-05T00:00:00-07:00" class="post-date">05 Jul 2020</time>
 
-    <div class="message">
-Today we'll explore some basic image processing techniques to count bees. These require <b>no labeled training data</b>, so we'll try them first before moving on to fancier techniques.
-</div>
+    <p>In my <a href="hardware.html">previous prototype</a>, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp. which was an apples-to-oranges comparison. With identical thermometers I’ll get a better sense of the actual tempertaures inside and outside the hive.</p>
 
-<p>Generally speaking, the number of bees at the entrance of the hive is a good indicator of the health of the hive. This means that the bees are collecting food (nectar and pollen). So let’s try to count some bees with as little effort as possible!</p>
+<p>Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!</p>
 
-<p>Say I have a video of the entrance of a beehive, like this:
-<img src="assets/phone-basic.mp4" alt=" " /></p>
+<p>Here’s a wiring diagram showing how the new MAX6675 breakouts are connected to the Raspberry Pi:</p>
 
-<p>If I wanted to count the number of bees in each frame, I <em>could</em> set up and train an object detection CNN.</p>
+<p><img src="../assets/3tc-wiring.png" alt=" " /></p>
 
-<p><strong>But here’s a lazy way to do it.</strong></p>
+<p>Note that I’m sharing the power (<code class="highlighter-rouge">VCC</code>), ground (<code class="highlighter-rouge">GND</code>), serial clock input (<code class="highlighter-rouge">SCK</code>) and serial data output (<code class="highlighter-rouge">SO</code>) lines across the three boards.  Each board has only one unique wire, going to the chip select (<code class="highlighter-rouge">CS</code>) pin.  This pin is active low according to the <a href="https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf">datasheet</a>, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.</p>
 
-<p>First, collapse the color data and apply a Gaussian blur to each frame, like so:
-<img src="assets/phone-blur.mp4" alt=" " /></p>
-
-<p>Then apply pixel thresholding to get the dark spots, like so:
-<img src="assets/phone-darkspots.mp4" alt=" " /></p>
-
-<p>To interpret the list of points as separate objects, we can use a clustering algorithm.  Here’s an example using <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">hierarchical clustering</a>.</p>
-
-<p><img src="../assets/phone-clusters.mp4" alt="  " /></p>
-
-<p>It <strong>kind of</strong> works!  From here we can just count the clusters to get an approximation of the number of bees in frame.</p>
-
-<p>Some clear problems though:</p>
-
-<ul>
-  <li>I had to determine a few values experimentally, like intensity threshold and clustering distance threshold</li>
-  <li>This only works because the bees’ heads and thoraxes are the darkest things in frame. Any dark black objects on the ground would also be counted as bees.</li>
-</ul>
-
-<p>This technique is fast but not reliably accurate.  But the small amount of computation required makes it suitable for a low-power application.</p>
+<p>Each MAX6675 chip has a max current draw of 1.5mA, so we’re well within the Pi’s pin limit of 16mA.</p>
 
   </article>
   
@@ -98,7 +76,7 @@ Today we'll explore some basic image processing techniques to count bees. These 
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-07-21T00:57:04-07:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2020-12-13T11:09:58-08:00">2020</time>. All rights reserved.
         </small>
       </footer>
     </div>
