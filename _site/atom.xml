@@ -4,7 +4,7 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-03-24T16:25:07-07:00</updated>
+ <updated>2022-03-24T16:32:26-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -58,7 +58,7 @@
 
 &lt;p&gt;The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/v3-back.jpg&quot; alt=&quot;The back of the prototype&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/v3-back.JPG&quot; alt=&quot;The back of the prototype&quot; /&gt;
 &lt;em&gt;The back of the prototype circuit.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.&lt;/p&gt;
@@ -67,7 +67,7 @@
 
 &lt;p&gt;To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/v3-enclosure.jpg&quot; alt=&quot;The enclosure&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/v3-enclosure.JPG&quot; alt=&quot;The enclosure&quot; /&gt;
 &lt;em&gt;The enclosure, in place on the frame.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;firmware&quot;&gt;Firmware&lt;/h4&gt;
