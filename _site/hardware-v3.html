@@ -14,7 +14,7 @@
 
   <title>
     
-      Python File Buffering and You &middot; BeeSci
+      A Wireless Hive Monitor Prototype with an ESP32 &middot; BeeSci
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
@@ -40,46 +40,38 @@
           <small><a href="/archive">Archive</a></small>
         
 
-        <small><span style="color:red">&nbsp; &nbsp; BETA VERSION </span></small>
+        <!-- <small><span style="color:red">&nbsp; &nbsp; BETA VERSION </span></small> -->
         </h3>
       </header>
 
       <main>
         <article class="post">
-  <h1 class="post-title">Python File Buffering and You</h1>
-  <time datetime="2020-07-10T01:35:00-07:00" class="post-date">10 Jul 2020</time>
-  <p>Python File Buffering</p>
+  <h1 class="post-title">A Wireless Hive Monitor Prototype with an ESP32</h1>
+  <time datetime="2021-04-21T00:00:00-07:00" class="post-date">21 Apr 2021</time>
+  <p>I’ve learned from my previous prototypes that hive temperature readings are most informative when they come directly from the brood chamber of the hive.</p>
 
-<p>I’m using a <a href="https://github.com/tdack/MAX6675">python library</a> to read the temperature every ten seconds. The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings. Here’s the basic idea:</p>
+<p>So I made another one that can be placed directly inside the hive. This means it needs to run off of a battery for months on end. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>    
-<span class="err">    </span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>        
-<span class="err">        </span><span class="n">dat</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>        
-<span class="err">        </span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>        
-<span class="err">        </span><span class="k">try</span><span class="p">:</span>            
-<span class="err">            </span><span class="n">t1</span> <span class="o">=</span> <span class="n">sensor1</span><span class="p">.</span><span class="n">readTempC</span><span class="p">()</span>            
-<span class="err">            </span><span class="n">t2</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readDieTempC</span><span class="p">()</span>            
-<span class="err">            </span><span class="n">t3</span> <span class="o">=</span> <span class="n">sensor2</span><span class="p">.</span><span class="n">readObjTempC</span><span class="p">()</span>        
-        <span class="k">except</span><span class="p">:</span>            
-        <span class="err">    </span><span class="k">print</span> <span class="s">"An error occured"</span>        
-        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">','</span><span class="p">.</span><span class="n">join</span><span class="p">([</span><span class="n">dat</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">])</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span> 
-        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
-</code></pre></div></div>
+<p><img src="../assets/v3-front.JPG" alt="The front of the prototype" />
+<em>The front of the prototype circuit/</em></p>
 
-<p>Initially, I wrote the script with the <code class="highlighter-rouge">open</code> statement outside the loop, like so…</p>
+<p>The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"temp.txt"</span><span class="p">,</span> <span class="s">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>    
-<span class="err">    </span><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>        
-<span class="err">        </span><span class="c1"># ... get temperatures        
-</span><span class="err">        </span><span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'something'</span><span class="p">)</span>
-        <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
-</code></pre></div></div>
+<p><img src="../assets/v3-back.jpg" alt="The back of the prototype" />
+<em>The back of the prototype circuit.</em></p>
 
-<p>… to save on the cost of reopening the file for each iteration of the loop. But this one doesn’t update the file after every call to <code class="highlighter-rouge">f.write('...')</code> , thanks to the magic of unnecessary file buffering.</p>
+<p>The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.</p>
 
-<p><img src="../assets/file-buffering.gif" alt=" " /></p>
+<h4 id="enclosure">Enclosure</h4>
 
-<p>This can be fixed by calling <code class="highlighter-rouge">f.flush()</code> after every <code class="highlighter-rouge">f.write()</code>, or specifying a buffer length of 0: <code class="highlighter-rouge">open('temp.txt', 'a', 0)</code>.</p>
+<p>To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.</p>
+
+<p><img src="../assets/v3-enclosure.jpg" alt="The enclosure" />
+<em>The enclosure, in place on the frame.</em></p>
+
+<h4 id="firmware">Firmware</h4>
+
+<p>The hardware is only half the battle – the next step is writing firmware.</p>
 
 </article>
 
@@ -89,23 +81,23 @@
   <ul class="related-posts">
     
       <li>
-        <a href="/charts.html">
-          Charts
-          <small><time datetime="2020-12-13T00:00:00-08:00">13 Dec 2020</time></small>
+        <a href="/hardware-v4.html">
+          A Wireless Hive Monitor Prototype with an ESP32
+          <small><time datetime="2021-04-21T00:00:00-07:00">21 Apr 2021</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/hardware-v2.html">
+          Wireless Hive Monitor and Scale Prototype
+          <small><time datetime="2021-02-07T00:00:00-08:00">07 Feb 2021</time></small>
         </a>
       </li>
     
       <li>
         <a href="/hardware.html">
-          Prototype For Hive Monitoring
+          My First Prototype For Hive Monitoring
           <small><time datetime="2020-07-14T00:00:00-07:00">14 Jul 2020</time></small>
-        </a>
-      </li>
-    
-      <li>
-        <a href="/big-handle.html">
-          DIY Hive Boxes
-          <small><time datetime="2020-07-13T01:57:00-07:00">13 Jul 2020</time></small>
         </a>
       </li>
     
@@ -117,7 +109,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2020-12-13T11:24:30-08:00">2020</time>. All rights reserved.
+          &copy; <time datetime="2022-03-24T16:25:07-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>

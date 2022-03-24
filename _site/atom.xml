@@ -4,7 +4,7 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2020-12-13T11:24:30-08:00</updated>
+ <updated>2022-03-24T16:25:07-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -13,107 +13,142 @@
 
  
  <entry>
-   <title>Charts</title>
-   <link href="http://localhost:4000/charts.html"/>
-   <updated>2020-12-13T00:00:00-08:00</updated>
-   <id>http://localhost:4000/charts</id>
-   <content type="html">&lt;script type=&quot;text/javascript&quot; src=&quot;js/d3.v4.js&quot;&gt;&lt;/script&gt;
+   <title>A Wireless Hive Monitor Prototype with an ESP32</title>
+   <link href="http://localhost:4000/hardware-v4.html"/>
+   <updated>2021-04-21T00:00:00-07:00</updated>
+   <id>http://localhost:4000/hardware-v4</id>
+   <content type="html">&lt;p&gt;I’ve learned from my previous prototypes that hive temperature readings are most informative when they come directly from the brood chamber of the hive.&lt;/p&gt;
 
-&lt;script type=&quot;text/javascript&quot; src=&quot;js/line-graph.js&quot;&gt;&lt;/script&gt;
+&lt;p&gt;So I made another one that can be placed directly inside the hive. This means it needs to run off of a battery for months on end. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.&lt;/p&gt;
 
-&lt;!-- &lt;script type=&quot;text/javascript&quot; src=&quot;js/line-test.js&quot;&gt;&lt;/script&gt; --&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/v3-front.JPG&quot; alt=&quot;The front of the prototype&quot; /&gt;
+&lt;em&gt;The front of the prototype circuit/&lt;/em&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;hive-statistics&quot;&gt;Hive Statistics&lt;/h2&gt;
-&lt;p&gt;&lt;span&gt;
-    &lt;b&gt;Hive Weight&lt;/b&gt;   
-    &lt;select id=&quot;weight_select&quot;&gt;&lt;/select&gt;
-&lt;/span&gt;&lt;/p&gt;
-&lt;div class=&quot;card-body pt-0&quot; id=&quot;weight_container&quot; height=&quot;300&quot;&gt;
-    &lt;div id=&quot;weight_graph&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;p&gt;The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.&lt;/p&gt;
 
-&lt;p&gt;&lt;span&gt;
-    &lt;b&gt;Hive Temperature&lt;/b&gt;   
-    &lt;select id=&quot;temp_select&quot;&gt;&lt;/select&gt;
-&lt;/span&gt;&lt;/p&gt;
-&lt;div class=&quot;card-body pt-0&quot; id=&quot;temp_container&quot; height=&quot;300&quot;&gt;
-    &lt;div id=&quot;temp_graph&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/v3-back.jpg&quot; alt=&quot;The back of the prototype&quot; /&gt;
+&lt;em&gt;The back of the prototype circuit.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.&lt;/p&gt;
 
-&lt;h2 id=&quot;device-statistics&quot;&gt;Device Statistics&lt;/h2&gt;
-&lt;p&gt;&lt;span&gt;
-    &lt;b&gt;Power Consumption&lt;/b&gt;   
-    &lt;select id=&quot;power_select&quot;&gt;&lt;/select&gt;
-&lt;/span&gt;&lt;/p&gt;
-&lt;div class=&quot;card-body pt-0&quot; id=&quot;power_container&quot; height=&quot;350&quot;&gt;
-    &lt;div id=&quot;power_graph&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;h4 id=&quot;enclosure&quot;&gt;Enclosure&lt;/h4&gt;
 
-&lt;p&gt;&lt;span&gt;
-    &lt;b&gt;Battery Voltage&lt;/b&gt;   
-    &lt;select id=&quot;voltage_select&quot;&gt;&lt;/select&gt;
-&lt;/span&gt;&lt;/p&gt;
-&lt;div class=&quot;card-body pt-0&quot; id=&quot;voltage_container&quot; height=&quot;350&quot;&gt;
-    &lt;div id=&quot;voltage_graph&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
+&lt;p&gt;To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.&lt;/p&gt;
 
-&lt;script&gt;
-//Read the data
-d3.csv(&quot;data/power.csv&quot;, d =&gt; {
-    return {
-    // timestamp,voltage,current,power,shuntvolt,name
-    date: d3.timeParse(&quot;%Y-%m-%d %H:%M:%S&quot;)(d.timestamp),
-    voltage: +d.voltage,
-    power: +d.power,
-    name: d.name
-    }
-  }, function (data) {
-      console.log(data[0]);
-      console.log(data[0][&quot;power&quot;]);
-      console.log(d3.extent(data, function (d) { return d[&quot;power&quot;]; }));
-      var xn = &quot;power&quot;;
-      console.log(d3.extent(data, function (d) { return d[xn]; }));
+&lt;p&gt;&lt;img src=&quot;../assets/v3-enclosure.jpg&quot; alt=&quot;The enclosure&quot; /&gt;
+&lt;em&gt;The enclosure, in place on the frame.&lt;/em&gt;&lt;/p&gt;
 
-      linegraph(data, &quot;date&quot;, &quot;power&quot;, &quot;#power_container&quot;, &quot;#power_graph&quot;, &quot;#power_select&quot;);
-      linegraph(data, &quot;date&quot;, &quot;voltage&quot;, &quot;#voltage_container&quot;, &quot;#voltage_graph&quot;, &quot;#voltage_select&quot;);
-  });
+&lt;h4 id=&quot;firmware&quot;&gt;Firmware&lt;/h4&gt;
 
+&lt;p&gt;The hardware is only half the battle – the next step is writing firmware.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>A Wireless Hive Monitor Prototype with an ESP32</title>
+   <link href="http://localhost:4000/hardware-v3.html"/>
+   <updated>2021-04-21T00:00:00-07:00</updated>
+   <id>http://localhost:4000/hardware-v3</id>
+   <content type="html">&lt;p&gt;I’ve learned from my previous prototypes that hive temperature readings are most informative when they come directly from the brood chamber of the hive.&lt;/p&gt;
 
+&lt;p&gt;So I made another one that can be placed directly inside the hive. This means it needs to run off of a battery for months on end. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.&lt;/p&gt;
 
-//Read the data
-d3.csv(&quot;data/weight.csv&quot;, d =&gt; {
-    return {
-      date: d3.timeParse(&quot;%Y-%m-%d %H:%M:%S&quot;)(d.timestamp),
-      weight: +d.weight,
-      name: d.name
-    }
-  }, function (data) {
-    linegraph(data, &quot;date&quot;, &quot;weight&quot;, &quot;#weight_container&quot;, &quot;#weight_graph&quot;, &quot;#weight_select&quot;);
-  });
+&lt;p&gt;&lt;img src=&quot;../assets/v3-front.JPG&quot; alt=&quot;The front of the prototype&quot; /&gt;
+&lt;em&gt;The front of the prototype circuit/&lt;/em&gt;&lt;/p&gt;
 
+&lt;p&gt;The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&quot;../assets/v3-back.jpg&quot; alt=&quot;The back of the prototype&quot; /&gt;
+&lt;em&gt;The back of the prototype circuit.&lt;/em&gt;&lt;/p&gt;
 
-//Read the data
-d3.csv(&quot;data/temp.csv&quot;, d =&gt; {
-    return {
-      date: d3.timeParse(&quot;%Y-%m-%d %H:%M:%S&quot;)(d.timestamp),
-      temp: +d.temp,
-      humid: +d.humid,
-      name: d.name
-    }
-  }, function (data) {
-    linegraph(data, &quot;date&quot;, &quot;temp&quot;, &quot;#temp_container&quot;, &quot;#temp_graph&quot;, &quot;#temp_select&quot;);
+&lt;p&gt;The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.&lt;/p&gt;
 
-  });
-&lt;/script&gt;
+&lt;h4 id=&quot;enclosure&quot;&gt;Enclosure&lt;/h4&gt;
+
+&lt;p&gt;To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v3-enclosure.jpg&quot; alt=&quot;The enclosure&quot; /&gt;
+&lt;em&gt;The enclosure, in place on the frame.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;firmware&quot;&gt;Firmware&lt;/h4&gt;
+
+&lt;p&gt;The hardware is only half the battle – the next step is writing firmware.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Wireless Hive Monitor and Scale Prototype</title>
+   <link href="http://localhost:4000/hardware-v2.html"/>
+   <updated>2021-02-07T00:00:00-08:00</updated>
+   <id>http://localhost:4000/hardware-v2</id>
+   <content type="html">&lt;p&gt;I’ve learned from my previous prototype that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.&lt;/p&gt;
+
+&lt;h3 id=&quot;electronics&quot;&gt;Electronics&lt;/h3&gt;
+
+&lt;p&gt;If this thing is going to run off of a battery, I’ll have to use something much lower-power than a Raspberry Pi. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I hooked it up to an analog microphone, 2 temperature sensors, a load cell amplifier, and a micro sd card adapter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v2-internals.jpg&quot; alt=&quot;The front of the prototype&quot; /&gt;
+&lt;em&gt;The inside of the device.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The whole thing is hooked up with DuPont wires. Not very nice to look at, but it does work.&lt;/p&gt;
+
+&lt;h3 id=&quot;enclosure&quot;&gt;Enclosure&lt;/h3&gt;
+
+&lt;p&gt;The enclosure was really a way for me to explore some of Fusion 360’s cooler features. It’s made of four parts: a 3D-printed hexagonal box, a threaded pipe with an integrated screen that attaches to the bottom of the hive, a lid for the box, and a nut to hold the pipe in place. Here’s how it attaches to the bottom board to get readings from internal hive conditions:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v2-pipe.jpg&quot; alt=&quot;The pipe of the prototype&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It’s super cool that all these pieces can be 3D printed in-place and without support!
+Here’s the underside of the hive bottom board, with the prototype attached:
+&lt;img src=&quot;../assets/v2-on-box.jpg&quot; alt=&quot;The bottom board with device&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Inside of the rightmost support thing is a load cell mounted to pieces of aluminum angle bar, with some wood on the outside. The other side is just a 2x4 that has been ripped to an equal height.&lt;/p&gt;
+
+&lt;h3 id=&quot;firmware&quot;&gt;Firmware&lt;/h3&gt;
+
+&lt;p&gt;The hardware is only half the battle – the next step is firmware. I’ll spare you from reading the crappy code. Basically, the ESP32 has a little RTC that can be used as a wakeup alarm. Every 10 minutes, it wakes up from a deep-sleep mode, powers on all sensor peripherals, waits for readings to stabilize, writes the data onto the SD card, and then goes back to sleep. And every few wakeups, it will sync the past few readings with a server I have on my local network. Nothing fancy, just a Node.js script that writes the data into a database. I’ll go into more detail on firmware design for the ESP32 in a later post.&lt;/p&gt;
+
+&lt;h3 id=&quot;data-analysis&quot;&gt;Data Analysis&lt;/h3&gt;
+
+&lt;p&gt;This is one of those good news/bad news situations. The good? I was able to get great weight data and good audio. But I didn’t notice a substantial difference in temperature readings between the inside and outside of the hive, even though I thought I properly insulated the inner sensor.&lt;/p&gt;
+
+&lt;p&gt;This is further evidence to me that the best way to “take a beehive’s temperature” is to measure from the &lt;strong&gt;center of the broodnest.&lt;/strong&gt;  Bees require precise thermoregulation of their brood.&lt;/p&gt;
+
+&lt;p&gt;Anyways, here’s what the raw weight data looks like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/rawweight_annotated.jpg&quot; alt=&quot; Raw Weight Annotated &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;What the heck is going on here? I see small daily fluctuations as well as instantaneous “steps” in the signal (indicated by red arrows). These steps are caused by me screwing around with the hive; putting rocks on the hive lid to prevent raccoons or bears from getting in, adding/removing a roof for rain shielding, etc.&lt;/p&gt;
+
+&lt;p&gt;There are two questions I’d like to answer:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Can I detect and filter out changes in weight due to human activity?&lt;/li&gt;
+  &lt;li&gt;Is the daily fluctuation caused only by bee activity? Or is there some other factor at play?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;detecting-instantaneous-change&quot;&gt;Detecting Instantaneous Change&lt;/h4&gt;
+
+&lt;p&gt;The easiest way of detecting those steps in the signal is to look at the percent change between each data point and the subsequent one.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/percentchange.jpg&quot; alt=&quot; Percent Change &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This could be good enough, but requires some manual thresholding. Moreover, if human activity results in a relatively small change in weight (like the point annoted with the red arrow) then the threshold would need to be really specific.&lt;/p&gt;
+
+&lt;p&gt;An alternative route would be to use a more special-purpose algorithm for step detection, like &lt;a href=&quot;https://en.wikipedia.org/wiki/CUSUM&quot;&gt;CUSUM&lt;/a&gt;. Here is a chart showing the detections with CUSUM (in orange) overlaid atop the raw weight signal:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/cusum_overlay.jpg&quot; alt=&quot; CUSUM &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The assumption here is that instantaneous changes in weight are likely due to human activity, while slower changes are likely due to bee activity (and other stuff, which we’ll get into later). By doing this separation we can filter out the step functions in the data:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/humandelta_beedelta.jpg&quot; alt=&quot; Human and Bee Delta &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The cumulative loss in weight over this period of time is normal. During winter months, honey bees go into a sort of hibernation mode. They live off the honey stores they’ve collected during the year and generally reduce their energy expenditure. This isn’t to say that they don’t still fly around and collect resources during the winter; if conditions are right, they will. But because of a dearth in nectar supply and decreasing temperatures, a decrease in hive weight is to be expected.&lt;/p&gt;
 
 </content>
  </entry>
  
  <entry>
-   <title>Prototype For Hive Monitoring</title>
+   <title>My First Prototype For Hive Monitoring</title>
    <link href="http://localhost:4000/hardware.html"/>
    <updated>2020-07-14T00:00:00-07:00</updated>
    <id>http://localhost:4000/hardware</id>
@@ -199,11 +234,58 @@ networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en
 
 &lt;p&gt;This data collection scheme is fine for prototyping, but would be very inconvenient for live metrics.&lt;/p&gt;
 
-&lt;h2 id=&quot;housing&quot;&gt;Housing&lt;/h2&gt;
+&lt;h3 id=&quot;housing&quot;&gt;Housing&lt;/h3&gt;
 
 &lt;p&gt;These sensors are arranged in a crappy box made from literal garbage – plywood and pallet wood I found in a dumpster.  Here’s  what it looks like all assembled:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../assets/hive-with-sensors.jpg&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;data&quot;&gt;Data&lt;/h3&gt;
+
+&lt;p&gt;Here is what the initial data looks like from this setup:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/temp.jpg&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, the TMP006 produces two readings: object temperature (the reading from the surface the thermopile is pointed at) and die temperature (the temperature from the die itself).   For more info see the TMP006 &lt;a href=&quot;https://cdn.sparkfun.com/datasheets/Sensors/Temp/sbou107.pdf&quot;&gt;user guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The large spike on 4/24 was due to the hive being in direct sunlight.  The night of the 24th, we placed shade covers over the hives to prevent them from overheating.   This clearly made a difference.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-do-bees-thermoregulate&quot;&gt;Why do bees thermoregulate?&lt;/h3&gt;
+
+&lt;p&gt;Bees work hard to keep the temperature of the hive &lt;em&gt;just&lt;/em&gt; right.  But why?  The later-stage young, called pupae, are like little Goldilocks – they need to be kept between 33 and 36ºC (91.4 - 96.8ºF) to prevent physical and behavioral defects. Pupae develop in sealed-off cells of the honeycomb, called “capped brood cells.”  Here’s a picture I took of some capped brood cells:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/capped-brood.jpg&quot; alt=&quot; Capped Brood&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If these cells get too hot, workers use evaporative cooling – they splash the cells with water and fan them with their wings.  If the cells get too cold, workers will vibrate their flight muscles to produce heat.  Here is what the heating process looks like under a thermal camera.&lt;sup id=&quot;fnref:fn-thermo&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-thermo&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/heater-bees.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+&lt;b&gt;TL;DR&lt;/b&gt; Need better ambient temperature sensor, a thermocouple would be best. Need better attic with more insulation. And the sample rate is far too high!   
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Using IR sensor for ambient temperature is bad&lt;/strong&gt; – My hope was that the attic measurements could be used as a baseline for comparison with the inside of the hive (i.e. it would provide the ambient temperature inside a wooden box, thus accounting for any insulation that the hive boxes provide). In theory, then, the difference between the attic temperature and the hive temperature would be due entirely to bee activity. But this is not necessarily the case, due to:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;differences in sensor properties (e.g. rate of heat absorption of the IR die vs the thermocouple)  → can be fixed by using a thermocouple&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;differences in construction between the hive boxes (solid wood, painted white) and the attic (plywood top and bottom, solid wood sides, unpainted) → can be re-made&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;interactions between the attic and the hive boxes (e.g. attic absorbes most of the sunlight at noon, and heat transfer between the hive boxes and the attic) → not yet sure how this can be addressed&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;My sampling rate is too high&lt;/strong&gt; – A reading every ten seconds is excessive. It’s clear that interesting events happen over the course of minute, not seconds. The BUR dataset resolution of one hour might be a little coarse, but I feel comfortable sampling every 5 minutes (30 times fewer datapoints than the current setup).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
   &lt;ol&gt;
@@ -213,63 +295,11 @@ networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en
     &lt;li id=&quot;fn:fn-vibratory&quot; role=&quot;doc-endnote&quot;&gt;
       &lt;p&gt;M. Hrncir, F. G. Barth, and J. Tautz, “32 vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. &lt;a href=&quot;#fnref:fn-vibratory&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
     &lt;/li&gt;
+    &lt;li id=&quot;fn:fn-thermo&quot; role=&quot;doc-endnote&quot;&gt;
+      &lt;p&gt;Stabentheiner A, Kovac H, Brodschneider R. Honeybee colony thermoregulation–regulatory mechanisms and contribution of individuals in dependence on age, location and thermal stress. &lt;em&gt;PLoS One&lt;/em&gt;. 2010;5(1):e8967. Published 2010 Jan 29. &lt;a href=&quot;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2813292/&quot;&gt;pdf&lt;/a&gt; &lt;a href=&quot;#fnref:fn-thermo&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>DIY Hive Boxes</title>
-   <link href="http://localhost:4000/big-handle.html"/>
-   <updated>2020-07-13T01:57:00-07:00</updated>
-   <id>http://localhost:4000/big-handle</id>
-   <content type="html">&lt;p&gt;Last year I made some hive boxes. I just measured the dimensions from store-bought ones and duplicated them.&lt;/p&gt;
-
-&lt;p&gt;Commercially-available hives tend to include a recessed handle for your convenience. Sometimes they’ll throw in a couple of 3/4” sticks as a bonus. These handles are garbage.&lt;/p&gt;
-
-&lt;p&gt;Consider the following: A fully-loaded deep super can weigh up to 70 pounds. In gloved hands, that half-inch finger grip isn’t gonna cut it.  That’s why you need a dowel-reinforced big handle.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../assets/big-handle.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Python File Buffering and You</title>
-   <link href="http://localhost:4000/python-file-buffering-and-you.html"/>
-   <updated>2020-07-10T01:35:00-07:00</updated>
-   <id>http://localhost:4000/python-file-buffering-and-you</id>
-   <content type="html">&lt;p&gt;Python File Buffering&lt;/p&gt;
-
-&lt;p&gt;I’m using a &lt;a href=&quot;https://github.com/tdack/MAX6675&quot;&gt;python library&lt;/a&gt; to read the temperature every ten seconds. The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings. Here’s the basic idea:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
-&lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;        
-&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datetime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
-&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;        
-&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;            
-&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            
-&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readDieTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;            
-&lt;span class=&quot;err&quot;&gt;            &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sensor2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readObjTempC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;        
-        &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;            
-        &lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;An error occured&quot;&lt;/span&gt;        
-        &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;','&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Initially, I wrote the script with the &lt;code class=&quot;highlighter-rouge&quot;&gt;open&lt;/code&gt; statement outside the loop, like so…&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;temp.txt&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;    
-&lt;span class=&quot;err&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;        
-&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ... get temperatures        
-&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'something'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;… to save on the cost of reopening the file for each iteration of the loop. But this one doesn’t update the file after every call to &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write('...')&lt;/code&gt; , thanks to the magic of unnecessary file buffering.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../assets/file-buffering.gif&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This can be fixed by calling &lt;code class=&quot;highlighter-rouge&quot;&gt;f.flush()&lt;/code&gt; after every &lt;code class=&quot;highlighter-rouge&quot;&gt;f.write()&lt;/code&gt;, or specifying a buffer length of 0: &lt;code class=&quot;highlighter-rouge&quot;&gt;open('temp.txt', 'a', 0)&lt;/code&gt;.&lt;/p&gt;
 </content>
  </entry>
  
@@ -284,9 +314,9 @@ networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en
  
  <entry>
    <title>Improving the Prototype's Temperature Sensor</title>
-   <link href="http://localhost:4000/hardware-v2.html"/>
+   <link href="http://localhost:4000/hardware-v1.5.html"/>
    <updated>2020-07-05T00:00:00-07:00</updated>
-   <id>http://localhost:4000/hardware-v2</id>
+   <id>http://localhost:4000/hardware-v1.5</id>
    <content type="html">&lt;p&gt;In my &lt;a href=&quot;hardware.html&quot;&gt;previous prototype&lt;/a&gt;, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp. which was an apples-to-oranges comparison. With identical thermometers I’ll get a better sense of the actual tempertaures inside and outside the hive.&lt;/p&gt;
 
 &lt;p&gt;Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!&lt;/p&gt;
@@ -373,66 +403,6 @@ Counting the number of &lt;b&gt;foragers&lt;/b&gt; (bees that collect pollen, ne
 &lt;/ol&gt;
 
 &lt;p&gt;In other words, &lt;strong&gt;rather than counting the number of bees, they are counting the number of movements that are bee-related&lt;/strong&gt;.  This is a useful metric to determine &lt;em&gt;relative&lt;/em&gt; changes in foraging behavior.  That said, a bee detection or pose estimation NN may provide even more insight.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Hive Temperature Analysis</title>
-   <link href="http://localhost:4000/hive-temp.html"/>
-   <updated>2020-05-02T00:00:00-07:00</updated>
-   <id>http://localhost:4000/hive-temp</id>
-   <content type="html">&lt;p&gt;Here is what the initial data looks like from my &lt;a href=&quot;hardware.html&quot;&gt;small hive monitoring setup&lt;/a&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/temp.jpg&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see, the TMP006 produces two readings: object temperature (the reading from the surface the thermopile is pointed at) and die temperature (the temperature from the die itself).   For more info see the TMP006 &lt;a href=&quot;https://cdn.sparkfun.com/datasheets/Sensors/Temp/sbou107.pdf&quot;&gt;user guide&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The large spike on 4/24 was due to the hive being in direct sunlight.  The night of the 24th, we placed shade covers over the hives to prevent them from overheating.   This clearly made a difference.&lt;/p&gt;
-
-&lt;h3 id=&quot;why-do-bees-thermoregulate&quot;&gt;Why do bees thermoregulate?&lt;/h3&gt;
-
-&lt;p&gt;Bees work hard to keep the temperature of the hive &lt;em&gt;just&lt;/em&gt; right.  But why?  The later-stage young, called pupae, are like little Goldilocks – they need to be kept between 33 and 36ºC (91.4 - 96.8ºF) to prevent physical and behavioral defects. Pupae develop in sealed-off cells of the honeycomb, called “capped brood cells.”  Here’s a picture I took of some capped brood cells:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/capped-brood.jpg&quot; alt=&quot; Capped Brood&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;If these cells get too hot, workers use evaporative cooling – they splash the cells with water and fan them with their wings.  If the cells get too cold, workers will vibrate their flight muscles to produce heat.  Here is what the heating process looks like under a thermal camera.&lt;sup id=&quot;fnref:fn-thermo&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-thermo&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/heater-bees.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h1&gt;
-
-&lt;div class=&quot;message&quot;&gt;
-&lt;b&gt;TL;DR&lt;/b&gt; Need better ambient temperature sensor, a thermocouple would be best. Need better attic with more insulation. And the sample rate is too damn high!   
-&lt;/div&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Using IR sensor for ambient temperature is bad&lt;/strong&gt; – My hope was that the attic measurements could be used as a baseline for comparison with the inside of the hive (i.e. it would provide the ambient temperature inside a wooden box, thus accounting for any insulation that the hive boxes provide). In theory, then, the difference between the attic temperature and the hive temperature would be due entirely to bee activity. But this is not necessarily the case, due to:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;differences in sensor properties (e.g. rate of heat absorption of the IR die vs the thermocouple)  → can be fixed by using a thermocouple&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;differences in construction between the hive boxes (solid wood, painted white) and the attic (plywood top and bottom, solid wood sides, unpainted) → can be re-made&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;interactions between the attic and the hive boxes (e.g. attic absorbes most of the sunlight at noon, and heat transfer between the hive boxes and the attic) → not yet sure how this can be addressed&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;My sampling rate is too high&lt;/strong&gt; – A reading every ten seconds is excessive. It’s clear that interesting events happen over the course of minute, not seconds. The BUR dataset resolution of one hour might be a little coarse, but I feel comfortable sampling every 5 minutes (30 times fewer datapoints than the current setup).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:fn-thermo&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Stabentheiner A, Kovac H, Brodschneider R. Honeybee colony thermoregulation–regulatory mechanisms and contribution of individuals in dependence on age, location and thermal stress. &lt;em&gt;PLoS One&lt;/em&gt;. 2010;5(1):e8967. Published 2010 Jan 29. &lt;a href=&quot;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2813292/&quot;&gt;pdf&lt;/a&gt; &lt;a href=&quot;#fnref:fn-thermo&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
 </content>
  </entry>
  
