@@ -4,45 +4,13 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-03-24T16:56:18-07:00</updated>
+ <updated>2022-03-24T17:03:16-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
    <email>josh.haug55@gmail.com</email>
  </author>
 
- 
- <entry>
-   <title>A Wireless Hive Monitor Prototype with an ESP32</title>
-   <link href="http://localhost:4000/hardware-v4.html"/>
-   <updated>2021-04-21T00:00:00-07:00</updated>
-   <id>http://localhost:4000/hardware-v4</id>
-   <content type="html">&lt;p&gt;I’ve learned from my previous prototypes that hive temperature readings are most informative when they come directly from the brood chamber of the hive.&lt;/p&gt;
-
-&lt;p&gt;So I made another one that can be placed directly inside the hive. This means it needs to run off of a battery for months on end. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../assets/v3-front.JPG&quot; alt=&quot;The front of the prototype&quot; /&gt;
-&lt;em&gt;The front of the prototype circuit/&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../assets/v3-back.jpg&quot; alt=&quot;The back of the prototype&quot; /&gt;
-&lt;em&gt;The back of the prototype circuit.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.&lt;/p&gt;
-
-&lt;h4 id=&quot;enclosure&quot;&gt;Enclosure&lt;/h4&gt;
-
-&lt;p&gt;To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../assets/v3-enclosure.jpg&quot; alt=&quot;The enclosure&quot; /&gt;
-&lt;em&gt;The enclosure, in place on the frame.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;firmware&quot;&gt;Firmware&lt;/h4&gt;
-
-&lt;p&gt;The hardware is only half the battle – the next step is writing firmware.&lt;/p&gt;
-</content>
- </entry>
  
  <entry>
    <title>A Wireless Hive Monitor Prototype with an ESP32</title>

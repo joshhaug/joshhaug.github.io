@@ -49,7 +49,7 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/hardware-v4.html">
+      <a href="/hardware-v3.html">
         A Wireless Hive Monitor Prototype with an ESP32
       </a>
     </h1>
@@ -60,13 +60,10 @@
 
 <p>So I made another one that can be placed directly inside the hive. This means it needs to run off of a battery for months on end. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.</p>
 
-<p><img src="../assets/v3-front.JPG" alt="The front of the prototype" />
-<em>The front of the prototype circuit/</em></p>
-
 <p>The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.</p>
 
-<p><img src="../assets/v3-back.jpg" alt="The back of the prototype" />
-<em>The back of the prototype circuit.</em></p>
+<p><img src="../assets/v3-frontandback.jpg" alt="The front of the prototype" />
+<em>The front and back of the prototype circuit.</em></p>
 
 <p>The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.</p>
 
@@ -74,7 +71,7 @@
 
 <p>To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.</p>
 
-<p><img src="../assets/v3-enclosure.jpg" alt="The enclosure" />
+<p><img src="../assets/v3-enclosure.JPG" alt="The enclosure" />
 <em>The enclosure, in place on the frame.</em></p>
 
 <h4 id="firmware">Firmware</h4>
@@ -89,7 +86,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-03-24T16:56:18-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-03-24T17:03:16-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>
