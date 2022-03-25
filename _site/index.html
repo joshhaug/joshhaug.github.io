@@ -50,15 +50,21 @@
   <article class="post">
     <h1 class="post-title">
       <a href="/hardware-v3.html">
-        A Wireless Hive Monitor Prototype with an ESP32
+        Hive Monitoring Prototype Version 3 -- It's Inside
       </a>
     </h1>
 
     <time datetime="2021-04-21T00:00:00-07:00" class="post-date">21 Apr 2021</time>
 
-    <p>I’ve learned from my previous prototypes that hive temperature readings are most informative when they come directly from the brood chamber of the hive.</p>
+    <div class="message">
+🐝  This is the third iteration of my beehive monitoring prototype.
+</div>
 
-<p>So I made another one that can be placed directly inside the hive. This means it needs to run off of a battery for months on end. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.</p>
+<p>I’ve learned from my previous prototypes (<a href="hardware.html">v1</a>, <a href="hardware-v2.html">v2</a>) that hive temperature readings are most informative when they come directly from the brood chamber of the hive. So I made another one that can be placed <strong>inside</strong> the hive.</p>
+
+<h4 id="️-electronics">⚡️ Electronics</h4>
+
+<p>I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.</p>
 
 <p>The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.</p>
 
@@ -67,7 +73,7 @@
 
 <p>The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.</p>
 
-<h4 id="enclosure">Enclosure</h4>
+<h4 id="-enclosure">📦 Enclosure</h4>
 
 <p>To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.</p>
 
@@ -76,7 +82,18 @@
 
 <h4 id="firmware">Firmware</h4>
 
-<p>The hardware is only half the battle – the next step is writing firmware.</p>
+<p>The firmware for this prototype is nearly the same as the firmware for <a href="hardware-v2.html">version 2</a>, so I won’t really bore you with it. Basically a C++ program that orchestrates all the sensor readings and syncs. I will say that debugging the firmware was kind of a pain. You don’t realize how many bugs your code has until it’s literally surrounded by thousands of stinging insects.</p>
+
+<h3 id="data-analysis">Data Analysis</h3>
+
+<p>An interesting technical challenge with this version was audio processing. With my <a href="hardware.html">very first prototype</a>, I was recording lossless, hour-long WAV files. But with embedded hardware, there are power and memory limitations that necessitate a different approach. The ESP32 has 4 MB of memory – that’s a lot for an embedded device, but literally <em>three orders of magnitude less</em> than the Raspberry Pi I used in V1.</p>
+
+<p>For this one, I decided to record and average really short audio samples that could fit in memory, and process them on board the ESP32 with an FFT. (An FFT, and more generally a Fourier transform, is a method of converting signals into their component frequencies. For example, if you use an FFT on a choir singing a chord, you’ll be able to tell the pitches the individual members were singing.) The resulting frequency information could then be saved onto the SD card and sent over Wi-Fi to my server.</p>
+
+<p>With this prototype I wanted to dive deep into processing audio signals from within the hive. I installed this monitor in a hive without a queen.</p>
+
+<p><img src="../assets/v3-fft-queen.jpg" alt="Queen Inserted" /></p>
+
 
   </article>
   
@@ -86,7 +103,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-03-24T17:03:16-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-03-24T20:31:02-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>

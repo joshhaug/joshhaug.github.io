@@ -4,7 +4,7 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-03-24T17:03:16-07:00</updated>
+ <updated>2022-03-24T20:31:02-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -13,13 +13,19 @@
 
  
  <entry>
-   <title>A Wireless Hive Monitor Prototype with an ESP32</title>
+   <title>Hive Monitoring Prototype Version 3 -- It's Inside</title>
    <link href="http://localhost:4000/hardware-v3.html"/>
    <updated>2021-04-21T00:00:00-07:00</updated>
    <id>http://localhost:4000/hardware-v3</id>
-   <content type="html">&lt;p&gt;I’ve learned from my previous prototypes that hive temperature readings are most informative when they come directly from the brood chamber of the hive.&lt;/p&gt;
+   <content type="html">&lt;div class=&quot;message&quot;&gt;
+🐝  This is the third iteration of my beehive monitoring prototype.
+&lt;/div&gt;
 
-&lt;p&gt;So I made another one that can be placed directly inside the hive. This means it needs to run off of a battery for months on end. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.&lt;/p&gt;
+&lt;p&gt;I’ve learned from my previous prototypes (&lt;a href=&quot;hardware.html&quot;&gt;v1&lt;/a&gt;, &lt;a href=&quot;hardware-v2.html&quot;&gt;v2&lt;/a&gt;) that hive temperature readings are most informative when they come directly from the brood chamber of the hive. So I made another one that can be placed &lt;strong&gt;inside&lt;/strong&gt; the hive.&lt;/p&gt;
+
+&lt;h4 id=&quot;️-electronics&quot;&gt;⚡️ Electronics&lt;/h4&gt;
+
+&lt;p&gt;I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.&lt;/p&gt;
 
 &lt;p&gt;The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.&lt;/p&gt;
 
@@ -28,7 +34,7 @@
 
 &lt;p&gt;The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.&lt;/p&gt;
 
-&lt;h4 id=&quot;enclosure&quot;&gt;Enclosure&lt;/h4&gt;
+&lt;h4 id=&quot;-enclosure&quot;&gt;📦 Enclosure&lt;/h4&gt;
 
 &lt;p&gt;To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.&lt;/p&gt;
 
@@ -37,20 +43,36 @@
 
 &lt;h4 id=&quot;firmware&quot;&gt;Firmware&lt;/h4&gt;
 
-&lt;p&gt;The hardware is only half the battle – the next step is writing firmware.&lt;/p&gt;
+&lt;p&gt;The firmware for this prototype is nearly the same as the firmware for &lt;a href=&quot;hardware-v2.html&quot;&gt;version 2&lt;/a&gt;, so I won’t really bore you with it. Basically a C++ program that orchestrates all the sensor readings and syncs. I will say that debugging the firmware was kind of a pain. You don’t realize how many bugs your code has until it’s literally surrounded by thousands of stinging insects.&lt;/p&gt;
+
+&lt;h3 id=&quot;data-analysis&quot;&gt;Data Analysis&lt;/h3&gt;
+
+&lt;p&gt;An interesting technical challenge with this version was audio processing. With my &lt;a href=&quot;hardware.html&quot;&gt;very first prototype&lt;/a&gt;, I was recording lossless, hour-long WAV files. But with embedded hardware, there are power and memory limitations that necessitate a different approach. The ESP32 has 4 MB of memory – that’s a lot for an embedded device, but literally &lt;em&gt;three orders of magnitude less&lt;/em&gt; than the Raspberry Pi I used in V1.&lt;/p&gt;
+
+&lt;p&gt;For this one, I decided to record and average really short audio samples that could fit in memory, and process them on board the ESP32 with an FFT. (An FFT, and more generally a Fourier transform, is a method of converting signals into their component frequencies. For example, if you use an FFT on a choir singing a chord, you’ll be able to tell the pitches the individual members were singing.) The resulting frequency information could then be saved onto the SD card and sent over Wi-Fi to my server.&lt;/p&gt;
+
+&lt;p&gt;With this prototype I wanted to dive deep into processing audio signals from within the hive. I installed this monitor in a hive without a queen.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v3-fft-queen.jpg&quot; alt=&quot;Queen Inserted&quot; /&gt;&lt;/p&gt;
+
 </content>
  </entry>
  
  <entry>
-   <title>Wireless Hive Monitor and Scale Prototype</title>
+   <title>Hive Monitoring Prototype Version 2 -- An ESP Under the Hive</title>
    <link href="http://localhost:4000/hardware-v2.html"/>
    <updated>2021-02-07T00:00:00-08:00</updated>
    <id>http://localhost:4000/hardware-v2</id>
-   <content type="html">&lt;p&gt;I’ve learned from my previous prototype that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.&lt;/p&gt;
+   <content type="html">&lt;div class=&quot;message&quot;&gt;
+🐝  This is the second iteration of my beehive monitoring prototype.
+Previous iteration &lt;a href=&quot;hardware.html&quot;&gt;here&lt;/a&gt;, subsequent iteration &lt;a href=&quot;hardware-v3.html&quot;&gt;here&lt;/a&gt;.
+&lt;/div&gt;
+
+&lt;p&gt;I’ve learned from my &lt;a href=&quot;hardware.html&quot;&gt;previous prototype&lt;/a&gt; that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.&lt;/p&gt;
 
 &lt;h3 id=&quot;electronics&quot;&gt;Electronics&lt;/h3&gt;
 
-&lt;p&gt;If this thing is going to run off of a battery, I’ll have to use something much lower-power than a Raspberry Pi. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I hooked it up to an analog microphone, 2 temperature sensors, a load cell amplifier, and a micro sd card adapter.&lt;/p&gt;
+&lt;p&gt;If this thing is going to run off of a battery, I’ll have to use something that consumes much less power than a Raspberry Pi. I decided on an ESP32, which is an &lt;em&gt;awesome&lt;/em&gt; SoC. I hooked it up to an analog microphone, 2 temperature sensors, a load cell amplifier, and a micro sd card adapter.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../assets/v2-internals.jpg&quot; alt=&quot;The front of the prototype&quot; /&gt;
 &lt;em&gt;The inside of the device.&lt;/em&gt;&lt;/p&gt;
@@ -109,11 +131,14 @@ Here’s the underside of the hive bottom board, with the prototype attached:
 
 &lt;p&gt;The cumulative loss in weight over this period of time is normal. During winter months, honey bees go into a sort of hibernation mode. They live off the honey stores they’ve collected during the year and generally reduce their energy expenditure. This isn’t to say that they don’t still fly around and collect resources during the winter; if conditions are right, they will. But because of a dearth in nectar supply and decreasing temperatures, a decrease in hive weight is to be expected.&lt;/p&gt;
 
+&lt;h4 id=&quot;causes-of-daily-fluctuations&quot;&gt;Causes of Daily Fluctuations&lt;/h4&gt;
+
+&lt;p&gt;Speaking of temperature, I’m interested to know what is causing these daily fluctuations in weight. I suspect it is not just bees leaving the hive and returning. That may play a part, but I think other contributing causes may be related to temperature and/or humidity.&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>My First Prototype For Hive Monitoring</title>
+   <title>Hive Monitoring Prototype Version 1 -- A Pi on the Roof</title>
    <link href="http://localhost:4000/hardware.html"/>
    <updated>2020-07-14T00:00:00-07:00</updated>
    <id>http://localhost:4000/hardware</id>
@@ -130,7 +155,7 @@ Here’s the underside of the hive bottom board, with the prototype attached:
   &lt;li&gt;infrared thermopile (TMP006) for ambient temperature&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Ideally I’d use just thermocouples, but these are the only sensors I have on hand. &lt;a href=&quot;hive-temp.html&quot;&gt;Here’s an analysis of the temperature data I collected from this setup&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Ideally I’d use just thermocouples, but these are the only sensors I have on hand. I have some of the data I collected from this setup at the end of this article.&lt;/p&gt;
 
 &lt;p&gt;I’m using a &lt;a href=&quot;https://github.com/tdack/MAX6675&quot;&gt;python library&lt;/a&gt; to read the temperature every ten seconds.  The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings.  Here’s the basic idea:&lt;/p&gt;
 

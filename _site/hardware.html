@@ -14,7 +14,7 @@
 
   <title>
     
-      My First Prototype For Hive Monitoring &middot; BeeSci
+      Hive Monitoring Prototype Version 1 -- A Pi on the Roof &middot; BeeSci
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
@@ -46,7 +46,7 @@
 
       <main>
         <article class="post">
-  <h1 class="post-title">My First Prototype For Hive Monitoring</h1>
+  <h1 class="post-title">Hive Monitoring Prototype Version 1 -- A Pi on the Roof</h1>
   <time datetime="2020-07-14T00:00:00-07:00" class="post-date">14 Jul 2020</time>
   <p>Here’s a prototype I’m working on for monitoring a hive’s temperature and audio.  The brains of the operation is a Raspberry Pi 4 running Raspbian.  Here’s what it looks like on the inside:</p>
 
@@ -61,7 +61,7 @@
   <li>infrared thermopile (TMP006) for ambient temperature</li>
 </ul>
 
-<p>Ideally I’d use just thermocouples, but these are the only sensors I have on hand. <a href="hive-temp.html">Here’s an analysis of the temperature data I collected from this setup</a>.</p>
+<p>Ideally I’d use just thermocouples, but these are the only sensors I have on hand. I have some of the data I collected from this setup at the end of this article.</p>
 
 <p>I’m using a <a href="https://github.com/tdack/MAX6675">python library</a> to read the temperature every ten seconds.  The logging scheme is decidedly un-fancy – I’m just appending a text file with timestamped readings.  Here’s the basic idea:</p>
 
@@ -206,14 +206,14 @@ networksetup <span class="nt">-setairportnetwork</span> en0 homenet password
     
       <li>
         <a href="/hardware-v3.html">
-          A Wireless Hive Monitor Prototype with an ESP32
+          Hive Monitoring Prototype Version 3 -- It's Inside
           <small><time datetime="2021-04-21T00:00:00-07:00">21 Apr 2021</time></small>
         </a>
       </li>
     
       <li>
         <a href="/hardware-v2.html">
-          Wireless Hive Monitor and Scale Prototype
+          Hive Monitoring Prototype Version 2 -- An ESP Under the Hive
           <small><time datetime="2021-02-07T00:00:00-08:00">07 Feb 2021</time></small>
         </a>
       </li>
@@ -233,7 +233,7 @@ networksetup <span class="nt">-setairportnetwork</span> en0 homenet password
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-03-24T17:03:16-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-03-24T20:31:02-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>
