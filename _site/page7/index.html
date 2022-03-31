@@ -49,46 +49,80 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/quick-video-analysis.html">
-        A Quick and Dirty Way to Count Bees
+      <a href="/counting-bees-using-a-cnn.html">
+        Counting Bee Movements Using a CNN
       </a>
     </h1>
 
-    <time datetime="2020-05-01T00:00:00-07:00" class="post-date">01 May 2020</time>
+    <time datetime="2020-05-14T14:46:20-07:00" class="post-date">14 May 2020</time>
 
     <div class="message">
-Today we'll explore some basic image processing techniques to count bees. These require <b>no labeled training data</b>, so we'll try them first before moving on to fancier techniques.
+Counting the number of <b>foragers</b> (bees that collect pollen, nectar, and water) is an important measure of hive health. What if we could use a <b>convolutional neural network</b> to count bees at the entrance of the hive?
 </div>
 
-<p>Generally speaking, the number of bees at the entrance of the hive is a good indicator of the health of the hive. This means that the bees are collecting food (nectar and pollen). So let’s try to count some bees with as little effort as possible!</p>
+<p>Luckily, we can stand on the shoulders of giants. In <a href="https://www.mdpi.com/2076-3417/9/18/3743">this great paper</a> by Vladimir Kulyukin and Sarbajit Mukherjee, the authors trained a CNN classifier for this very purpose.  <strong>And they released their labeled data!</strong></p>
 
-<p>Say I have a video of the entrance of a beehive, like this:
-<img src="assets/phone-basic.mp4" alt=" " /></p>
+<p>Let’s take a look at some of that sweet, sweet data (from dataset BEE1, 32x32 images):</p>
 
-<p>If I wanted to count the number of bees in each frame, I <em>could</em> set up and train an object detection CNN.</p>
+<p><img src="../assets/classes.jpg" alt="" /></p>
 
-<p><strong>But here’s a lazy way to do it.</strong></p>
+<p>The “no bee” class seems to have a red bias, but we’ll address that later.</p>
 
-<p>First, collapse the color data and apply a Gaussian blur to each frame, like so:
-<img src="assets/phone-blur.mp4" alt=" " /></p>
+<p>Here’s the architecture that they say worked best for a 32x32 input image:
+<img src="assets/cnn-1.jpg" alt="" /></p>
 
-<p>Then apply pixel thresholding to get the dark spots, like so:
-<img src="assets/phone-darkspots.mp4" alt=" " /></p>
+<p>With that image, I was able to implement the network in a few minutes using Keras:</p>
 
-<p>To interpret the list of points as separate objects, we can use a clustering algorithm.  Here’s an example using <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">hierarchical clustering</a>.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">Sequential</span><span class="p">()</span>
 
-<p><img src="../assets/phone-clusters.mp4" alt="  " /></p>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">BatchNormalization</span><span class="p">())</span>
 
-<p>It <strong>kind of</strong> works!  From here we can just count the clusters to get an approximation of the number of bees in frame.</p>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">BatchNormalization</span><span class="p">())</span>
 
-<p>Some clear problems though:</p>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 
-<ul>
-  <li>I had to determine a few values experimentally, like intensity threshold and clustering distance threshold</li>
-  <li>This only works because the bees’ heads and thoraxes are the darkest things in frame. Any dark black objects on the ground would also be counted as bees.</li>
-</ul>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Flatten</span><span class="p">())</span>
 
-<p>This technique is fast but not reliably accurate.  But the small amount of computation required makes it suitable for a low-power application.</p>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"sigmoid"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Here’s what the accuracy looks like during training:</p>
+
+<p><img src="assets/training.jpg" alt="" /></p>
+
+<h3 id="applying-it-to-our-data">Applying It To Our Data</h3>
+
+<p>Note that this is an image <strong>classifier</strong>, not a detector.  To apply this classifier to video, the authors used a scheme like this:</p>
+
+<ol>
+  <li>apply some background subtraction/motion detection algorithm like <a href="http://www.ee.surrey.ac.uk/CVSSP/Publications/papers/KaewTraKulPong-AVBS01.pdf">MOG</a>, <a href="https://ieeexplore.ieee.org/document/1333992">MOG2</a>, or <a href="https://goldberg.berkeley.edu/pubs/acc-2012-visual-tracking-final.pdf">GMG</a> to determine regions of interest, then</li>
+  <li>generate some 32x32 image tile containing the region of interest, then</li>
+  <li>run the CNN on the tile to determine whether the motion was “bee related” or not</li>
+</ol>
+
+<p>In other words, <strong>rather than counting the number of bees, they are counting the number of movements that are bee-related</strong>.  This is a useful metric to determine <em>relative</em> changes in foraging behavior.  That said, a bee detection or pose estimation NN may provide even more insight.</p>
 
   </article>
   
@@ -98,7 +132,7 @@ Today we'll explore some basic image processing techniques to count bees. These 
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-03-24T20:31:02-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-03-29T20:46:13-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>

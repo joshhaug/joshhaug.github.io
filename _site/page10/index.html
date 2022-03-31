@@ -14,7 +14,7 @@
 
   <title>
     
-      All Posts &middot; BeeSci
+      BeeSci &middot; Beehive Science
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
@@ -45,69 +45,68 @@
       </header>
 
       <main>
-        <article class="page">
-  <h1 class="page-title">All Posts</h1>
-  <!-- 
-  * 21 Apr 2021 &raquo; [ Hive Monitoring Prototype Version 4 -- PCB ](/hardware-v4.html)
+        <div class="posts">
+  
+  <article class="post">
+    <h1 class="post-title">
+      <a href="/about-this-site.html">
+        How To Make This Website
+      </a>
+    </h1>
 
-  * 21 Apr 2021 &raquo; [ Hive Monitoring Prototype Version 3 -- It's Inside ](/hardware-v3.html)
+    <time datetime="2016-10-04T01:02:23-07:00" class="post-date">04 Oct 2016</time>
 
-  * 07 Feb 2021 &raquo; [ Hive Monitoring Prototype Version 2 -- An ESP Under the Hive ](/hardware-v2.html)
-
-  * 14 Jul 2020 &raquo; [ Hive Monitoring Prototype Version 1 -- A Pi on the Roof ](/hardware.html)
-
-  * 06 Jul 2020 &raquo; [ Big Handle ](/big-handle.html)
-
-  * 05 Jul 2020 &raquo; [ Improving the Prototype's Temperature Sensor ](/hardware-v1.5.html)
-
-  * 14 May 2020 &raquo; [ Counting Bee Movements Using a CNN ](/counting-bees-using-a-cnn.html)
-
-  * 01 May 2020 &raquo; [ A Quick and Dirty Way to Count Bees ](/quick-video-analysis.html)
-
-  * 01 May 2020 &raquo; [ Hive Sound Analysis ](/hive-sound.html)
-
-  * 04 Oct 2016 &raquo; [ How To Make This Website ](/about-this-site.html)
- -->
-
-<div class="message">
-Here's a list of all the posts in this site.
+    <div class="message">
+How I made this website.  Guaranteed to be boring for non-developers.
 </div>
 
-<ul>
-  <li>
-    <p><a href="/hardware-v4.html"> Hive Monitoring Prototype Version 4 – PCB </a></p>
-  </li>
-  <li>
-    <p><a href="/hardware-v3.html"> Hive Monitoring Prototype Version 3 – It’s Inside </a></p>
-  </li>
-  <li>
-    <p><a href="/hardware-v2.html"> Hive Monitoring Prototype Version 2 – An ESP Under the Hive </a></p>
-  </li>
-  <li>
-    <p><a href="/hardware.html"> Hive Monitoring Prototype Version 1 – A Pi on the Roof </a></p>
-  </li>
-  <li>
-    <p><a href="/big-handle.html"> Big Handle </a></p>
-  </li>
-  <li>
-    <p><a href="/hardware-v1.5.html"> Improving the Prototype’s Temperature Sensor </a></p>
-  </li>
-  <li>
-    <p><a href="/counting-bees-using-a-cnn.html"> Counting Bee Movements Using a CNN </a></p>
-  </li>
-  <li>
-    <p><a href="/quick-video-analysis.html"> A Quick and Dirty Way to Count Bees </a></p>
-  </li>
-  <li>
-    <p><a href="/hive-sound.html"> Hive Sound Analysis </a></p>
-  </li>
-  <li>
-    <p><a href="/about-this-site.html"> How To Make This Website </a></p>
-  </li>
-</ul>
+<p><strong>How did you make it?</strong></p>
 
+<blockquote>
+  <p>I modeled my effort on <a href="http://joshualande.com/jekyll-github-pages-poole">this one</a>. In short, it uses <a href="https://github.com/poole/poole">Poole</a>, which is a theme for <a href="http://jekyllrb.com/">Jekyll</a>.  I write the posts in markdown and Jekyll converts the files to HTML.</p>
+</blockquote>
 
-</article>
+<p><strong>How did you get math to render on your site?</strong></p>
+
+<blockquote>
+  <p>The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
+    <span class="na">src=</span><span class="s">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
+
+<blockquote>
+  <p>Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle<sup id="fnref:fn-aerodyn" role="doc-noteref"><a href="#fn:fn-aerodyn" class="footnote">1</a></sup> is represented as <code class="highlighter-rouge">$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$</code> in my code, but produces…</p>
+</blockquote>
+
+\[{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}\]
+
+<p><strong>Why do your code blocks look so nice?</strong></p>
+
+<blockquote>
+  <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
+</blockquote>
+
+<p><strong>How are you hosting it?</strong></p>
+
+<blockquote>
+  <p>This website is <a href="https://github.com/joshhaug/joshhaug.github.io">hosted on github pages</a>.</p>
+</blockquote>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:fn-aerodyn" role="doc-endnote">
+      <p>In case you’re interested, the particle is assumed to have a density p₀ = 1000 kg/m³.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. <a href="#fnref:fn-aerodyn" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </article>
+  
+</div>
 
       </main>
 

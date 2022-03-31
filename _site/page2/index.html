@@ -49,84 +49,60 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/hardware-v2.html">
-        Hive Monitoring Prototype Version 2 -- An ESP Under the Hive
+      <a href="/hardware-v3.html">
+        Hive Monitoring Prototype Version 3 -- It's Inside
       </a>
     </h1>
 
-    <time datetime="2021-02-07T00:00:00-08:00" class="post-date">07 Feb 2021</time>
+    <time datetime="2021-04-21T00:00:00-07:00" class="post-date">21 Apr 2021</time>
 
     <div class="message">
-🐝  This is the second iteration of my beehive monitoring prototype.
-Previous iteration <a href="hardware.html">here</a>, subsequent iteration <a href="hardware-v3.html">here</a>.
+🐝  This is the third iteration of my beehive monitoring prototype.
 </div>
 
-<p>I’ve learned from my <a href="hardware.html">previous prototype</a> that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.</p>
+<p>I’ve learned from my previous prototypes (<a href="hardware.html">v1</a>, <a href="hardware-v2.html">v2</a>) that hive temperature readings are most informative when they come directly from the brood chamber of the hive. So I made another one that can be placed <strong>inside</strong> the hive.</p>
 
-<h3 id="electronics">Electronics</h3>
+<h4 id="️-electronics">⚡️ Electronics</h4>
 
-<p>If this thing is going to run off of a battery, I’ll have to use something that consumes much less power than a Raspberry Pi. I decided on an ESP32, which is an <em>awesome</em> SoC. I hooked it up to an analog microphone, 2 temperature sensors, a load cell amplifier, and a micro sd card adapter.</p>
+<p>I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.</p>
 
-<p><img src="../assets/v2-internals.jpg" alt="The front of the prototype" />
-<em>The inside of the device.</em></p>
+<p>The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.</p>
 
-<p>The whole thing is hooked up with DuPont wires. Not very nice to look at, but it does work.</p>
+<p><img src="../assets/v3-frontandback.jpg" alt="The front of the prototype" />
+<em>The front and back of the prototype circuit.</em></p>
 
-<h3 id="enclosure">Enclosure</h3>
+<p>The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.</p>
 
-<p>The enclosure was really a way for me to explore some of Fusion 360’s cooler features. It’s made of four parts: a 3D-printed hexagonal box, a threaded pipe with an integrated screen that attaches to the bottom of the hive, a lid for the box, and a nut to hold the pipe in place. Here’s how it attaches to the bottom board to get readings from internal hive conditions:</p>
+<h4 id="-enclosure">📦 Enclosure</h4>
 
-<p><img src="../assets/v2-pipe.jpg" alt="The pipe of the prototype" /></p>
+<p>To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.</p>
 
-<p>It’s super cool that all these pieces can be 3D printed in-place and without support!
-Here’s the underside of the hive bottom board, with the prototype attached:
-<img src="../assets/v2-on-box.jpg" alt="The bottom board with device" /></p>
+<p><img src="../assets/v3-enclosure.JPG" alt="The enclosure" />
+<em>The enclosure, in place on the frame.</em></p>
 
-<p>Inside of the rightmost support thing is a load cell mounted to pieces of aluminum angle bar, with some wood on the outside. The other side is just a 2x4 that has been ripped to an equal height.</p>
+<h4 id="firmware">Firmware</h4>
 
-<h3 id="firmware">Firmware</h3>
+<p>The firmware for this prototype is nearly the same as the firmware for <a href="hardware-v2.html">version 2</a>, so I won’t really bore you with it. Basically a C++ program that orchestrates all the sensor readings and syncs. I will say that debugging the firmware was kind of a pain. You don’t realize how many bugs your code has until it’s literally surrounded by thousands of stinging insects.</p>
 
-<p>The hardware is only half the battle – the next step is firmware. I’ll spare you from reading the crappy code. Basically, the ESP32 has a little RTC that can be used as a wakeup alarm. Every 10 minutes, it wakes up from a deep-sleep mode, powers on all sensor peripherals, waits for readings to stabilize, writes the data onto the SD card, and then goes back to sleep. And every few wakeups, it will sync the past few readings with a server I have on my local network. Nothing fancy, just a Node.js script that writes the data into a database. I’ll go into more detail on firmware design for the ESP32 in a later post.</p>
+<p>An interesting technical challenge with this version was audio processing. With my <a href="hardware.html">very first prototype</a>, I was recording lossless, hour-long WAV files. But with embedded hardware, there are power and memory limitations that necessitate a different approach. The ESP32 has 4 MB of memory – that’s a lot for an embedded device, but literally <em>three orders of magnitude less</em> than the Raspberry Pi I used in V1.</p>
+
+<p>For this one, I decided to record and average really short audio samples that could fit in memory, and process them on board the ESP32 with an FFT. (An FFT, and more generally a Fourier transform, is a method of converting signals into their component frequencies. For example, if you use an FFT on a choir singing a chord, you’ll be able to tell the pitches the individual members were singing.) The resulting frequency information could then be saved onto the SD card and sent over Wi-Fi to my server.</p>
 
 <h3 id="data-analysis">Data Analysis</h3>
 
-<p>This is one of those good news/bad news situations. The good? I was able to get great weight data and good audio. But I didn’t notice a substantial difference in temperature readings between the inside and outside of the hive, even though I thought I properly insulated the inner sensor.</p>
+<p>With this prototype I wanted to dive deep into processing audio signals from within the hive. So, I installed this monitor in a hive without a queen, and then installed a queen a couple days later. Here are the FFT results from the day the queen was installed.</p>
 
-<p>This is further evidence to me that the best way to “take a beehive’s temperature” is to measure from the <strong>center of the broodnest.</strong>  Bees require precise thermoregulation of their brood.</p>
+<p><img src="../assets/v3-fft-queen.jpg" alt="Queen Inserted" /></p>
 
-<p>Anyways, here’s what the raw weight data looks like:</p>
+<p>Note that an FFT was taken every 10 minutes, but they have been averaged together into 5-hour segments to make the chart easier to read. Looking at this graph, you can see that installing a queen in the hive causes a massive change in the the sound the hive makes. The sound gets louder and increases in pitch. A more complete way of viewing this is with a spectrogram:</p>
 
-<p><img src="../assets/rawweight_annotated.jpg" alt=" Raw Weight Annotated " /></p>
+<p><img src="../assets/v3-spectrogram_alpha.jpg" alt="Queen Inserted" />
+<em>In a spectrogram, each column is the FFT of an individual audio sample, and the intensity of frequency bins are encoded as color instead of height. You can clearly see that there was a huge change in the signal at 6PM.</em></p>
 
-<p>What the heck is going on here? I see small daily fluctuations as well as instantaneous “steps” in the signal (indicated by red arrows). These steps are caused by me screwing around with the hive; putting rocks on the hive lid to prevent raccoons or bears from getting in, adding/removing a roof for rain shielding, etc.</p>
+<h3 id="conclusions">Conclusions</h3>
 
-<p>There are two questions I’d like to answer:</p>
-<ul>
-  <li>Can I detect and filter out changes in weight due to human activity?</li>
-  <li>Is the daily fluctuation caused only by bee activity? Or is there some other factor at play?</li>
-</ul>
+<p>There appears to be some correlation</p>
 
-<h4 id="detecting-instantaneous-change">Detecting Instantaneous Change</h4>
-
-<p>The easiest way of detecting those steps in the signal is to look at the percent change between each data point and the subsequent one.</p>
-
-<p><img src="../assets/percentchange.jpg" alt=" Percent Change " /></p>
-
-<p>This could be good enough, but requires some manual thresholding. Moreover, if human activity results in a relatively small change in weight (like the point annoted with the red arrow) then the threshold would need to be really specific.</p>
-
-<p>An alternative route would be to use a more special-purpose algorithm for step detection, like <a href="https://en.wikipedia.org/wiki/CUSUM">CUSUM</a>. Here is a chart showing the detections with CUSUM (in orange) overlaid atop the raw weight signal:</p>
-
-<p><img src="../assets/cusum_overlay.jpg" alt=" CUSUM " /></p>
-
-<p>The assumption here is that instantaneous changes in weight are likely due to human activity, while slower changes are likely due to bee activity (and other stuff, which we’ll get into later). By doing this separation we can filter out the step functions in the data:</p>
-
-<p><img src="../assets/humandelta_beedelta.jpg" alt=" Human and Bee Delta " /></p>
-
-<p>The cumulative loss in weight over this period of time is normal. During winter months, honey bees go into a sort of hibernation mode. They live off the honey stores they’ve collected during the year and generally reduce their energy expenditure. This isn’t to say that they don’t still fly around and collect resources during the winter; if conditions are right, they will. But because of a dearth in nectar supply and decreasing temperatures, a decrease in hive weight is to be expected.</p>
-
-<h4 id="causes-of-daily-fluctuations">Causes of Daily Fluctuations</h4>
-
-<p>Speaking of temperature, I’m interested to know what is causing these daily fluctuations in weight. I suspect it is not just bees leaving the hive and returning. That may play a part, but I think other contributing causes may be related to temperature and/or humidity.</p>
 
   </article>
   
@@ -136,7 +112,7 @@ Here’s the underside of the hive bottom board, with the prototype attached:
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-03-24T20:31:02-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-03-29T20:46:13-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>

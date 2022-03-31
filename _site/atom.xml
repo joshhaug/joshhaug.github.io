@@ -4,13 +4,68 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-03-24T20:31:02-07:00</updated>
+ <updated>2022-03-29T20:46:13-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
    <email>josh.haug55@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Hive Monitoring Prototype Version 4 -- PCB</title>
+   <link href="http://localhost:4000/hardware-v4.html"/>
+   <updated>2021-04-21T00:00:00-07:00</updated>
+   <id>http://localhost:4000/hardware-v4</id>
+   <content type="html">&lt;div class=&quot;message&quot;&gt;
+🐝  This is the third iteration of my beehive monitoring prototype.
+&lt;/div&gt;
+
+&lt;p&gt;I’ve learned from my previous prototypes (&lt;a href=&quot;hardware.html&quot;&gt;v1&lt;/a&gt;, &lt;a href=&quot;hardware-v2.html&quot;&gt;v2&lt;/a&gt;) that hive temperature readings are most informative when they come directly from the brood chamber of the hive. So I made another one that can be placed &lt;strong&gt;inside&lt;/strong&gt; the hive.&lt;/p&gt;
+
+&lt;h4 id=&quot;️-electronics&quot;&gt;⚡️ Electronics&lt;/h4&gt;
+
+&lt;p&gt;I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.&lt;/p&gt;
+
+&lt;p&gt;The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v3-frontandback.jpg&quot; alt=&quot;The front of the prototype&quot; /&gt;
+&lt;em&gt;The front and back of the prototype circuit.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.&lt;/p&gt;
+
+&lt;h4 id=&quot;-enclosure&quot;&gt;📦 Enclosure&lt;/h4&gt;
+
+&lt;p&gt;To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v3-enclosure.JPG&quot; alt=&quot;The enclosure&quot; /&gt;
+&lt;em&gt;The enclosure, in place on the frame.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;firmware&quot;&gt;Firmware&lt;/h4&gt;
+
+&lt;p&gt;The firmware for this prototype is nearly the same as the firmware for &lt;a href=&quot;hardware-v2.html&quot;&gt;version 2&lt;/a&gt;, so I won’t really bore you with it. Basically a C++ program that orchestrates all the sensor readings and syncs. I will say that debugging the firmware was kind of a pain. You don’t realize how many bugs your code has until it’s literally surrounded by thousands of stinging insects.&lt;/p&gt;
+
+&lt;p&gt;An interesting technical challenge with this version was audio processing. With my &lt;a href=&quot;hardware.html&quot;&gt;very first prototype&lt;/a&gt;, I was recording lossless, hour-long WAV files. But with embedded hardware, there are power and memory limitations that necessitate a different approach. The ESP32 has 4 MB of memory – that’s a lot for an embedded device, but literally &lt;em&gt;three orders of magnitude less&lt;/em&gt; than the Raspberry Pi I used in V1.&lt;/p&gt;
+
+&lt;p&gt;For this one, I decided to record and average really short audio samples that could fit in memory, and process them on board the ESP32 with an FFT. (An FFT, and more generally a Fourier transform, is a method of converting signals into their component frequencies. For example, if you use an FFT on a choir singing a chord, you’ll be able to tell the pitches the individual members were singing.) The resulting frequency information could then be saved onto the SD card and sent over Wi-Fi to my server.&lt;/p&gt;
+
+&lt;h3 id=&quot;data-analysis&quot;&gt;Data Analysis&lt;/h3&gt;
+
+&lt;p&gt;With this prototype I wanted to dive deep into processing audio signals from within the hive. So, I installed this monitor in a hive without a queen, and then installed a queen a couple days later. Here are the FFT results from the day the queen was installed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v3-fft-queen.jpg&quot; alt=&quot;Queen Inserted&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note that an FFT was taken every 10 minutes, but they have been averaged together into 5-hour segments to make the chart easier to read. Looking at this graph, you can see that installing a queen in the hive causes a massive change in the the sound the hive makes. The sound gets louder and increases in pitch. A more complete way of viewing this is with a spectrogram:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v3-spectrogram_alpha.jpg&quot; alt=&quot;Queen Inserted&quot; /&gt;
+&lt;em&gt;In a spectrogram, each column is the FFT of an individual audio sample, and the intensity of frequency bins are encoded as color instead of height. You can clearly see that there was a huge change in the signal at 6PM.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h3&gt;
+
+&lt;p&gt;There appears to be some correlation&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Hive Monitoring Prototype Version 3 -- It's Inside</title>
@@ -45,15 +100,24 @@
 
 &lt;p&gt;The firmware for this prototype is nearly the same as the firmware for &lt;a href=&quot;hardware-v2.html&quot;&gt;version 2&lt;/a&gt;, so I won’t really bore you with it. Basically a C++ program that orchestrates all the sensor readings and syncs. I will say that debugging the firmware was kind of a pain. You don’t realize how many bugs your code has until it’s literally surrounded by thousands of stinging insects.&lt;/p&gt;
 
-&lt;h3 id=&quot;data-analysis&quot;&gt;Data Analysis&lt;/h3&gt;
-
 &lt;p&gt;An interesting technical challenge with this version was audio processing. With my &lt;a href=&quot;hardware.html&quot;&gt;very first prototype&lt;/a&gt;, I was recording lossless, hour-long WAV files. But with embedded hardware, there are power and memory limitations that necessitate a different approach. The ESP32 has 4 MB of memory – that’s a lot for an embedded device, but literally &lt;em&gt;three orders of magnitude less&lt;/em&gt; than the Raspberry Pi I used in V1.&lt;/p&gt;
 
 &lt;p&gt;For this one, I decided to record and average really short audio samples that could fit in memory, and process them on board the ESP32 with an FFT. (An FFT, and more generally a Fourier transform, is a method of converting signals into their component frequencies. For example, if you use an FFT on a choir singing a chord, you’ll be able to tell the pitches the individual members were singing.) The resulting frequency information could then be saved onto the SD card and sent over Wi-Fi to my server.&lt;/p&gt;
 
-&lt;p&gt;With this prototype I wanted to dive deep into processing audio signals from within the hive. I installed this monitor in a hive without a queen.&lt;/p&gt;
+&lt;h3 id=&quot;data-analysis&quot;&gt;Data Analysis&lt;/h3&gt;
+
+&lt;p&gt;With this prototype I wanted to dive deep into processing audio signals from within the hive. So, I installed this monitor in a hive without a queen, and then installed a queen a couple days later. Here are the FFT results from the day the queen was installed.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;../assets/v3-fft-queen.jpg&quot; alt=&quot;Queen Inserted&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note that an FFT was taken every 10 minutes, but they have been averaged together into 5-hour segments to make the chart easier to read. Looking at this graph, you can see that installing a queen in the hive causes a massive change in the the sound the hive makes. The sound gets louder and increases in pitch. A more complete way of viewing this is with a spectrogram:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../assets/v3-spectrogram_alpha.jpg&quot; alt=&quot;Queen Inserted&quot; /&gt;
+&lt;em&gt;In a spectrogram, each column is the FFT of an individual audio sample, and the intensity of frequency bins are encoded as color instead of height. You can clearly see that there was a huge change in the signal at 6PM.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h3&gt;
+
+&lt;p&gt;There appears to be some correlation&lt;/p&gt;
 
 </content>
  </entry>
