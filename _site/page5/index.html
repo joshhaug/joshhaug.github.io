@@ -14,14 +14,14 @@
 
   <title>
     
-      BeeSci &middot; Beehive Science
+      🐝 BeeSci &middot; Beehive Science
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="BeeSci" href="/atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="🐝 BeeSci" href="/atom.xml">
 </head>
 
 
@@ -30,7 +30,7 @@
     <div class="container content">
       <header class="masthead">
         <h3 class="masthead-title">
-        <a href="/" title="Home">BeeSci</a>
+        <a href="/" title="Home">🐝 BeeSci</a>
 
         
           &nbsp;&nbsp;&nbsp;
@@ -49,14 +49,24 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/big-handle.html">
-        Big Handle
+      <a href="/hardware-v1.5.html">
+        Improving the Prototype's Temperature Sensor
       </a>
     </h1>
 
-    <time datetime="2020-07-06T00:00:00-07:00" class="post-date">06 Jul 2020</time>
+    <time datetime="2020-07-05T00:00:00-07:00" class="post-date">05 Jul 2020</time>
 
-    
+    <p>In my <a href="hardware.html">previous prototype</a>, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp. which was an apples-to-oranges comparison. With identical thermometers I’ll get a better sense of the actual tempertaures inside and outside the hive.</p>
+
+<p>Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!</p>
+
+<p>Here’s a wiring diagram showing how the new MAX6675 breakouts are connected to the Raspberry Pi:</p>
+
+<p><img src="../assets/3tc-wiring.png" alt=" " /></p>
+
+<p>Note that I’m sharing the power (<code class="highlighter-rouge">VCC</code>), ground (<code class="highlighter-rouge">GND</code>), serial clock input (<code class="highlighter-rouge">SCK</code>) and serial data output (<code class="highlighter-rouge">SO</code>) lines across the three boards.  Each board has only one unique wire, going to the chip select (<code class="highlighter-rouge">CS</code>) pin.  This pin is active low according to the <a href="https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf">datasheet</a>, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.</p>
+
+<p>Each MAX6675 chip has a max current draw of 1.5mA, so we’re well within the Pi’s pin limit of 16mA.</p>
 
   </article>
   
@@ -66,7 +76,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-07-15T10:30:48-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-07-15T10:38:06-07:00">2022</time>. Thanks for reading! 🐝
         </small>
       </footer>
     </div>

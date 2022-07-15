@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>BeeSci</title>
+ <title>🐝 BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-07-15T10:30:48-07:00</updated>
+ <updated>2022-07-15T10:38:06-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -317,15 +317,6 @@ networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Big Handle</title>
-   <link href="http://localhost:4000/big-handle.html"/>
-   <updated>2020-07-06T00:00:00-07:00</updated>
-   <id>http://localhost:4000/big-handle</id>
-   <content type="html">
 </content>
  </entry>
  

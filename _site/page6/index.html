@@ -14,14 +14,14 @@
 
   <title>
     
-      BeeSci &middot; Beehive Science
+      🐝 BeeSci &middot; Beehive Science
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="BeeSci" href="/atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="🐝 BeeSci" href="/atom.xml">
 </head>
 
 
@@ -30,7 +30,7 @@
     <div class="container content">
       <header class="masthead">
         <h3 class="masthead-title">
-        <a href="/" title="Home">BeeSci</a>
+        <a href="/" title="Home">🐝 BeeSci</a>
 
         
           &nbsp;&nbsp;&nbsp;
@@ -49,24 +49,80 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/hardware-v1.5.html">
-        Improving the Prototype's Temperature Sensor
+      <a href="/counting-bees-using-a-cnn.html">
+        Counting Bee Movements Using a CNN
       </a>
     </h1>
 
-    <time datetime="2020-07-05T00:00:00-07:00" class="post-date">05 Jul 2020</time>
+    <time datetime="2020-05-14T14:46:20-07:00" class="post-date">14 May 2020</time>
 
-    <p>In my <a href="hardware.html">previous prototype</a>, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp. which was an apples-to-oranges comparison. With identical thermometers I’ll get a better sense of the actual tempertaures inside and outside the hive.</p>
+    <div class="message">
+Counting the number of <b>foragers</b> (bees that collect pollen, nectar, and water) is an important measure of hive health. What if we could use a <b>convolutional neural network</b> to count bees at the entrance of the hive?
+</div>
 
-<p>Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!</p>
+<p>Luckily, we can stand on the shoulders of giants. In <a href="https://www.mdpi.com/2076-3417/9/18/3743">this great paper</a> by Vladimir Kulyukin and Sarbajit Mukherjee, the authors trained a CNN classifier for this very purpose.  <strong>And they released their labeled data!</strong></p>
 
-<p>Here’s a wiring diagram showing how the new MAX6675 breakouts are connected to the Raspberry Pi:</p>
+<p>Let’s take a look at some of that sweet, sweet data (from dataset BEE1, 32x32 images):</p>
 
-<p><img src="../assets/3tc-wiring.png" alt=" " /></p>
+<p><img src="../assets/classes.jpg" alt="" /></p>
 
-<p>Note that I’m sharing the power (<code class="highlighter-rouge">VCC</code>), ground (<code class="highlighter-rouge">GND</code>), serial clock input (<code class="highlighter-rouge">SCK</code>) and serial data output (<code class="highlighter-rouge">SO</code>) lines across the three boards.  Each board has only one unique wire, going to the chip select (<code class="highlighter-rouge">CS</code>) pin.  This pin is active low according to the <a href="https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf">datasheet</a>, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.</p>
+<p>The “no bee” class seems to have a red bias, but we’ll address that later.</p>
 
-<p>Each MAX6675 chip has a max current draw of 1.5mA, so we’re well within the Pi’s pin limit of 16mA.</p>
+<p>Here’s the architecture that they say worked best for a 32x32 input image:
+<img src="assets/cnn-1.jpg" alt="" /></p>
+
+<p>With that image, I was able to implement the network in a few minutes using Keras:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">Sequential</span><span class="p">()</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">BatchNormalization</span><span class="p">())</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">BatchNormalization</span><span class="p">())</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Flatten</span><span class="p">())</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">512</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">))</span>
+
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="p">.</span><span class="n">Activation</span><span class="p">(</span><span class="s">"sigmoid"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Here’s what the accuracy looks like during training:</p>
+
+<p><img src="assets/training.jpg" alt="" /></p>
+
+<h3 id="applying-it-to-our-data">Applying It To Our Data</h3>
+
+<p>Note that this is an image <strong>classifier</strong>, not a detector.  To apply this classifier to video, the authors used a scheme like this:</p>
+
+<ol>
+  <li>apply some background subtraction/motion detection algorithm like <a href="http://www.ee.surrey.ac.uk/CVSSP/Publications/papers/KaewTraKulPong-AVBS01.pdf">MOG</a>, <a href="https://ieeexplore.ieee.org/document/1333992">MOG2</a>, or <a href="https://goldberg.berkeley.edu/pubs/acc-2012-visual-tracking-final.pdf">GMG</a> to determine regions of interest, then</li>
+  <li>generate some 32x32 image tile containing the region of interest, then</li>
+  <li>run the CNN on the tile to determine whether the motion was “bee related” or not</li>
+</ol>
+
+<p>In other words, <strong>rather than counting the number of bees, they are counting the number of movements that are bee-related</strong>.  This is a useful metric to determine <em>relative</em> changes in foraging behavior.  That said, a bee detection or pose estimation NN may provide even more insight.</p>
 
   </article>
   
@@ -76,7 +132,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-07-15T10:30:48-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-07-15T10:38:06-07:00">2022</time>. Thanks for reading! 🐝
         </small>
       </footer>
     </div>

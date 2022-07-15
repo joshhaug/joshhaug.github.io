@@ -14,14 +14,14 @@
 
   <title>
     
-      BeeSci &middot; Beehive Science
+      🐝 BeeSci &middot; Beehive Science
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
   <link rel="stylesheet" href="/styles.css">
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
   <link rel="shortcut icon" href="/public/favicon.ico">
-  <link rel="alternate" type="application/atom+xml" title="BeeSci" href="/atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="🐝 BeeSci" href="/atom.xml">
 </head>
 
 
@@ -30,7 +30,7 @@
     <div class="container content">
       <header class="masthead">
         <h3 class="masthead-title">
-        <a href="/" title="Home">BeeSci</a>
+        <a href="/" title="Home">🐝 BeeSci</a>
 
         
           &nbsp;&nbsp;&nbsp;
@@ -49,46 +49,60 @@
   
   <article class="post">
     <h1 class="post-title">
-      <a href="/quick-video-analysis.html">
-        A Quick and Dirty Way to Count Bees
+      <a href="/about-this-site.html">
+        How To Make This Website
       </a>
     </h1>
 
-    <time datetime="2020-05-01T00:00:00-07:00" class="post-date">01 May 2020</time>
+    <time datetime="2016-10-04T01:02:23-07:00" class="post-date">04 Oct 2016</time>
 
     <div class="message">
-Today we'll explore some basic image processing techniques to count bees. These require <b>no labeled training data</b>, so we'll try them first before moving on to fancier techniques.
+How I made this website.  Guaranteed to be boring for non-developers.
 </div>
 
-<p>Generally speaking, the number of bees at the entrance of the hive is a good indicator of the health of the hive. This means that the bees are collecting food (nectar and pollen). So let’s try to count some bees with as little effort as possible!</p>
+<p><strong>How did you make it?</strong></p>
 
-<p>Say I have a video of the entrance of a beehive, like this:
-<img src="assets/phone-basic.mp4" alt=" " /></p>
+<blockquote>
+  <p>I modeled my effort on <a href="http://joshualande.com/jekyll-github-pages-poole">this one</a>. In short, it uses <a href="https://github.com/poole/poole">Poole</a>, which is a theme for <a href="http://jekyllrb.com/">Jekyll</a>.  I write the posts in markdown and Jekyll converts the files to HTML.</p>
+</blockquote>
 
-<p>If I wanted to count the number of bees in each frame, I <em>could</em> set up and train an object detection CNN.</p>
+<p><strong>How did you get math to render on your site?</strong></p>
 
-<p><strong>But here’s a lazy way to do it.</strong></p>
+<blockquote>
+  <p>The math on this site is rendered using <a href="https://www.mathjax.org/">MathJax</a>.  To get this working, I navigated to Jekyll’s <code class="highlighter-rouge">_layouts/default.html</code> and included this snippet:</p>
+</blockquote>
 
-<p>First, collapse the color data and apply a Gaussian blur to each frame, like so:
-<img src="assets/phone-blur.mp4" alt=" " /></p>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span>
+    <span class="na">src=</span><span class="s">"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span></code></pre></figure>
 
-<p>Then apply pixel thresholding to get the dark spots, like so:
-<img src="assets/phone-darkspots.mp4" alt=" " /></p>
+<blockquote>
+  <p>Now I can use the LaTeX math format in my blog posts and it comes out as a beautiful equation.  For example, the equation for the aerodynamic diameter of an aerosol particle<sup id="fnref:fn-aerodyn" role="doc-noteref"><a href="#fn:fn-aerodyn" class="footnote">1</a></sup> is represented as <code class="highlighter-rouge">$${a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}$$</code> in my code, but produces…</p>
+</blockquote>
 
-<p>To interpret the list of points as separate objects, we can use a clustering algorithm.  Here’s an example using <a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">hierarchical clustering</a>.</p>
+\[{a} = d_{e}\left(\frac{\rho_{p}}{\rho_{0}\chi}\right)^{\frac{1}{2}}\]
 
-<p><img src="../assets/phone-clusters.mp4" alt="  " /></p>
+<p><strong>Why do your code blocks look so nice?</strong></p>
 
-<p>It <strong>kind of</strong> works!  From here we can just count the clusters to get an approximation of the number of bees in frame.</p>
+<blockquote>
+  <p>The built-in support for code blocks produced ugly horizontal scroll bars.  To add functionality for code wrapping, I went to <code class="highlighter-rouge">_sass/_code.scss</code>, found the block that started with <code class="highlighter-rouge">pre {</code> and added in <code class="highlighter-rouge">white-space: pre-wrap;</code>, which did the trick.  If you’re on mobile, however, the code blocks are gonna look ugly.</p>
+</blockquote>
 
-<p>Some clear problems though:</p>
+<p><strong>How are you hosting it?</strong></p>
 
-<ul>
-  <li>I had to determine a few values experimentally, like intensity threshold and clustering distance threshold</li>
-  <li>This only works because the bees’ heads and thoraxes are the darkest things in frame. Any dark black objects on the ground would also be counted as bees.</li>
-</ul>
+<blockquote>
+  <p>This website is <a href="https://github.com/joshhaug/joshhaug.github.io">hosted on github pages</a>.</p>
+</blockquote>
 
-<p>This technique is fast but not reliably accurate.  But the small amount of computation required makes it suitable for a low-power application.</p>
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:fn-aerodyn" role="doc-endnote">
+      <p>In case you’re interested, the particle is assumed to have a density p₀ = 1000 kg/m³.  I’m still trying out using footnotes in markdown, so that’s what I’m doing here. <a href="#fnref:fn-aerodyn" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 
   </article>
   
@@ -98,7 +112,7 @@ Today we'll explore some basic image processing techniques to count bees. These 
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-07-15T10:30:48-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-07-15T10:38:06-07:00">2022</time>. Thanks for reading! 🐝
         </small>
       </footer>
     </div>

@@ -2,7 +2,7 @@
 permalink:           /:categories/:title.html
 
 # Setup
-title:               BeeSci
+title:               🐝 BeeSci
 tagline:             Beehive Science
 paginate:            1
 #baseurl:             ""
