@@ -14,7 +14,7 @@
 
   <title>
     
-      Hive Monitoring Prototype Version 2 -- An ESP Under the Hive &middot; BeeSci
+      Hive Monitor v2: Adding a Scale &middot; BeeSci
     
   </title>
   <link rel="canonical" href=" { { site.url } }{ { page.url } }" />
@@ -46,79 +46,28 @@
 
       <main>
         <article class="post">
-  <h1 class="post-title">Hive Monitoring Prototype Version 2 -- An ESP Under the Hive</h1>
+  <h1 class="post-title">Hive Monitor v2: Adding a Scale</h1>
   <time datetime="2021-02-07T00:00:00-08:00" class="post-date">07 Feb 2021</time>
-  <div class="message">
-🐝  This is the second iteration of my beehive monitoring prototype.
-Previous iteration <a href="hardware.html">here</a>, subsequent iteration <a href="hardware-v3.html">here</a>.
-</div>
+  <p>I’ve learned from my previous prototype that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.</p>
 
-<p>I’ve learned from my <a href="hardware.html">previous prototype</a> that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.</p>
-
-<h3 id="electronics">Electronics</h3>
-
-<p>If this thing is going to run off of a battery, I’ll have to use something that consumes much less power than a Raspberry Pi. I decided on an ESP32, which is an <em>awesome</em> SoC. I hooked it up to an analog microphone, 2 temperature sensors, a load cell amplifier, and a micro sd card adapter.</p>
+<p>If this thing is going to run off of a battery, I’ll have to use something much lower-power than a Raspberry Pi. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I hooked it up to an analog microphone, 2 temperature sensors, a load cell amplifier, and a micro sd card adapter.</p>
 
 <p><img src="../assets/v2-internals.jpg" alt="The front of the prototype" />
 <em>The inside of the device.</em></p>
 
-<p>The whole thing is hooked up with DuPont wires. Not very nice to look at, but it does work.</p>
+<p>The whole thing is hooked up with DuPont wires. It’s not very nice to look at, but it does work.</p>
 
 <h3 id="enclosure">Enclosure</h3>
 
-<p>The enclosure was really a way for me to explore some of Fusion 360’s cooler features. It’s made of four parts: a 3D-printed hexagonal box, a threaded pipe with an integrated screen that attaches to the bottom of the hive, a lid for the box, and a nut to hold the pipe in place. Here’s how it attaches to the bottom board to get readings from internal hive conditions:</p>
+<p>The enclosure was really a way for me to explore some of Fusion 360’s cooler features. It’s made of four parts: a 3D-printed hexagonal box, a threaded pipe with an integrated screen that attaches to the bottom of the hive, a lid for the box, and a nut to hold the pipe in place.</p>
 
-<p><img src="../assets/v2-pipe.jpg" alt="The pipe of the prototype" /></p>
+<p><img src="../assets/v2-underside.jpg" alt="The pipe of the prototype" /></p>
 
-<p>It’s super cool that all these pieces can be 3D printed in-place and without support!
-Here’s the underside of the hive bottom board, with the prototype attached:
-<img src="../assets/v2-on-box.jpg" alt="The bottom board with device" /></p>
+<p>Cool</p>
 
-<p>Inside of the rightmost support thing is a load cell mounted to pieces of aluminum angle bar, with some wood on the outside. The other side is just a 2x4 that has been ripped to an equal height.</p>
+<h4 id="firmware">Firmware</h4>
 
-<h3 id="firmware">Firmware</h3>
-
-<p>The hardware is only half the battle – the next step is firmware. I’ll spare you from reading the crappy code. Basically, the ESP32 has a little RTC that can be used as a wakeup alarm. Every 10 minutes, it wakes up from a deep-sleep mode, powers on all sensor peripherals, waits for readings to stabilize, writes the data onto the SD card, and then goes back to sleep. And every few wakeups, it will sync the past few readings with a server I have on my local network. Nothing fancy, just a Node.js script that writes the data into a database. I’ll go into more detail on firmware design for the ESP32 in a later post.</p>
-
-<h3 id="data-analysis">Data Analysis</h3>
-
-<p>This is one of those good news/bad news situations. The good? I was able to get great weight data and good audio. But I didn’t notice a substantial difference in temperature readings between the inside and outside of the hive, even though I thought I properly insulated the inner sensor.</p>
-
-<p>This is further evidence to me that the best way to “take a beehive’s temperature” is to measure from the <strong>center of the broodnest.</strong>  Bees require precise thermoregulation of their brood.</p>
-
-<p>Anyways, here’s what the raw weight data looks like:</p>
-
-<p><img src="../assets/rawweight_annotated.jpg" alt=" Raw Weight Annotated " /></p>
-
-<p>What the heck is going on here? I see small daily fluctuations as well as instantaneous “steps” in the signal (indicated by red arrows). These steps are caused by me screwing around with the hive; putting rocks on the hive lid to prevent raccoons or bears from getting in, adding/removing a roof for rain shielding, etc.</p>
-
-<p>There are two questions I’d like to answer:</p>
-<ul>
-  <li>Can I detect and filter out changes in weight due to human activity?</li>
-  <li>Is the daily fluctuation caused only by bee activity? Or is there some other factor at play?</li>
-</ul>
-
-<h4 id="detecting-instantaneous-change">Detecting Instantaneous Change</h4>
-
-<p>The easiest way of detecting those steps in the signal is to look at the percent change between each data point and the subsequent one.</p>
-
-<p><img src="../assets/percentchange.jpg" alt=" Percent Change " /></p>
-
-<p>This could be good enough, but requires some manual thresholding. Moreover, if human activity results in a relatively small change in weight (like the point annoted with the red arrow) then the threshold would need to be really specific.</p>
-
-<p>An alternative route would be to use a more special-purpose algorithm for step detection, like <a href="https://en.wikipedia.org/wiki/CUSUM">CUSUM</a>. Here is a chart showing the detections with CUSUM (in orange) overlaid atop the raw weight signal:</p>
-
-<p><img src="../assets/cusum_overlay.jpg" alt=" CUSUM " /></p>
-
-<p>The assumption here is that instantaneous changes in weight are likely due to human activity, while slower changes are likely due to bee activity (and other stuff, which we’ll get into later). By doing this separation we can filter out the step functions in the data:</p>
-
-<p><img src="../assets/humandelta_beedelta.jpg" alt=" Human and Bee Delta " /></p>
-
-<p>The cumulative loss in weight over this period of time is normal. During winter months, honey bees go into a sort of hibernation mode. They live off the honey stores they’ve collected during the year and generally reduce their energy expenditure. This isn’t to say that they don’t still fly around and collect resources during the winter; if conditions are right, they will. But because of a dearth in nectar supply and decreasing temperatures, a decrease in hive weight is to be expected.</p>
-
-<h4 id="causes-of-daily-fluctuations">Causes of Daily Fluctuations</h4>
-
-<p>Speaking of temperature, I’m interested to know what is causing these daily fluctuations in weight. I suspect it is not just bees leaving the hive and returning. That may play a part, but I think other contributing causes may be related to temperature and/or humidity.</p>
+<p>The hardware is only half the battle – the next step is writing firmware.</p>
 
 </article>
 
@@ -129,21 +78,21 @@ Here’s the underside of the hive bottom board, with the prototype attached:
     
       <li>
         <a href="/hardware-v4.html">
-          Hive Monitoring Prototype Version 4 -- PCB
+          Hive Monitor v4: Custom PCB
           <small><time datetime="2021-04-21T00:00:00-07:00">21 Apr 2021</time></small>
         </a>
       </li>
     
       <li>
         <a href="/hardware-v3.html">
-          Hive Monitoring Prototype Version 3 -- It's Inside
+          Hive Monitor v3: Inside the Hive
           <small><time datetime="2021-04-21T00:00:00-07:00">21 Apr 2021</time></small>
         </a>
       </li>
     
       <li>
         <a href="/hardware.html">
-          Hive Monitoring Prototype Version 1 -- A Pi on the Roof
+          Hive Monitor v1: A Pi on the Roof
           <small><time datetime="2020-07-14T00:00:00-07:00">14 Jul 2020</time></small>
         </a>
       </li>
@@ -156,7 +105,7 @@ Here’s the underside of the hive bottom board, with the prototype attached:
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-03-29T20:46:13-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-07-15T10:05:02-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>

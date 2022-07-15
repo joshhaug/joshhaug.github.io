@@ -50,58 +50,65 @@
   <article class="post">
     <h1 class="post-title">
       <a href="/hardware-v4.html">
-        Hive Monitoring Prototype Version 4 -- PCB
+        Hive Monitor v4: Custom PCB
       </a>
     </h1>
 
     <time datetime="2021-04-21T00:00:00-07:00" class="post-date">21 Apr 2021</time>
 
     <div class="message">
-🐝  This is the third iteration of my beehive monitoring prototype.
+🐝  This is the fourth iteration of my beehive monitoring prototype.
 </div>
 
-<p>I’ve learned from my previous prototypes (<a href="hardware.html">v1</a>, <a href="hardware-v2.html">v2</a>) that hive temperature readings are most informative when they come directly from the brood chamber of the hive. So I made another one that can be placed <strong>inside</strong> the hive.</p>
+<p>I’ve learned from my previous prototypes (<a href="hardware.html">v1</a>, <a href="hardware-v2.html">v2</a>, <a href="hardware-v3.html">v3</a>) that the ideal system for monitoring hive conditions would be small and battery operated so that it can be placed inside the hive. My <a href="hardware-v3.html">third prototype</a> was the smallest yet, but required cutting away a secion of the bee’s functional honeycomb. Moreover, I had to make them by hand, which doesn’t scale very well. So for this version, I’m going to try and make a printed circuit board with the same functionality.</p>
 
 <h4 id="️-electronics">⚡️ Electronics</h4>
 
-<p>I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I soldered it to a protoboard and hooked up an analog microphone and temperature sensor.</p>
+<p>The basic requirements for this thing are:</p>
+<ul>
+  <li>An ESP32, which already has WiFi and Bluetooth built in</li>
+  <li>a microphone</li>
+  <li>a temperature and humidity sensor</li>
+  <li>a method of storing large amounts of data</li>
+</ul>
 
-<p>The ESP32 is equipped with Wi-Fi and Bluetooth, so in theory I can just aggregate sensor readings in memory and send them off to a server. But I’d like to write the sensor readings to some kind of non-volatile memory for safekeeping. So I soldered on a MicroSD card adapter. Shield your eyes, this thing is kind of an abomination.</p>
+<p>Based on my previous prototype, I drew up a circuit that seemed like it would work. Then I paid a guy on Fiverr to draw up a PCB to implement that schematic, then had them fabricated somewhere in China. Here’s what the PCB looks like:</p>
 
-<p><img src="../assets/v3-frontandback.jpg" alt="The front of the prototype" />
-<em>The front and back of the prototype circuit.</em></p>
+<p><img src="../assets/v4-pcb-2.jpg" alt="The PCB" /></p>
 
-<p>The ESP32 is a Sparkfun ESP32 Thing, which has a low-dropout voltage regulator on board. This means I can power it with a LiPo battery.</p>
+<p>As you can see, there’s a microphone, a temp/humidity sensor, and a micro-sd card slot. Initially, I was going to include a micro USB connector, but that would’ve complicated the circuit, and added cost. So instead I decided to use pogo pins on a 3d-printed jig to program the boards.</p>
 
 <h4 id="-enclosure">📦 Enclosure</h4>
 
-<p>To prevent the bees from going nuts and tearing up the circuit, I modeled a little enclosure in Fusion 360. It’s just a 3D-printed box that zip-ties to the frame. Because of the thickness of the circuit board, part of the frame had to be cut away. Not ideal, but we’ll address that later.</p>
+<p>My previous design required that the honeycomb be cut away, but this one is thin enough that the PCB and battery can be slipped between the frames of the beehive. 
+I modeled the enclosure in Fusion 360, then 3d printed it in yellow PLA.</p>
 
-<p><img src="../assets/v3-enclosure.JPG" alt="The enclosure" />
-<em>The enclosure, in place on the frame.</em></p>
+<p><img src="../assets/v4-enclosure-1.jpg" alt="The enclosure" /></p>
+
+<p><img src="../assets/v4-enclosure-2.jpg" alt="The enclosure in the hive" /></p>
 
 <h4 id="firmware">Firmware</h4>
 
-<p>The firmware for this prototype is nearly the same as the firmware for <a href="hardware-v2.html">version 2</a>, so I won’t really bore you with it. Basically a C++ program that orchestrates all the sensor readings and syncs. I will say that debugging the firmware was kind of a pain. You don’t realize how many bugs your code has until it’s literally surrounded by thousands of stinging insects.</p>
+<p>If you’re not interested in software, feel free to skip this section. 
+My prime objective with this version was to reduce power consumption.  I ended up spending a lot of time on this, primarily because the ESP32 is a power-hungry monster. Don’t get me wrong, it’s amazingly powerful and dirt cheap, but it’s not well suited for low power battery-operated IoT devices.</p>
 
-<p>An interesting technical challenge with this version was audio processing. With my <a href="hardware.html">very first prototype</a>, I was recording lossless, hour-long WAV files. But with embedded hardware, there are power and memory limitations that necessitate a different approach. The ESP32 has 4 MB of memory – that’s a lot for an embedded device, but literally <em>three orders of magnitude less</em> than the Raspberry Pi I used in V1.</p>
+<p>Some of the tricks I used to reduce power consumption:</p>
+<ul>
+  <li>Using the deep sleep functionality of the ESP32, and using a hardware interrupt timer</li>
+  <li>Re-compiling the bootloader to prevent checksumming the program memory on every wake</li>
+  <li>Not syncing with WiFi on every wake</li>
+  <li>Not writing to the SD card on every wake. Writing to disk is super slow, and there’s a lot of overhead to mount the disk. I’m saving the sensor readings to RTC memory, and pooling disk writes.</li>
+  <li>Reducing the size of the audio buffer. This means the sound recording takes up less time (and makes the computation faster). The tradeoff is that you are effectively losing resolution in the output frequency domain (the frequency bin size is higher) but there’s a happy medium.</li>
+</ul>
 
-<p>For this one, I decided to record and average really short audio samples that could fit in memory, and process them on board the ESP32 with an FFT. (An FFT, and more generally a Fourier transform, is a method of converting signals into their component frequencies. For example, if you use an FFT on a choir singing a chord, you’ll be able to tell the pitches the individual members were singing.) The resulting frequency information could then be saved onto the SD card and sent over Wi-Fi to my server.</p>
+<p>After all those optimizations, I was able to get the average wake time to under 200mS, which for this hardware is pretty good! Here’s the current on my oscilloscope.
+<img src="../assets/v4-power.jpg" alt="Power consumption after optimizations" /></p>
+
+<p>Based on some experimentation and calculations, a 1000mAh battery would power this thing for 1.5 years!</p>
 
 <h3 id="data-analysis">Data Analysis</h3>
 
-<p>With this prototype I wanted to dive deep into processing audio signals from within the hive. So, I installed this monitor in a hive without a queen, and then installed a queen a couple days later. Here are the FFT results from the day the queen was installed.</p>
-
-<p><img src="../assets/v3-fft-queen.jpg" alt="Queen Inserted" /></p>
-
-<p>Note that an FFT was taken every 10 minutes, but they have been averaged together into 5-hour segments to make the chart easier to read. Looking at this graph, you can see that installing a queen in the hive causes a massive change in the the sound the hive makes. The sound gets louder and increases in pitch. A more complete way of viewing this is with a spectrogram:</p>
-
-<p><img src="../assets/v3-spectrogram_alpha.jpg" alt="Queen Inserted" />
-<em>In a spectrogram, each column is the FFT of an individual audio sample, and the intensity of frequency bins are encoded as color instead of height. You can clearly see that there was a huge change in the signal at 6PM.</em></p>
-
-<h3 id="conclusions">Conclusions</h3>
-
-<p>There appears to be some correlation</p>
+<p>I’m still collecting data from these sensors, so I think I’ll save the data analysis for another time. Stay tuned!</p>
 
 
   </article>
@@ -112,7 +119,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-03-29T20:46:13-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-07-15T10:05:02-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>
