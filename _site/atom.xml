@@ -4,7 +4,7 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-07-15T10:05:02-07:00</updated>
+ <updated>2022-07-15T10:13:56-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -454,89 +454,6 @@ Today we'll explore some basic image processing techniques to count bees. These 
 &lt;/ul&gt;
 
 &lt;p&gt;This technique is fast but not reliably accurate.  But the small amount of computation required makes it suitable for a low-power application.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Hive Sound Analysis</title>
-   <link href="http://localhost:4000/hive-sound.html"/>
-   <updated>2020-05-01T00:00:00-07:00</updated>
-   <id>http://localhost:4000/hive-sound</id>
-   <content type="html">&lt;h2 id=&quot;the-bees-are-speaking&quot;&gt;The Bees Are Speaking&lt;/h2&gt;
-
-&lt;p&gt;Bees communicate with sound.  Newborn queens, for example, use their wing muscles to make a trumpeting sound called “piping”.  This is a battle cry.&lt;/p&gt;
-
-&lt;p&gt;/assets/piping.mp3&lt;/p&gt;
-
-&lt;h2 id=&quot;audio-data-collection-setup&quot;&gt;Audio Data Collection Setup&lt;/h2&gt;
-
-&lt;p&gt;Audio is coming from an old Guitar Hero USB mic I cannibalized.&lt;/p&gt;
-
-&lt;p&gt;The audio is recorded using &lt;a href=&quot;http://manpages.org/arecord&quot;&gt;arecord&lt;/a&gt; in a bash script more or less like this:&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;    
-    &lt;span class=&quot;n&quot;&gt;arecord&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sysdefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CARD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;S16_LE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rate&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11025&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;channels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;duration&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3600&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wav&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It’s pretty easy to see what this command is doing: record an hour (3600 seconds) of mono sound (16 bit samples, little endian) at 11025 samples per second.&lt;/p&gt;
-
-&lt;p&gt;Why am I recording at 11025 Hz instead of the standard 44.1kHz? Some papers indicate that bee communication sounds are composed of a low fundamental frequency between 300 and 600Hz and the corresponding harmonics.&lt;sup id=&quot;fnref:fn-vibratory&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-vibratory&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;  Therefore, the Nyquist sampling rate is 1200 Hz, but that makes for some gnarly audio.&lt;/p&gt;
-
-&lt;p&gt;Besides, the standard 44.1kHz stereo signal is ~10MB per minute. The mono 11kHz signal is ~1.25 MB per minute, which is a tolerable 1.8GB per day. For data safety and ease of processing, I’m recording the audio data as 1-hour wav files.&lt;/p&gt;
-
-&lt;p&gt;So… what am I looking for? Here’s some examples:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/acoustic-signature.jpg&quot; alt=&quot;  &quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This table is from the great paper &lt;em&gt;Remote Beehive Monitoring using Acoustic Signals&lt;/em&gt;.&lt;sup id=&quot;fnref:fn-acoustics&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-acoustics&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;The table fails to mention that worker piping also occurs in non-disturbed queenright hives.&lt;sup id=&quot;fnref:fn-worker-piping&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:fn-worker-piping&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://www.beeculture.com/a-closer-look-piping-tooting-quacking/&quot;&gt;https://www.beeculture.com/a-closer-look-piping-tooting-quacking/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;ideas-for-stuff&quot;&gt;Ideas for Stuff&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Pics of setup&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Sonogram of signal to show harmonics&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Commercial hive montioring tool&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://broodminder.com&quot;&gt;Broodminder&lt;/a&gt; Blutetooth LE devices&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=ZoRyeiV7BSE&quot;&gt;Arnia&lt;/a&gt; setup&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Amateur tools&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=1hl_YaXvU0A&quot;&gt;Temperature and humidity&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:fn-vibratory&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;M. Hrncir, F. G. Barth, and J. Tautz, “Vibratory and airborne-sound signals in bee communication (hymenoptera),” Insect Sounds and Communication: Physiology, Behaviour, Ecology, and Evolution, p. 421, 2005. &lt;a href=&quot;#fnref:fn-vibratory&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:fn-acoustics&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Qandour, Amro &amp;amp; Ahmad, Iftekhar &amp;amp; Habibi, Daryoush &amp;amp; Leppard, Mark. Remote Beehive Monitoring using Acoustic Signals. Acoustics Australia / Australian Acoustical Society. 42. 204-209. 2014. &lt;a href=&quot;#fnref:fn-acoustics&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-    &lt;li id=&quot;fn:fn-worker-piping&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;Pratt, S. C., Kühnholz, S., Seeley, T. D., and Weidenmüller, A. Worker piping associated with foraging in undisturbed queenright colonies of honey bees. Apidologie, 27(1), 13-20. 1996. &lt;a href=&quot;https://www.apidologie.org/articles/apido/pdf/1996/01/Apidologie_0044-8435_1996_27_1_ART0002.pdf&quot;&gt;pdf&lt;/a&gt; &lt;a href=&quot;#fnref:fn-worker-piping&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;
 </content>
  </entry>
  
