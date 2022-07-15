@@ -48,7 +48,11 @@
         <article class="post">
   <h1 class="post-title">Hive Monitor v2: Adding a Scale</h1>
   <time datetime="2021-02-07T00:00:00-08:00" class="post-date">07 Feb 2021</time>
-  <p>I’ve learned from my previous prototype that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.</p>
+  <div class="message">
+🐝  This is the second iteration of my beehive monitoring prototype.
+</div>
+
+<p>I’ve learned from my previous prototype that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.</p>
 
 <p>If this thing is going to run off of a battery, I’ll have to use something much lower-power than a Raspberry Pi. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I hooked it up to an analog microphone, 2 temperature sensors, a load cell amplifier, and a micro sd card adapter.</p>
 
@@ -61,13 +65,14 @@
 
 <p>The enclosure was really a way for me to explore some of Fusion 360’s cooler features. It’s made of four parts: a 3D-printed hexagonal box, a threaded pipe with an integrated screen that attaches to the bottom of the hive, a lid for the box, and a nut to hold the pipe in place.</p>
 
-<p><img src="../assets/v2-underside.jpg" alt="The pipe of the prototype" /></p>
+<p><img src="../assets/v2-standalone-2.jpg" alt="Standalone" />
+<em>The device with the scale.</em></p>
 
-<p>Cool</p>
+<h3 id="firmware">Firmware</h3>
 
-<h4 id="firmware">Firmware</h4>
+<p>The hardware is only half the battle – the next step is writing firmware. I slapped together a little program for the ESP32 that would wake up, take sensor readings, sync with a server, and then go back to sleep.</p>
 
-<p>The hardware is only half the battle – the next step is writing firmware.</p>
+<p>Looking at the preliminary data, I quickly realized this version was not going to work. The bees just don’t thermoregulate the bottom of the hive. They are more interested in ensuring the brood chamber is thermoregulated. This meant that the form factor I had in mind was not going to work. So I decided to disassemble to prototype, lose the scale, and try putting the temperature sensor inside the hive. This ended up becoming my <a href="hardware-v3.html">third prototype</a>.</p>
 
 </article>
 
@@ -105,7 +110,7 @@
 
       <footer class="footer">
         <small>
-          &copy; <time datetime="2022-07-15T10:13:56-07:00">2022</time>. All rights reserved.
+          &copy; <time datetime="2022-07-15T10:30:48-07:00">2022</time>. All rights reserved.
         </small>
       </footer>
     </div>

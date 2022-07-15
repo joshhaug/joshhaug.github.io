@@ -4,7 +4,7 @@
  <title>BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-07-15T10:13:56-07:00</updated>
+ <updated>2022-07-15T10:30:48-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -126,6 +126,8 @@ My prime objective with this version was to reduce power consumption.  I ended u
 
 &lt;p&gt;There appears to be some interesting correlation between the sound of the bees and their health. I’m going to reserach this a bit more, and try to collect some better data to verify this correlation.&lt;/p&gt;
 
+&lt;p&gt;After assembling a few of these, I got very tired, so I spent the time designing a custom PCB. The details can be found on the page about the &lt;a href=&quot;hardware-v4.html&quot;&gt;fourth prototype&lt;/a&gt;. Go take a look!&lt;/p&gt;
+
 </content>
  </entry>
  
@@ -134,7 +136,11 @@ My prime objective with this version was to reduce power consumption.  I ended u
    <link href="http://localhost:4000/hardware-v2.html"/>
    <updated>2021-02-07T00:00:00-08:00</updated>
    <id>http://localhost:4000/hardware-v2</id>
-   <content type="html">&lt;p&gt;I’ve learned from my previous prototype that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.&lt;/p&gt;
+   <content type="html">&lt;div class=&quot;message&quot;&gt;
+🐝  This is the second iteration of my beehive monitoring prototype.
+&lt;/div&gt;
+
+&lt;p&gt;I’ve learned from my previous prototype that hive temperature readings taken right underneath the lid are not nearly as informative as they might seem. So maybe instead of the device living inside the hive lid, I should be taking readings near the bottom of the hive. And as long as I’m gonna be messing with the underside of the hive, I’d like to start taking some weight measurements. Weight increase can be good indicator of hive growth, as it means the bees are bringing in nectar and pollen.&lt;/p&gt;
 
 &lt;p&gt;If this thing is going to run off of a battery, I’ll have to use something much lower-power than a Raspberry Pi. I’m using an ESP32, which is a super inexpensive SoC with all sorts of great features. I hooked it up to an analog microphone, 2 temperature sensors, a load cell amplifier, and a micro sd card adapter.&lt;/p&gt;
 
@@ -147,13 +153,14 @@ My prime objective with this version was to reduce power consumption.  I ended u
 
 &lt;p&gt;The enclosure was really a way for me to explore some of Fusion 360’s cooler features. It’s made of four parts: a 3D-printed hexagonal box, a threaded pipe with an integrated screen that attaches to the bottom of the hive, a lid for the box, and a nut to hold the pipe in place.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../assets/v2-underside.jpg&quot; alt=&quot;The pipe of the prototype&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../assets/v2-standalone-2.jpg&quot; alt=&quot;Standalone&quot; /&gt;
+&lt;em&gt;The device with the scale.&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Cool&lt;/p&gt;
+&lt;h3 id=&quot;firmware&quot;&gt;Firmware&lt;/h3&gt;
 
-&lt;h4 id=&quot;firmware&quot;&gt;Firmware&lt;/h4&gt;
+&lt;p&gt;The hardware is only half the battle – the next step is writing firmware. I slapped together a little program for the ESP32 that would wake up, take sensor readings, sync with a server, and then go back to sleep.&lt;/p&gt;
 
-&lt;p&gt;The hardware is only half the battle – the next step is writing firmware.&lt;/p&gt;
+&lt;p&gt;Looking at the preliminary data, I quickly realized this version was not going to work. The bees just don’t thermoregulate the bottom of the hive. They are more interested in ensuring the brood chamber is thermoregulated. This meant that the form factor I had in mind was not going to work. So I decided to disassemble to prototype, lose the scale, and try putting the temperature sensor inside the hive. This ended up becoming my &lt;a href=&quot;hardware-v3.html&quot;&gt;third prototype&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  
