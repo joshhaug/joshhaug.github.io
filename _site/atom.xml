@@ -4,7 +4,7 @@
  <title>🐝 BeeSci</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-07-15T10:38:06-07:00</updated>
+ <updated>2022-07-16T21:04:56-07:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Joshua Haug</name>
@@ -317,25 +317,6 @@ networksetup &lt;span class=&quot;nt&quot;&gt;-setairportnetwork&lt;/span&gt; en
     &lt;/li&gt;
   &lt;/ol&gt;
 &lt;/div&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Improving the Prototype's Temperature Sensor</title>
-   <link href="http://localhost:4000/hardware-v1.5.html"/>
-   <updated>2020-07-05T00:00:00-07:00</updated>
-   <id>http://localhost:4000/hardware-v1.5</id>
-   <content type="html">&lt;p&gt;In my &lt;a href=&quot;hardware.html&quot;&gt;previous prototype&lt;/a&gt;, I used a thermocouple to measure the hive temp and an IR thermopile to measure the ambient temp. which was an apples-to-oranges comparison. With identical thermometers I’ll get a better sense of the actual tempertaures inside and outside the hive.&lt;/p&gt;
-
-&lt;p&gt;Well, I just got some K-type thermocouples and MAX6675 breakout boards in the mail. It’s like Christmas in July!&lt;/p&gt;
-
-&lt;p&gt;Here’s a wiring diagram showing how the new MAX6675 breakouts are connected to the Raspberry Pi:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../assets/3tc-wiring.png&quot; alt=&quot; &quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Note that I’m sharing the power (&lt;code class=&quot;highlighter-rouge&quot;&gt;VCC&lt;/code&gt;), ground (&lt;code class=&quot;highlighter-rouge&quot;&gt;GND&lt;/code&gt;), serial clock input (&lt;code class=&quot;highlighter-rouge&quot;&gt;SCK&lt;/code&gt;) and serial data output (&lt;code class=&quot;highlighter-rouge&quot;&gt;SO&lt;/code&gt;) lines across the three boards.  Each board has only one unique wire, going to the chip select (&lt;code class=&quot;highlighter-rouge&quot;&gt;CS&lt;/code&gt;) pin.  This pin is active low according to the &lt;a href=&quot;https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf&quot;&gt;datasheet&lt;/a&gt;, so you need to set each board’s GPIO pin to 0 (and the others to 1) before reading it.&lt;/p&gt;
-
-&lt;p&gt;Each MAX6675 chip has a max current draw of 1.5mA, so we’re well within the Pi’s pin limit of 16mA.&lt;/p&gt;
 </content>
  </entry>
  
