@@ -9,7 +9,7 @@ title: About This Site
 - Karl von Frisch
 </div>
 
-As a recreational beekeeper, I'm obsessed with the challenges bees (and beekeepers) face every day. And as a software engineer, I can't help but wonder how those challenges might be addressed by technology.
+As a hobbyist beekeeper, I'm obsessed with the challenges bees face. And as a software engineer, I can't help but wonder how those challenges might be addressed by technology.
 
 For instance, **what if inexpensive sensors could detect problems in your beehive in real time?** I've explored that concept with some prototypes. Check them out!
 * [Version 1: Very Bad](hardware.html)
